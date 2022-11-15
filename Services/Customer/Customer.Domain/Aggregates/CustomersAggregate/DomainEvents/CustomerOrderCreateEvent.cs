@@ -3,9 +3,9 @@
 public record CustomerOrderCreateEvent : CustomerDomainEvent
 {
     public MoneyValueObject OrderTotal { get; private set; }
-    public long CustomerOrderId { get; private set; }
+    public Guid CustomerOrderId { get; private set; }
 
-    public CustomerOrderCreateEvent(MoneyValueObject orderTotal, long customerOrderId, long customerId) : base(customerId)
+    public CustomerOrderCreateEvent(MoneyValueObject orderTotal, Guid customerOrderId, Guid customerId) : base(customerId)
     {
         OrderTotal = orderTotal;
         CustomerOrderId = customerOrderId;

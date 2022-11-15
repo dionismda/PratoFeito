@@ -2,9 +2,9 @@
 
 public record CustomerOrderDelivered : CustomerOrderDomainEvent
 {
-    public long CustomerId { get; private set; }
+    public Guid CustomerId { get; private set; }
 
-    public CustomerOrderDelivered(long customerId, long customerOrderId) : base(customerOrderId)
+    public CustomerOrderDelivered(Guid customerId, Guid customerOrderId) : base(customerOrderId)
     {
         CustomerId = customerId;
     }

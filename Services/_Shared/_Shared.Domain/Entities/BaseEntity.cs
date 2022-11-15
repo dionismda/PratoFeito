@@ -2,13 +2,20 @@
 
 public abstract class BaseEntity
 {
-    public long Id { get; protected set; }
+    public Guid Id { get; protected set; }
 
     private List<DomainEvent> _domainEvents = new();
     [JsonIgnore] public IReadOnlyCollection<DomainEvent>? DomainEvents => _domainEvents?.AsReadOnly();
 
     public BaseEntity()
-    {}
+    {
+        Id = Guid.NewGuid();
+    }
+
+    public BaseEntity(Guid id)
+    {
+        Id = id;
+    }
 
     public void AddDomainEvent(DomainEvent eventItem)
     {

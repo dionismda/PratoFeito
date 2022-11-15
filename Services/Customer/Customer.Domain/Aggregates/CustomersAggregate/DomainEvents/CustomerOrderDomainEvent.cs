@@ -2,9 +2,9 @@
 
 public abstract record CustomerOrderDomainEvent : DomainEvent
 {
-    public long CustomerOrderId { get; private set; }
+    public Guid CustomerOrderId { get; private set; }
 
-    protected CustomerOrderDomainEvent(long customerOrderId)
+    protected CustomerOrderDomainEvent(Guid customerOrderId)
     {
         CustomerOrderId = customerOrderId;
     }

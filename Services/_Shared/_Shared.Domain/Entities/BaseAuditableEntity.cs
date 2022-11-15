@@ -15,6 +15,11 @@ public abstract class BaseAuditableEntity : BaseEntity
         Created = DateTime.UtcNow.ToUniversalTime();
     }
 
+    public BaseAuditableEntity(DateTime created, Guid id) : base(id)
+    {
+        Created = created;
+    }
+
     public void SetCreatedby(string createdBy)
     {
         CreatedBy = createdBy;

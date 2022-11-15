@@ -2,10 +2,10 @@
 
 public class CreateCustomerOrderCommand
 {
-    public long CustomerOrderId { get; private set; }
+    public Guid CustomerOrderId { get; private set; }
     public MoneyValueObject OrderTotal { get; private set; }
 
-    public CreateCustomerOrderCommand(long customerOrderId, MoneyValueObject orderTotal)
+    public CreateCustomerOrderCommand(Guid customerOrderId, MoneyValueObject orderTotal)
     {
         CustomerOrderId = customerOrderId;
         OrderTotal = orderTotal;

@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\_Shared\_Shared.Domain\_Shared.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\CustomersAggregate\Commands\Handlers\" />
+  </ItemGroup>
+
 </Project>

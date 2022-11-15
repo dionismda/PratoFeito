@@ -2,7 +2,7 @@
 
 public record CustomerOrderRejectedEvent : CustomerOrderDomainEvent
 {
-    public CustomerOrderRejectedEvent(long customerOrderId) : base(customerOrderId)
+    public CustomerOrderRejectedEvent(Guid customerOrderId) : base(customerOrderId)
     {
     }
 }
