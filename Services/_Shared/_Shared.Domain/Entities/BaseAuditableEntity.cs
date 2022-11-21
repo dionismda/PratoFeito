@@ -4,24 +4,25 @@ public abstract class BaseAuditableEntity : BaseEntity
 {
     public DateTime Created { get; private set; }
 
-    public string? CreatedBy { get; private set; }
+    public string CreatedBy { get; private set; }
 
-    public DateTime? LastModified { get; private set; }
+    public DateTime LastModified { get; private set; }
 
     public string? LastModifiedBy { get; private set; }
 
-    public BaseAuditableEntity() : base()
+    [JsonConstructor]
+    protected BaseAuditableEntity() { }
+
+    public BaseAuditableEntity(string createdBy) : base()
     {
-        Created = DateTime.UtcNow.ToUniversalTime();
+        CreatedBy = createdBy;
+        Created = DateTime.UtcNow.ToUniversalTime();        
+        LastModified = DateTime.UtcNow.ToUniversalTime();
     }
 
-    public BaseAuditableEntity(DateTime created, Guid id) : base(id)
+    public BaseAuditableEntity(DateTime created, string createdBy, Guid id) : base(id)
     {
         Created = created;
-    }
-
-    public void SetCreatedby(string createdBy)
-    {
         CreatedBy = createdBy;
     }
 
