@@ -5,3 +5,6 @@ global using _Shared.Domain.Interfaces;
 global using System.Text.Json.Serialization;
 global using FluentValidation;
 global using _Shared.Domain.ValueObjects.Validators;
+global using _Shared.Domain.Interfaces.Handlers;
+global using _Shared.Domain.Entities;
+global using _Shared.Domain.Interfaces.Models;

@@ -1,6 +1,6 @@
-﻿namespace Customer.Domain.Aggregates.CustomersAggregate.Commands;
+﻿namespace Customer.Domain.Customers.Aggregates.CustomerOrders.Commands;
 
-public class MarkCustomerOrderAsDeliveredCommand
+public class MarkCustomerOrderAsDeliveredCommand : ICommand
 {
     public long CustomerOrderId { get; private set; }
 

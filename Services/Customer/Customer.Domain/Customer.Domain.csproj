@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregates\CustomersAggregate\Commands\Handlers\" />
+    <Folder Include="Customers\Entities\Validators\" />
+    <Folder Include="Customers\Interfaces\Services\" />
   </ItemGroup>
 
 </Project>

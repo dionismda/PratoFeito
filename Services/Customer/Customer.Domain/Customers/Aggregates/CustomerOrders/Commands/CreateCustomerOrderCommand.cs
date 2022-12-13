@@ -1,6 +1,6 @@
-﻿namespace Customer.Domain.Aggregates.CustomersAggregate.Commands;
+﻿namespace Customer.Domain.Customers.Aggregates.CustomerOrders.Commands;
 
-public class CreateCustomerOrderCommand
+public class CreateCustomerOrderCommand : ICommand
 {
     public Guid CustomerOrderId { get; private set; }
     public MoneyValueObject OrderTotal { get; private set; }

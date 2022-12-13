@@ -1,6 +1,6 @@
-﻿namespace Customer.Domain.Aggregates.CustomersAggregate.Commands;
+﻿namespace Customer.Domain.Customers.Commands;
 
-public class CreateCustomerCommand
+public class CreateCustomerCommand : ICommand
 {
     public PersonNameValueObject PersonName { get; private set; }
     public MoneyValueObject OrderLimit { get; private set; }

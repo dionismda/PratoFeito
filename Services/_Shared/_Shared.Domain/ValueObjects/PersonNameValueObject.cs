@@ -1,6 +1,6 @@
 ﻿namespace _Shared.Domain.ValueObjects;
 
-public class PersonNameValueObject
+public class PersonNameValueObject : IValidation
 {
     public string FirstName { get; private set; } = string.Empty;
     public string LastName { get; private set; } = string.Empty;

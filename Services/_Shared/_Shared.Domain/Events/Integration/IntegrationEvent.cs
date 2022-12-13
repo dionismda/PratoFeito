@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace _Shared.Domain.Events.Integration;
+﻿namespace _Shared.Domain.Events.Integration;
 
 public abstract class IntegrationEvent : IIntegrationEvent
 {
@@ -16,7 +14,6 @@ public abstract class IntegrationEvent : IIntegrationEvent
         CreatedAt = DateTime.UtcNow;
     }
 
-    [JsonConstructor]
     public IntegrationEvent(Guid id, DateTime createDate)
     {
         Id = id;

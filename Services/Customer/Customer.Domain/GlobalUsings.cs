@@ -1,5 +1,13 @@
-﻿global using _Shared.Domain.Events.Domain;
-global using _Shared.Domain.ValueObjects;
-global using _Shared.Domain.Entities;
-global using Customer.Domain.Aggregates.CustomersAggregate.DomainEvents;
+﻿global using _Shared.Domain.Entities;
 global using _Shared.Domain.Enum;
+global using _Shared.Domain.Events.Domain;
+global using _Shared.Domain.Exceptions;
+global using _Shared.Domain.Interfaces;
+global using _Shared.Domain.ValueObjects;
+global using Customer.Domain.Customers.DomainEvents;
+global using Customer.Domain.Customers.Entities;
+global using Customer.Domain.Customers.Aggregates.CustomerOrders.Entities;
+global using Customer.Domain.Customers.Aggregates.CustomerOrders.DomainEvents;
+global using _Shared.Domain.Interfaces.Handlers;
+global using _Shared.Domain.Interfaces.Models;
+global using Customer.Domain.Customers.QueryModels;

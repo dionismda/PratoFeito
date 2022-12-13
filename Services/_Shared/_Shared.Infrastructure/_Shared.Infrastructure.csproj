@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_Shared\_Shared.Infrastructure\_Shared.Infrastructure.csproj" />
-    <ProjectReference Include="..\Customer.Domain\Customer.Domain.csproj" />
+    <ProjectReference Include="..\_Shared.Domain\_Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>
