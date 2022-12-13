@@ -3,6 +3,8 @@
 public abstract class BaseEntity
 {
     public Guid Id { get; protected set; }
+    public DateTime CreatedDate { get; private set; }
+    public DateTime? Updateddate { get; private set; }
 
     private List<DomainEvent> _domainEvents = new();
 
@@ -12,6 +14,13 @@ public abstract class BaseEntity
     protected BaseEntity()
     {
         Id = Guid.NewGuid();
+        CreatedDate = DateTime.UtcNow.ToUniversalTime();
+        Updateddate = null;
+    }
+
+    public void ModifyUpdatedDate()
+    {
+        Updateddate = DateTime.UtcNow.ToUniversalTime();
     }
 
     public void AddDomainEvent(DomainEvent eventItem)

@@ -1,6 +1,6 @@
 ﻿namespace Customer.Domain.Customers.Aggregates.CustomerOrders.Entities;
 
-public class CustomerOrderEntity : BaseAuditableEntity
+public class CustomerOrderEntity : BaseEntity
 {
     public CustomerEntity Customer { get; set; }
     public MoneyValueObject OrderTotal { get; private set; }

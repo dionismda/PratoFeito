@@ -4,8 +4,10 @@ public abstract class IntegrationEvent : IIntegrationEvent
 {
     [JsonInclude]
     public Guid Id { get; private init; }
+
     [JsonInclude]
     public DateTime CreatedAt { get; private init; }
+
     [JsonIgnore]
     public string IntegrationTypeName => GetType().Name;
     public IntegrationEvent()
