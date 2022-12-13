@@ -1,6 +1,6 @@
-﻿namespace _Shared.Infrastructure.DbContexts;
+﻿namespace _Shared.Infrastructure.Persistences;
 
-public abstract class BaseContext : DbContext, IDbContextUnitOfWork
+public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
 {
     private readonly IDomainMediator _mediator;
 
@@ -8,7 +8,7 @@ public abstract class BaseContext : DbContext, IDbContextUnitOfWork
 
     protected readonly DataBaseSetting DataBaseSettings;
 
-    protected BaseContext(DbContextOptions options,
+    protected BaseDbContext(DbContextOptions options,
                           IOptions<DataBaseSetting> dataBaseSettings,
                           IDomainMediator mediator,
                           IIntegrationEventMapper eventMapper) : base(options)
@@ -27,8 +27,18 @@ public abstract class BaseContext : DbContext, IDbContextUnitOfWork
             $"Server={DataBaseSettings.DefaultServer};Port=5432;Database={DataBaseSettings.DefaultDatabase};User Id={DataBaseSettings.DefaultDatabaseUser};Password={DataBaseSettings.DefaultDatabasePass};";
 
         optionsBuilder
-            .UseNpgsql(connectionString);
-            //.UseSnakeCaseNamingConvention();
+            .UseNpgsql(connectionString)
+            .UseSnakeCaseNamingConvention();
+    }
+
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+
+        modelBuilder.ApplyConfiguration(new IntegrationEventLogMap());
+        modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap());
+
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

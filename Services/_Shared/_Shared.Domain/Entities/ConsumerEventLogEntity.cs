@@ -4,7 +4,7 @@ public class ConsumerEventLogEntity : BaseEntity
 {
     public Guid EventId { get; private set; }
     public string Name { get; private set; }
-    public DateTime Time { get; private set; }
+    public DateTime DateConsumed { get; private set; }
 
     protected ConsumerEventLogEntity() : base() { }
 
@@ -12,6 +12,6 @@ public class ConsumerEventLogEntity : BaseEntity
     {
         EventId = eventId;
         Name = name;
-        Time = DateTime.UtcNow;
+        DateConsumed = DateTime.UtcNow;
     }
 }

@@ -2,12 +2,12 @@
 
 public class CreateCustomerOrderCommand : ICommand
 {
-    public Guid CustomerOrderId { get; private set; }
+    public Guid CustomerId { get; private set; }
     public MoneyValueObject OrderTotal { get; private set; }
 
-    public CreateCustomerOrderCommand(Guid customerOrderId, MoneyValueObject orderTotal)
+    public CreateCustomerOrderCommand(Guid customerId, MoneyValueObject orderTotal)
     {
-        CustomerOrderId = customerOrderId;
+        CustomerId = customerId;
         OrderTotal = orderTotal;
     }
 }

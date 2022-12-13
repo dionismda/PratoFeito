@@ -4,13 +4,13 @@ public abstract class BaseRepository<TAggregateRoot, TQueryModel> : IRepository<
     where TAggregateRoot : class, IAggregateRoot
     where TQueryModel : class, IQueryModel
 {
-    protected readonly BaseContext Context;
+    protected readonly BaseDbContext Context;
     protected readonly IConnectionDapperManager ConnectionDapper;
 
     public IDbContextUnitOfWork UnitOfWork => Context;
 
 
-    protected BaseRepository(BaseContext context, IConnectionDapperManager connectionDapper)
+    protected BaseRepository(BaseDbContext context, IConnectionDapperManager connectionDapper)
     {
         Context = context;
         ConnectionDapper = connectionDapper;
@@ -132,7 +132,7 @@ public abstract class BaseRepository<TAggregateRoot, TQueryModel> : IRepository<
         if (entityFromDb is null)
             throw new ArgumentNullException($"{id} not found");
 
-        Context.Update(entity);
+        Context.Set<TAggregateRoot>().Update(entity);
 
         return entity;
     }
@@ -144,7 +144,7 @@ public abstract class BaseRepository<TAggregateRoot, TQueryModel> : IRepository<
         if (entity == null)
             throw new ArgumentNullException($"{id} not found");
 
-        Context.Remove(entity);
+        Context.Set<TAggregateRoot>().Remove(entity);
 
         return true;
     }

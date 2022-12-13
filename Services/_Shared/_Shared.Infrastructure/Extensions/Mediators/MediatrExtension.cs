@@ -2,7 +2,7 @@
 
 public static class MediatrExtension
 {
-    public static async Task DispatchEventsAsync(this IDomainMediator mediator, BaseContext context)
+    public static async Task DispatchEventsAsync(this IDomainMediator mediator, BaseDbContext context)
     {
         var domainEntities = context.ChangeTracker
             .Entries<BaseEntity>()
@@ -28,7 +28,7 @@ public static class MediatrExtension
         }
     }
 
-    private static async Task DispatchIntegrationEventsAsync(IEnumerable<DomainEvent> domainEvents, BaseContext context)
+    private static async Task DispatchIntegrationEventsAsync(IEnumerable<DomainEvent> domainEvents, BaseDbContext context)
     {
         var integrationEvents = context.EventMapper.Map(domainEvents);
 

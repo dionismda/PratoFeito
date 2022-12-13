@@ -5,6 +5,12 @@ public class CustomerEntity : BaseEntity, IAggregateRoot, IValidation
     public PersonNameValueObject Name { get; private set; }
     public MoneyValueObject OrderLimit { get; private set; }
 
+    private List<CustomerOrderEntity> _customerOrders;
+    public IReadOnlyCollection<CustomerOrderEntity>? CustomerOrders
+    {
+        get => _customerOrders?.AsReadOnly();
+        private set => _customerOrders = value?.ToList();
+    }
 
     protected CustomerEntity() : base() { }
 
@@ -22,7 +28,7 @@ public class CustomerEntity : BaseEntity, IAggregateRoot, IValidation
     {
         if (!OrderTotal.IsGreatThenOrEquals(OrderLimit))
         {
-            new CustomerOrderEntity(this, OrderLimit);
+            _customerOrders.Add(new CustomerOrderEntity(this, OrderLimit));
         }
         else
         {
