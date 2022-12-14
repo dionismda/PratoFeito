@@ -9,7 +9,6 @@ public abstract class BaseRepository<TAggregateRoot, TQueryModel> : IRepository<
 
     public IDbContextUnitOfWork UnitOfWork => Context;
 
-
     protected BaseRepository(BaseDbContext context, IConnectionDapperManager connectionDapper)
     {
         Context = context;

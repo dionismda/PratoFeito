@@ -8,17 +8,15 @@ public class Startup
     {
         Configuration = configuration;
     }
-
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddOptions();
         services.InjectCustomerApi(Configuration);
-        services.InjectCustomerApplication(Configuration);
-        services.InjectCustomerDomain(Configuration);
-        services.InjectCustomerInfrastructure(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-
+        if (env.IsDevelopment())
+            app.UseDeveloperExceptionPage();
     }
 }

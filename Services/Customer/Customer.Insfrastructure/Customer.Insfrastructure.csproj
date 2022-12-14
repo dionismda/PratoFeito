@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -7,9 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\_Shared\_Shared.Infrastructure\_Shared.Infrastructure.csproj" />
-    <ProjectReference Include="..\Customer.Domain\Customer.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\_Shared\_Shared.Infrastructure\_Shared.Infrastructure.csproj" />
+		<ProjectReference Include="..\Customer.Domain\Customer.Domain.csproj" />
+	</ItemGroup>
 
 </Project>

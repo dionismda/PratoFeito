@@ -10,7 +10,7 @@ public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBase
 
         builder
             .Property(e => e.Id)
-            .HasColumnName(typeof(TBaseModel).Name.ToSnakeCase() + "_id")
+            .HasColumnName(typeof(TBaseModel).Name.Replace("Entity", "").ToSnakeCase() + "_id")
             .HasColumnType("uuid")
             .IsRequired();
 
