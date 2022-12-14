@@ -1,9 +1,10 @@
-﻿namespace Customer.Api.Extensions;
+﻿namespace _Shared.Api.Extensions;
 
 public static class ServiceCollectionExtension
 {
     public static IServiceCollection CustomAddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
+
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("JwtOptions:SecurityKey").Value));
 
         var tokenValidationParameters = new TokenValidationParameters
@@ -28,11 +29,11 @@ public static class ServiceCollectionExtension
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
         {
-            options.RequireHttpsMetadata = false;
-            options.SaveToken = true;
-            options.TokenValidationParameters = tokenValidationParameters;
+            opt.RequireHttpsMetadata = false;
+            opt.SaveToken = true;
+            opt.TokenValidationParameters = tokenValidationParameters;
         });
 
         return services;

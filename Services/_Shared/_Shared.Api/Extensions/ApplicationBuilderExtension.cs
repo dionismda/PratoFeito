@@ -1,4 +1,4 @@
-﻿namespace Customer.Api.Extensions;
+﻿namespace _Shared.Api.Extensions;
 
 public static class ApplicationBuilderExtension
 {

@@ -1,7 +1,7 @@
-﻿namespace Customer.Api.Swagger;
+﻿namespace _Shared.Api.Swagger;
 
 public class SwaggerOptions
-{    
+{
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string JsonRoute { get; set; } = string.Empty;

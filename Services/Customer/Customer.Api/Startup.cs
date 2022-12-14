@@ -1,8 +1,4 @@
-﻿using Customer.Api.Extensions;
-using Microsoft.Extensions.Options;
-using System.Text.Json.Serialization;
-
-namespace Customer.Api;
+﻿namespace Customer.Api;
 
 public class Startup
 {
@@ -13,7 +9,7 @@ public class Startup
         Configuration = configuration;
     }
     public void ConfigureServices(IServiceCollection services)
-    {       
+    {
         services.AddMediatR(Assembly.GetExecutingAssembly());
 
         services

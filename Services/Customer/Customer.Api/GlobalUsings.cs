@@ -1,12 +1,5 @@
-﻿global using Customer.Api;
-global using Customer.Api.Swagger;
+﻿global using _Shared.Api.Extensions;
+global using Customer.Api;
 global using MediatR;
-global using Microsoft.AspNetCore.Authentication.JwtBearer;
-global using Microsoft.AspNetCore.Mvc;
-global using Microsoft.IdentityModel.Tokens;
-global using Microsoft.OpenApi.Models;
-global using Swashbuckle.AspNetCore.Filters;
-global using Swashbuckle.AspNetCore.SwaggerGen;
 global using System.Reflection;
-global using System.Text;
-global using Microsoft.AspNetCore.Mvc.Versioning;
+global using System.Text.Json.Serialization;
