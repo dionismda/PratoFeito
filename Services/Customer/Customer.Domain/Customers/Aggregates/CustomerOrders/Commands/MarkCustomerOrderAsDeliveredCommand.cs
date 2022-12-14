@@ -2,9 +2,9 @@
 
 public class MarkCustomerOrderAsDeliveredCommand : ICommand
 {
-    public long CustomerOrderId { get; private set; }
+    public Guid CustomerOrderId { get; private set; }
 
-    public MarkCustomerOrderAsDeliveredCommand(long customerOrderId)
+    public MarkCustomerOrderAsDeliveredCommand(Guid customerOrderId)
     {
         CustomerOrderId = customerOrderId;
     }

@@ -1,0 +1,13 @@
+﻿global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using _Shared.Application.IntegrationEvents;
+global using _Shared.Domain.Entities;
+global using _Shared.Domain.Events.Integration;
+global using _Shared.Infrastructure.Interfaces.IntegrationEvents;
+global using Customer.Application.IntegrationEvents.Mappers;
+global using _Shared.Application.Dispatchers;
+global using _Shared.Application.Interfaces;
+global using Microsoft.AspNetCore.Mvc;
+global using System.ComponentModel.DataAnnotations;
+global using System.Text.Json.Serialization;
+global using System.ComponentModel;

@@ -1,8 +1,10 @@
-﻿namespace Customer.Domain.Customers.Aggregates.CustomerOrders.Entities;
+﻿using Customer.Domain.Customers.Aggregates.CustomerOrders.Entities.Validators;
 
-public class CustomerOrderEntity : BaseAuditableEntity
+namespace Customer.Domain.Customers.Aggregates.CustomerOrders.Entities;
+
+public class CustomerOrderEntity : BaseEntity, IValidation
 {
-    public CustomerEntity Customer { get; set; }
+    public CustomerEntity Customer { get; private set; }
     public MoneyValueObject OrderTotal { get; private set; }
     public CustomerOrderStateEnum OrderState { get; private set; }
 
@@ -32,4 +34,13 @@ public class CustomerOrderEntity : BaseAuditableEntity
         return this;
     }
 
+    public void Validate()
+    {
+        CustomerOrderEntityValidator validator = new();
+
+        var result = validator.Validate(this);
+
+        if (!result.IsValid)
+            throw new FluentValidationException(result.Errors);
+    }
 }
