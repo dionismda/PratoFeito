@@ -10,7 +10,7 @@ public class CustomerMap : BaseEntityMap<CustomerEntity>
             .OwnsOne(x => x.Name, i =>
             {
                 i.Property(p => p.FirstName)
-                 .HasColumnName("first_name") 
+                 .HasColumnName("first_name")
                  .HasMaxLength(120)
                  .IsRequired();
 
@@ -27,6 +27,6 @@ public class CustomerMap : BaseEntityMap<CustomerEntity>
                  .HasColumnName("amount")
                  .HasPrecision(10, 4)
                  .IsRequired();
-            });        
+            });
     }
 }

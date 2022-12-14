@@ -3,8 +3,6 @@ global using _Shared.Domain.Events.Domain;
 global using _Shared.Domain.Events.Integration;
 global using _Shared.Domain.Extensions;
 global using _Shared.Domain.Interfaces;
-global using _Shared.Domain.Interfaces.Models;
-global using _Shared.Infrastructure.EntityMapping;
 global using _Shared.Infrastructure.EntityMappings;
 global using _Shared.Infrastructure.Enums;
 global using _Shared.Infrastructure.Extensions.Mediators;

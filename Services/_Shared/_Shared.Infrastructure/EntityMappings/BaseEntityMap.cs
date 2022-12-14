@@ -1,6 +1,6 @@
-﻿namespace _Shared.Infrastructure.EntityMapping;
+﻿namespace _Shared.Infrastructure.EntityMappings;
 
-public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBaseModel> 
+public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBaseModel>
     where TBaseModel : BaseEntity
 {
     public virtual void Configure(EntityTypeBuilder<TBaseModel> builder)

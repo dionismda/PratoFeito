@@ -9,7 +9,7 @@ public abstract class BaseDomainService<TAggregateRoot, TQueryModel> : IDomainSe
 
     protected BaseDomainService(IRepository<TAggregateRoot, TQueryModel> repository)
     {
-        Repository = repository ?? throw new NullReferenceException($"{nameof(Repository)} not instancied");
+        Repository = repository;
     }
 
     public virtual async Task<List<TQueryModel>> GetAllAsync(CancellationToken cancellation, int? pageSize, int? pageNumber, IBaseParamModel? paramModel)

@@ -4,7 +4,7 @@ public sealed class CustomerIntegrationEventMapper : IntegrationEventMapper
 {
     protected override IntegrationEvent? MapDomainEvent<TDomainEvent>(TDomainEvent domainEvent)
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     protected override IntegrationEventLogEntity MapIntegrationEvent(IntegrationEvent? integrationEvent)

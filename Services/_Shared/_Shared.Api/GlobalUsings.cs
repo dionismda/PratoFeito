@@ -8,3 +8,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using System.Reflection;
 global using Microsoft.AspNetCore.Mvc.Versioning;
+global using _Shared.Application.Interfaces;
+global using System.ComponentModel;

@@ -16,16 +16,13 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	  <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
+	  <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
 	  <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\_Shared\_Shared.Api\_Shared.Api.csproj" />
     <ProjectReference Include="..\Customer.Application\Customer.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

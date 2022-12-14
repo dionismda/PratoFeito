@@ -47,7 +47,7 @@ public static class ServiceCollectionExtension
         {
             opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                Description = @"JWT Authorization header using the Bearer scheme.
                       Enter your token in the text input below.
                       Example: '12345abcdef'",
                 Name = "Authorization",

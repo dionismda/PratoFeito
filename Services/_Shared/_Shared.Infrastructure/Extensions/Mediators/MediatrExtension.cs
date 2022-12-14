@@ -32,7 +32,7 @@ public static class MediatrExtension
     {
         var integrationEvents = context.EventMapper.Map(domainEvents);
 
-        if (integrationEvents != null)
+        if (integrationEvents.Any())
         {
             await context.IntegrationEventLog.AddRangeAsync(integrationEvents);
         }
