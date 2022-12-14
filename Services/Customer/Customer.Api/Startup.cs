@@ -1,4 +1,8 @@
-﻿namespace Customer.Api;
+﻿using Customer.Api.Extensions;
+using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+
+namespace Customer.Api;
 
 public class Startup
 {
@@ -9,8 +13,31 @@ public class Startup
         Configuration = configuration;
     }
     public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddOptions();
+    {       
+        services.AddMediatR(Assembly.GetExecutingAssembly());
+
+        services
+            .AddCors()
+            .AddOptions()
+            .AddHttpContextAccessor()
+            .CustomAddAuthentication(Configuration)
+            .CustomAddSwaggerService(Configuration)
+            .CustomAddVersioningService();
+
+        services.AddMvc()
+            .ConfigureApiBehaviorOptions(opt =>
+            {
+                opt.SuppressInferBindingSourcesForParameters = true;
+                opt.SuppressModelStateInvalidFilter = true;
+            })
+            .AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+
+        services.AddEndpointsApiExplorer();
+
         services.InjectCustomerApi(Configuration);
     }
 
@@ -18,5 +45,18 @@ public class Startup
     {
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
+
+        app.CustomConfigureSwagger(Configuration);
+
+        app.UseRouting();
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 }
