@@ -1,4 +1,4 @@
-﻿namespace _Shared.Application.Features.Responses;
+﻿namespace _Shared.Kernel.Responses;
 
 public class ResponseWarning<TObject> : IResponse
 {

@@ -2,17 +2,17 @@
 
 public class NpgsqlDapperConnectionManager : IConnectionDapperManager
 {
-    protected readonly DataBaseSetting DataBaseSettings;
+    private readonly DataBaseSetting _dataBaseSettings;
 
     public NpgsqlDapperConnectionManager(IOptions<DataBaseSetting> dataBaseSettings)
     {
-        DataBaseSettings = dataBaseSettings.Value;
+        _dataBaseSettings = dataBaseSettings.Value;
     }
 
     public async Task<IDbConnection> GetConnectionAsync()
     {
         var connectionString =
-            $"Server={DataBaseSettings.DefaultServer};Port=5432;Database={DataBaseSettings.DefaultDatabase};User Id={DataBaseSettings.DefaultDatabaseUser};Password={DataBaseSettings.DefaultDatabasePass};";
+            $"Server={_dataBaseSettings.DefaultServer};Port={_dataBaseSettings.DefaultPort};Database={_dataBaseSettings.DefaultDatabase};User Id={_dataBaseSettings.DefaultDatabaseUser};Password={_dataBaseSettings.DefaultDatabasePass};";
 
         var connection = new NpgsqlConnection(connectionString);
 

@@ -1,4 +1,4 @@
-﻿namespace _Shared.Application.Enums;
+﻿namespace _Shared.Kernel.Enums;
 
 public enum ResponseTypeEnum
 {

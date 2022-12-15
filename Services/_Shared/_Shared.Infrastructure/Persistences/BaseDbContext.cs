@@ -6,14 +6,14 @@ public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
 
     public readonly IIntegrationEventMapper EventMapper;
 
-    protected readonly DataBaseSetting DataBaseSettings;
+    private readonly DataBaseSetting _dataBaseSettings;
 
     protected BaseDbContext(DbContextOptions options,
                           IOptions<DataBaseSetting> dataBaseSettings,
                           IDomainMediator mediator,
                           IIntegrationEventMapper eventMapper) : base(options)
     {
-        DataBaseSettings = dataBaseSettings.Value;
+        _dataBaseSettings = dataBaseSettings.Value;
         _mediator = mediator;
         EventMapper = eventMapper;
     }
@@ -24,7 +24,7 @@ public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var connectionString =
-            $"Server={DataBaseSettings.DefaultServer};Port=5432;Database={DataBaseSettings.DefaultDatabase};User Id={DataBaseSettings.DefaultDatabaseUser};Password={DataBaseSettings.DefaultDatabasePass};";
+            $"Server={_dataBaseSettings.DefaultServer};Port={_dataBaseSettings.DefaultPort};Database={_dataBaseSettings.DefaultDatabase};User Id={_dataBaseSettings.DefaultDatabaseUser};Password={_dataBaseSettings.DefaultDatabasePass};";
 
         optionsBuilder
             .UseNpgsql(connectionString)
