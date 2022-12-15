@@ -4,7 +4,6 @@
     {
 
         var dataBaseSetting = configuration.GetSection(nameof(DataBaseSetting));
-
         services.Configure<DataBaseSetting>(options =>
         {
             options.DefaultServer = dataBaseSetting[nameof(DataBaseSetting.DefaultServer)];

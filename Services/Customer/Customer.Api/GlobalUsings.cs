@@ -1,7 +1,9 @@
 ﻿global using _Shared.Api.Controllers;
 global using _Shared.Api.Extensions;
+global using _Shared.Api.Swagger;
 global using _Shared.Application.Interfaces;
 global using _Shared.Domain.ValueObjects;
+global using _Shared.Kernel.Responses;
 global using Customer.Api;
 global using Customer.Application.Features.InputModels;
 global using Customer.Application.Features.ViewModels;
@@ -12,5 +14,3 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
 global using System.Reflection;
 global using System.Text.Json.Serialization;
-global using _Shared.Application.Features.Responses;
-global using _Shared.Api.Swagger;

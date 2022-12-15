@@ -1,4 +1,4 @@
-﻿namespace _Shared.Application.Interfaces;
+﻿namespace _Shared.Kernel.Interfaces;
 
 public interface IResponse
 {
