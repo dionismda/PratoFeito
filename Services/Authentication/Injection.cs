@@ -43,6 +43,17 @@
             options.DefaultDatabasePass = dataBaseSetting[nameof(DataBaseSetting.DefaultDatabasePass)];
         });
 
+        var jwtOptions = configuration.GetSection(nameof(JwtOptions));
+        var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("JwtOptions:SecurityKey").Value));
+
+        services.Configure<JwtOptions>(options =>
+        {
+            options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
+            options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
+            options.SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+            options.AccessTokenExpiration = int.Parse(jwtOptions[nameof(JwtOptions.AccessTokenExpiration)] ?? "0");
+        });
+
         services.AddScoped<ICipherCryptographyService, CipherCryptographyService>();
 
         services

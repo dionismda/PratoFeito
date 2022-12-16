@@ -10,3 +10,8 @@ global using System.Reflection;
 global using Microsoft.AspNetCore.Mvc.Versioning;
 global using _Shared.Application.Interfaces;
 global using System.ComponentModel;
+global using _Shared.Infrastructure.Settings;
+global using Microsoft.Extensions.Options;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using _Shared.Infrastructure.Interfaces;

@@ -1,22 +1,33 @@
 ﻿namespace _Shared.Infrastructure.Persistences;
 
-public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
+public abstract class BaseDbContext : DbContext, IDbContext
 {
     private readonly IDomainMediator _mediator;
 
-    public readonly IIntegrationEventMapper EventMapper;
-
     private readonly DataBaseSetting _dataBaseSettings;
 
+    public readonly IIntegrationEventMapper EventMapper;
+
+    public Guid TenantId { get; protected set; }
+    public string Server { get; protected set; } = "";
+    public string Port { get; protected set; } = "";
+    public string DbAlias { get; protected set; } = "";
+    public string DbUser { get; protected set; } = "";
+    public string DbPass { get; protected set; } = "";
+
     protected BaseDbContext(DbContextOptions options,
-                          IOptions<DataBaseSetting> dataBaseSettings,
-                          IDomainMediator mediator,
-                          IIntegrationEventMapper eventMapper) : base(options)
+                            IOptions<DataBaseSetting> dataBaseSettings,
+                            IDomainMediator mediator,
+                            IIntegrationEventMapper eventMapper,
+                            IDbContextConfig dbContextConfig) : base(options)
     {
         _dataBaseSettings = dataBaseSettings.Value;
         _mediator = mediator;
         EventMapper = eventMapper;
+
+        ContextSetData(dbContextConfig);
     }
+
 
     public DbSet<IntegrationEventLogEntity>? IntegrationEventLog { get; set; }
     public DbSet<ConsumerEventLogEntity>? ConsumerEventLog { get; set; }
@@ -24,13 +35,12 @@ public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var connectionString =
-            $"Server={_dataBaseSettings.DefaultServer};Port={_dataBaseSettings.DefaultPort};Database={_dataBaseSettings.DefaultDatabase};User Id={_dataBaseSettings.DefaultDatabaseUser};Password={_dataBaseSettings.DefaultDatabasePass};";
+            $"Server={Server};Port={Port};Database={DbAlias};User Id={DbUser};Password={DbPass};";
 
         optionsBuilder
             .UseNpgsql(connectionString)
             .UseSnakeCaseNamingConvention();
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -40,7 +50,6 @@ public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
 
         modelBuilder.ApplyConfiguration(new IntegrationEventLogMap());
         modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap());
-
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -71,5 +80,28 @@ public abstract class BaseDbContext : DbContext, IDbContextUnitOfWork
         await _mediator.DispatchEventsAsync(this);
 
         return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    public void SetConfig(string server, string port, string dbAlias, string dbUser, string dbPass, Guid tenantId)
+    {
+        TenantId = tenantId;
+        Server = server;
+        Port = port;
+        DbAlias = dbAlias;
+        DbUser = dbUser;
+        DbPass = dbPass;
+    }
+
+    protected virtual void ContextSetData(IDbContextConfig dbContextConfig)
+    {
+        DbAlias = _dataBaseSettings.DefaultDatabase;
+
+        DbUser = _dataBaseSettings.DefaultDatabaseUser;
+
+        DbPass = _dataBaseSettings.DefaultDatabasePass;
+
+        Server = _dataBaseSettings.DefaultServer;
+
+        TenantId = dbContextConfig.TenantId;
     }
 }
