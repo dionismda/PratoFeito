@@ -2,7 +2,8 @@
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; protected set; }
+    public Guid Id { get; private set; }
+    public Guid TenantId { get; private set; }
     public DateTime CreatedDate { get; private set; }
     public DateTime? Updateddate { get; private set; }
 

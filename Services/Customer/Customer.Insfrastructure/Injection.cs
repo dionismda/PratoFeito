@@ -18,7 +18,8 @@
         services.AddSingleton<IConnectionDapperManager, NpgsqlDapperConnectionManager>();
 
         services.AddScoped<ICustomerRepository, CustomerRepositoty>();
-        services.AddScoped<IDomainMediator, MediaTrMediator>();   
+        services.AddScoped<IDomainMediator, MediaTrMediator>();
+        services.AddScoped<IDbContextConfig, DbContextConfig>();
 
         return services;
     }

@@ -5,7 +5,8 @@ public class CustomerDbContext : BaseDbContext, ICustomerDbContext
     public CustomerDbContext(DbContextOptions<CustomerDbContext> options,
                              IOptions<DataBaseSetting> dataBaseSettings,
                              IDomainMediator mediator,
-                             IIntegrationEventMapper eventMapper) : base(options, dataBaseSettings, mediator, eventMapper)
+                             IIntegrationEventMapper eventMapper,
+                             IDbContextConfig dbContextConfig) : base(options, dataBaseSettings, mediator, eventMapper, dbContextConfig)
     {
     }
 
