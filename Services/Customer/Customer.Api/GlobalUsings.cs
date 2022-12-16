@@ -14,3 +14,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
 global using System.Reflection;
 global using System.Text.Json.Serialization;
+global using Microsoft.AspNetCore.Authorization;
+global using _Shared.Api.Middleware;

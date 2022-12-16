@@ -15,3 +15,4 @@ global using Microsoft.Extensions.Options;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using _Shared.Infrastructure.Interfaces;
+global using Microsoft.AspNetCore.Authorization;

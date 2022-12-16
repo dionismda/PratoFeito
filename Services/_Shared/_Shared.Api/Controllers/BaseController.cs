@@ -1,6 +1,7 @@
 ﻿namespace _Shared.Api.Controllers;
 
 [ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Produces("application/json")]
 [Consumes("application/json")]
 [Route("api/v{version:apiVersion}/[controller]")]
