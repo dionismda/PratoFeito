@@ -6,6 +6,8 @@
         services.InjectCustomerDomain(configuration);
         services.InjectCustomerInfrastructure(configuration);
 
+        services.AddScoped<ValidateJwtTokenAuthorizationMiddleware>();
+
         return services;
     }
 }

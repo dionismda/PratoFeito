@@ -50,6 +50,8 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
+        app.UseMiddleware<ValidateJwtTokenAuthorizationMiddleware>();
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapDefaultControllerRoute();
