@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  PostgressDb:
+  postgressDb:
     image: postgres
-    container_name: PostgressDb
+    container_name: postgressDb
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -14,7 +14,20 @@ services:
       - "${POSTGRES_VOLUMES}:/var/lib/mysql"
     networks:
       - postgres-network
-
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "teste@teste.com.br"
+      PGADMIN_DEFAULT_PASSWORD: "1234"
+    ports:
+      - "16543:80"
+    volumes:
+      - "${PGADMIN_VOLUMES}:/root/.pgadmin"
+    networks:
+      - postgres-network
+    depends_on:
+      - postgressDb     
      
 networks:
   postgres-network:
