@@ -9,12 +9,17 @@ public sealed class CustomerRepositoty : BaseRepository<CustomerEntity, Customer
 
     protected override string GetBaseSql()
     {
-        throw new NotImplementedException();
+        return $"select * from customer where tenant_id = '{Context.TenantId}'";
     }
 
     protected override string GetFilter(IBaseParamModel? paramModel)
     {
-        throw new NotImplementedException();
+        if (paramModel == null)
+            return "";
+
+        var filter = "";
+
+        return filter;
     }
 
     public Task<CustomerOrderEntity?> GetCustomerOrderByIdAsync(Guid id, CancellationToken cancellation)
