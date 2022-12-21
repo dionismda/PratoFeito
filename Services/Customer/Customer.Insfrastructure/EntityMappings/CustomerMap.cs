@@ -2,6 +2,10 @@
 
 public class CustomerMap : BaseEntityMap<CustomerEntity>
 {
+    public CustomerMap(Guid tenantId) : base(tenantId)
+    {
+    }
+
     public override void Configure(EntityTypeBuilder<CustomerEntity> builder)
     {
         base.Configure(builder);

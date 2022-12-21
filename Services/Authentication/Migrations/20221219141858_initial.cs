@@ -34,7 +34,6 @@ namespace Authentication.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenantid = table.Column<Guid>(name: "tenant_id", type: "uuid", nullable: false),
                     username = table.Column<string>(name: "user_name", type: "character varying(256)", maxLength: 256, nullable: true),
                     normalizedusername = table.Column<string>(name: "normalized_user_name", type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),

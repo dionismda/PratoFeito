@@ -8,7 +8,7 @@ public class CustomerInputModel
     [DefaultValue("da Silva")]
     public string LastName { get; set; } = string.Empty;
 
-    [DefaultValue("150,00")]
+    [DefaultValue("150.00")]
     public Decimal Amount { get; set; }
 }
 

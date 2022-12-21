@@ -48,28 +48,27 @@ public abstract class BaseDbContext : DbContext, IDbContext
 
         modelBuilder.HasPostgresExtension("uuid-ossp");
 
-        modelBuilder.ApplyConfiguration(new IntegrationEventLogMap());
-        modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap());
+        modelBuilder.ApplyConfiguration(new IntegrationEventLogMap(TenantId));
+        modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap(TenantId));
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach (var changedEntity in ChangeTracker.Entries())
+        foreach (var changedEntity in ChangeTracker.Entries<BaseEntity>())
         {
             if (changedEntity.Entity is BaseEntity entity)
             {
                 switch (changedEntity.State)
                 {
                     case EntityState.Added:
+                        changedEntity.Entity.TenantId = TenantId;
                         break;
                     case EntityState.Modified:
+                        changedEntity.Entity.TenantId = TenantId;
                         entity.ModifyUpdatedDate();
                         break;
-                    case EntityState.Detached:
-                        break;
-                    case EntityState.Unchanged:
-                        break;
                     case EntityState.Deleted:
+                        changedEntity.Entity.TenantId = TenantId;
                         break;
                     default:
                         throw new InvalidEnumArgumentException("Invalid EntityState");

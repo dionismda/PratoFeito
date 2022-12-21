@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  PostgressDb:
+  postgressDb:
     image: postgres
-    container_name: PostgressDb
+    container_name: postgressDb
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -14,8 +14,7 @@ services:
       - "${POSTGRES_VOLUMES}:/var/lib/mysql"
     networks:
       - postgres-network
-
-     
+      
 networks:
   postgres-network:
     driver: bridge

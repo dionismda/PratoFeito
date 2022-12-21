@@ -2,6 +2,10 @@
 
 public class IntegrationEventLogMap : BaseEntityMap<IntegrationEventLogEntity>
 {
+    public IntegrationEventLogMap(Guid tenantId) : base(tenantId)
+    {
+    }
+
     public override void Configure(EntityTypeBuilder<IntegrationEventLogEntity> builder)
     {
         builder.Property(e => e.EventId)

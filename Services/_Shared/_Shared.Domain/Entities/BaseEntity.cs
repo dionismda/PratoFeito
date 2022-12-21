@@ -3,7 +3,7 @@
 public abstract class BaseEntity
 {
     public Guid Id { get; private set; }
-    public Guid TenantId { get; private set; }
+    public Guid TenantId { get; set; }
     public DateTime CreatedDate { get; private set; }
     public DateTime? Updateddate { get; private set; }
 

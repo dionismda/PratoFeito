@@ -16,6 +16,8 @@ public sealed class CustomerHandler :
     {
         var customer = new CustomerEntity(command.PersonName, command.OrderLimit);
 
+        var result2 = await _customerDomainService.GetAllAsync(cancellation, null, null, null);
+
         return await _customerDomainService.InsertAsync(customer, cancellation);
     }
 
