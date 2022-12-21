@@ -2,6 +2,10 @@
 
 public class ConsumerEventLogEntityMap : BaseEntityMap<ConsumerEventLogEntity>
 {
+    public ConsumerEventLogEntityMap(Guid tenantId) : base(tenantId)
+    {
+    }
+
     public override void Configure(EntityTypeBuilder<ConsumerEventLogEntity> builder)
     {        
         builder.Property(cel => cel.EventId)

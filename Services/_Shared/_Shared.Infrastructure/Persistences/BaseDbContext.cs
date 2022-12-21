@@ -48,8 +48,8 @@ public abstract class BaseDbContext : DbContext, IDbContext
 
         modelBuilder.HasPostgresExtension("uuid-ossp");
 
-        modelBuilder.ApplyConfiguration(new IntegrationEventLogMap());
-        modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap());
+        modelBuilder.ApplyConfiguration(new IntegrationEventLogMap(TenantId));
+        modelBuilder.ApplyConfiguration(new ConsumerEventLogEntityMap(TenantId));
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

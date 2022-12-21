@@ -3,10 +3,10 @@
 public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBaseModel>
     where TBaseModel : BaseEntity
 {
-    private readonly IDbContextConfig _dbContextConfig;
-    public BaseEntityMap(IDbContextConfig dbContextConfig)
+    private readonly Guid _tenantId;
+    public BaseEntityMap(Guid tenantId)
     {
-        _dbContextConfig = dbContextConfig;
+        _tenantId = tenantId;
     }
 
     public virtual void Configure(EntityTypeBuilder<TBaseModel> builder)
@@ -15,7 +15,7 @@ public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBase
             .HasKey(e => e.Id);
 
         builder
-            .HasQueryFilter(e => e.TenantId == _dbContextConfig.TenantId);
+            .HasQueryFilter(e => e.TenantId == _tenantId);
 
         builder
             .Property(e => e.Id)

@@ -17,8 +17,8 @@ public class CustomerDbContext : BaseDbContext, ICustomerDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new CustomerMap());
-        modelBuilder.ApplyConfiguration(new CustomerOrderMap());
+        modelBuilder.ApplyConfiguration(new CustomerMap(TenantId));
+        modelBuilder.ApplyConfiguration(new CustomerOrderMap(TenantId));
     }
 
 }
