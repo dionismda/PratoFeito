@@ -54,22 +54,21 @@ public abstract class BaseDbContext : DbContext, IDbContext
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach (var changedEntity in ChangeTracker.Entries())
+        foreach (var changedEntity in ChangeTracker.Entries<BaseEntity>())
         {
             if (changedEntity.Entity is BaseEntity entity)
             {
                 switch (changedEntity.State)
                 {
                     case EntityState.Added:
+                        changedEntity.Entity.TenantId = TenantId;
                         break;
                     case EntityState.Modified:
+                        changedEntity.Entity.TenantId = TenantId;
                         entity.ModifyUpdatedDate();
                         break;
-                    case EntityState.Detached:
-                        break;
-                    case EntityState.Unchanged:
-                        break;
                     case EntityState.Deleted:
+                        changedEntity.Entity.TenantId = TenantId;
                         break;
                     default:
                         throw new InvalidEnumArgumentException("Invalid EntityState");

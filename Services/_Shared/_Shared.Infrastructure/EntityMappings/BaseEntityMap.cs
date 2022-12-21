@@ -15,6 +15,11 @@ public abstract class BaseEntityMap<TBaseModel> : IEntityTypeConfiguration<TBase
             .IsRequired();
 
         builder
+            .Property(e => e.TenantId)
+            .HasColumnType("uuid")
+            .IsRequired();
+
+        builder
             .Ignore(e => e.DomainEvents);
     }
 }
