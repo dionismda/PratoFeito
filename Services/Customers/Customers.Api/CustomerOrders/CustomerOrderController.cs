@@ -1,4 +1,4 @@
-﻿namespace PratoFeito_Customers.Api.Controllers;
+﻿namespace PratoFeito_Customers.Api.CustomerOrders;
 
 [Route("api/[controller]")]
 public class CustomerOrderController : BaseController
@@ -12,7 +12,7 @@ public class CustomerOrderController : BaseController
 
     [HttpPost]
     [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CustomerOrderViewModel>> Post([FromBody]CreateCustomerOrderInputModel inputModel, CancellationToken cancellation)
+    public async Task<ActionResult<CustomerOrderViewModel>> Post([FromBody] CreateCustomerOrderInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync<CustomerOrderViewModel, CustomerOrder>(async ()
             => await _mediator.Send(Mapper.Map<CreateCustomerOrderCommand>(inputModel), cancellation));
 
