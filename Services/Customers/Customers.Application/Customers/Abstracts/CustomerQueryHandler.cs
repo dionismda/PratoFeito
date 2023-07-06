@@ -1,4 +1,4 @@
-﻿namespace Customers.Application.Abstracts;
+﻿namespace Customers.Application.Customers.Abstracts;
 
 public abstract class CustomerQueryHandler<TQueryRequest, TResponse> : QueryHandler<Customer, TQueryRequest, TResponse>
     where TQueryRequest : IQuery<TResponse>

@@ -1,4 +1,4 @@
-﻿namespace Customers.Application.Abstracts;
+﻿namespace Customers.Application.Customers.Abstracts;
 
 public abstract class CustomerCommandHandler<TCommandRequest, TResponse> : CommandHandler<Customer, TCommandRequest, TResponse>
     where TCommandRequest : ICommand<TResponse>

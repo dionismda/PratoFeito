@@ -47,6 +47,7 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
 
         if (dbEntity.HasName(entity.Name))
         {
+            //Todo Ajustar mensagem de exception - notification/exception
             throw new Exception();
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace Customers.Application.Customers.Queries.Handlers;
+﻿using Customers.Application.Customers.Abstracts;
+
+namespace Customers.Application.Customers.Queries.Handlers;
 
 public sealed class GetCustomerByIdQueryHandler : CustomerQueryHandler<GetCustomerByIdQuery, Customer?>
 {

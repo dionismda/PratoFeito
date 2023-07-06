@@ -25,7 +25,7 @@ public class CustomerProfile : Profile
 
         CreateMap<UpdateCustomerCommand, Customer>();
 
-        CreateMap<DeleteCustomerInputModel, DeleteCustomerCommand>()
+        CreateMap<DeleteCustomerInputModel, DeleteCustomerOrderCommand>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
 

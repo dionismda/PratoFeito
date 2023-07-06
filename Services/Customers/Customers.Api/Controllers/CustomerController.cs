@@ -1,9 +1,6 @@
-﻿using Architecture.Api.Abstracts;
-
-namespace Customers.Api.Controllers;
+﻿namespace Customers.Api.Controllers;
 
 [Route("api/[controller]")]
-[ApiController]
 public class CustomerController : BaseController
 {
     private readonly IMediator _mediator;
@@ -41,5 +38,5 @@ public class CustomerController : BaseController
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<ActionResult> Delete(DeleteCustomerInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync(async ()
-            => await _mediator.Send(Mapper.Map<DeleteCustomerCommand>(inputModel), cancellation));
+            => await _mediator.Send(Mapper.Map<DeleteCustomerOrderCommand>(inputModel), cancellation));
 }

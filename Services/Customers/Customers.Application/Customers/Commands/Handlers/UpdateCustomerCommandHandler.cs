@@ -1,4 +1,6 @@
-﻿namespace Customers.Application.Customers.Commands.Handlers;
+﻿using Customers.Application.Customers.Abstracts;
+
+namespace Customers.Application.Customers.Commands.Handlers;
 
 public sealed class UpdateCustomerCommandHandler : CustomerCommandHandler<UpdateCustomerCommand, Customer>
 {

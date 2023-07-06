@@ -1,14 +1,14 @@
 ﻿namespace Customers.Application.Customers.Commands;
 
-public sealed class DeleteCustomerCommand : ICommand
+public sealed class DeleteCustomerOrderCommand : ICommand
 {
     public Identifier Id { get; private set; } = null!;
 
-    public DeleteCustomerCommand()
+    public DeleteCustomerOrderCommand()
     {
     }
 
-    public DeleteCustomerCommand(Identifier id)
+    public DeleteCustomerOrderCommand(Identifier id)
     {
         Id = id;
     }
