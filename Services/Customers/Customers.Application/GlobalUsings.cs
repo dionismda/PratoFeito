@@ -1,0 +1,11 @@
+﻿global using AutoMapper;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.DependencyInjection;
+global using Architecture.Application.Abstracts;
+global using Architecture.Application.Interfaces;
+global using Architecture.Domain.ValueObjects;
+global using Customers.Domain.CustomerOrders.Entities;
+global using Customers.Domain.Customers.Entities;
+global using Customers.Domain.Customers.Interfaces;
+global using System.Reflection;
+global using Customers.Application.Abstracts;

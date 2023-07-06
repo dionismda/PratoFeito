@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Customers.Infrastructure</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\..\Architecture\Architecture.Infrastructure\Architecture.Infrastructure.csproj" />
+    <ProjectReference Include="..\Customers.Domain\Customers.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
