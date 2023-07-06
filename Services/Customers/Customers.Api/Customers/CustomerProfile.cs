@@ -1,4 +1,4 @@
-﻿namespace Customers.Api.Profiles;
+﻿namespace PratoFeito_Customers.Api.Customers;
 
 public class CustomerProfile : Profile
 {
