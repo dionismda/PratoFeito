@@ -1,5 +1,8 @@
 ﻿namespace Architecture.Api.Abstracts;
 
+[ApiController]
+[Produces("application/json")]
+[Consumes("application/json")]
 public abstract class BaseController : ControllerBase
 {
     protected IMapper Mapper { get; set; }

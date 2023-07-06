@@ -3,7 +3,7 @@
 public sealed class CustomerOrder : AggregateRoot, IValidation
 {
     public Identifier CustomerId { get; private set; } = null!;
-    public CustomerOrderState State { get; private set; }
+    public CustomerOrderState State { get; private set; } = CustomerOrderState.Created;
     public Money OrderTotal { get; private set; } = null!;
 
     public CustomerOrder() : base() { }
@@ -31,6 +31,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
         else
         {
+            //Todo criar exception especifica?
             throw new Exception("The corrent state is not Created");
         }
     }
@@ -39,6 +40,25 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
     {
         Id = @event.CustomerOrderId;
         State = CustomerOrderState.Delivered;
+    }
+
+    public void MarkOrderAsCanceled()
+    {
+        if (State == CustomerOrderState.Created)
+        {
+            AddDomainEvent(new CustomerOrderCanceledDomainEvent(Id));
+        }
+        else
+        {
+            //Todo criar exception especifica?
+            throw new Exception("The corrent state is not Created");
+        }
+    }
+
+    public void Apply(CustomerOrderCanceledDomainEvent @event)
+    {
+        Id = @event.CustomerOrderId;
+        State = CustomerOrderState.Cancelled;
     }
 
     public void Validate()

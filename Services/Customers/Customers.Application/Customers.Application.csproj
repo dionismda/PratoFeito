@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Customers.Infrastructure\Customers.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CustomerOrders\Queries\" />
+  </ItemGroup>
+
 </Project>
