@@ -10,6 +10,22 @@ public abstract class DomainService<TAggregateRoot> : IDomainService<TAggregateR
         Repository = repository;
     }
 
+    public virtual async Task<IList<TAggregateRoot>> GetAllAsync(
+        CancellationToken cancellationToken,
+        Expression<Func<TAggregateRoot, bool>>? filter = null,
+        Func<IQueryable<TAggregateRoot>, IOrderedQueryable<TAggregateRoot>>? orderBy = null,
+        int? top = null,
+        int? skip = null,
+        params string[] includeProperties)
+    {
+        return await Repository.GetAllAsync(cancellationToken, filter, orderBy, top, skip, includeProperties);
+    }
+
+    public virtual async Task<TAggregateRoot?> GetByIdAsync(Identifier id, CancellationToken cancellationToken)
+    {
+        return await Repository.GetByIdAsync(id, cancellationToken);
+    }
+
     public virtual async Task InsertAsync(TAggregateRoot entity, CancellationToken cancellationToken)
     {
         Repository.Insert(entity);

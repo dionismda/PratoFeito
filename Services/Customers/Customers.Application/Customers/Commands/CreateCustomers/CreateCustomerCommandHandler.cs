@@ -1,19 +1,21 @@
 ﻿namespace Customers.Application.Customers.Commands.CreateCustomers;
 
-public sealed class CreateCustomerCommandHandler : CustomerCommandHandler<CreateCustomerCommand, Customer>
+public sealed class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerCommand, Customer>
 {
     private readonly IMapper _mapper;
+    private readonly ICustomerDomainService _customerDomainService;
 
-    public CreateCustomerCommandHandler(IMapper mapper, ICustomerDomainService domainService) : base(domainService)
+    public CreateCustomerCommandHandler(IMapper mapper, ICustomerDomainService customerDomainService)
     {
         _mapper = mapper;
+        _customerDomainService = customerDomainService;
     }
 
-    public override async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = _mapper.Map<Customer>(request);
 
-        await DomainService.InsertAsync(customer, cancellationToken);
+        await _customerDomainService.InsertAsync(customer, cancellationToken);
 
         return customer;
     }

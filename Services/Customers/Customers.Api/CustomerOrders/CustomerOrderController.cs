@@ -10,6 +10,13 @@ public class CustomerOrderController : BaseController
         _mediator = mediator;
     }
 
+    [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(GetCustomerOrdersByCustomerIdViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCustomerOrdersByCustomerIdViewModel>> GetById(
+        [FromQuery] GetCustomerOrdersByCustomerIdInputModel inputModel, CancellationToken cancellation)
+        => await ExecuteAsync(async ()
+            => await _mediator.Send(Mapper.Map<GetCustomerOrdersByCustomerIdQuery>(inputModel), cancellation));
+
     [HttpPost]
     [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<CustomerOrderViewModel>> Post([FromBody] CreateCustomerOrderInputModel inputModel, CancellationToken cancellation)

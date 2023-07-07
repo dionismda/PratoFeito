@@ -30,6 +30,13 @@ public abstract class BaseController : ControllerBase
         return Ok(apiResult);
     }
 
+    protected async Task<ActionResult<TDto>> ExecuteAsync<TDto>(Func<Task<TDto>> func)
+    {
+        var dbResult = await func();
+
+        return Ok(dbResult);
+    }
+
     protected async Task<ActionResult> ExecuteAsync(Func<Task> func)
     {
         await func();

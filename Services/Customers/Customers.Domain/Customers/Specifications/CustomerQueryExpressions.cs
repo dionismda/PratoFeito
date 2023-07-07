@@ -1,6 +1,6 @@
-﻿namespace Customers.Domain.Customers.QueryExpressions;
+﻿namespace Customers.Domain.Customers.Specifications;
 
-public static class CustomerQueryExpressions
+public static class CustomerSpecifications
 {
     public static Expression<Func<Customer, bool>> CheckCustomerDuplicate(Customer entity)
     {

@@ -1,15 +1,16 @@
-﻿using Customers.Application.Customers.Abstracts;
+﻿namespace Customers.Application.Customers.Commands.DeleteCustomers;
 
-namespace Customers.Application.Customers.Commands.DeleteCustomers;
-
-public sealed class DeleteUpdateCommandHandler : CustomerCommandHandler<DeleteCustomerOrderCommand>
+public sealed class DeleteUpdateCommandHandler : ICommandHandler<DeleteCustomerOrderCommand>
 {
-    public DeleteUpdateCommandHandler(ICustomerDomainService customerDomainService) : base(customerDomainService)
+    private readonly ICustomerDomainService _customerDomainService;
+
+    public DeleteUpdateCommandHandler(ICustomerDomainService customerDomainService)
     {
+        _customerDomainService = customerDomainService;
     }
 
-    public override async Task Handle(DeleteCustomerOrderCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        await DomainService.DeleteAsync(request.Id, cancellationToken);
+        await _customerDomainService.DeleteAsync(request.Id, cancellationToken);
     }
 }

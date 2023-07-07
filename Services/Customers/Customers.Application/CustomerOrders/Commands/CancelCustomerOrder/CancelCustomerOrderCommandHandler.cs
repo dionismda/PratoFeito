@@ -1,14 +1,16 @@
 ﻿namespace Customers.Application.CustomerOrders.Commands.CancelCustomerOrder;
 
-public class CancelCustomerOrderCommandHandler : CustomerOrderCommandHandler<CancelCustomerOrderCommand, CustomerOrder>
+public class CancelCustomerOrderCommandHandler : ICommandHandler<CancelCustomerOrderCommand, CustomerOrder>
 {
-    public CancelCustomerOrderCommandHandler(ICustomerOrderDomainService domainService) : base(domainService)
+    private readonly ICustomerOrderDomainService _customerOrderDomainService;
+    public CancelCustomerOrderCommandHandler(ICustomerOrderDomainService customerOrderDomainService)
     {
+        _customerOrderDomainService = customerOrderDomainService;
     }
 
-    public override async Task<CustomerOrder> Handle(CancelCustomerOrderCommand request, CancellationToken cancellationToken)
+    public async Task<CustomerOrder> Handle(CancelCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        var customerOrder = await DomainService.GetCustomerOrderAsync(request.Id, cancellationToken);
+        var customerOrder = await _customerOrderDomainService.GetByIdAsync(request.Id, cancellationToken);
 
         if (customerOrder is null)
         {
@@ -20,7 +22,7 @@ public class CancelCustomerOrderCommandHandler : CustomerOrderCommandHandler<Can
 
         customerOrder.Validate();
 
-        await DomainService.UpdateAsync(customerOrder, cancellationToken);
+        await _customerOrderDomainService.UpdateAsync(customerOrder, cancellationToken);
 
         return customerOrder;
     }

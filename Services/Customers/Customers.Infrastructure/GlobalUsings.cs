@@ -12,3 +12,4 @@ global using Customers.Infrastructure._Commons;
 global using Customers.Infrastructure.CustomerOrders;
 global using Customers.Infrastructure.Customers;
 global using MediatR;
+global using Architecture.Domain.ValueObjects;

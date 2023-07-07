@@ -1,15 +1,16 @@
-﻿using Customers.Application.Customers.Abstracts;
+﻿namespace Customers.Application.Customers.Queries.GetCustomers;
 
-namespace Customers.Application.Customers.Queries.GetCustomers;
-
-public sealed class GetCustomersQueryHandler : CustomerQueryHandler<GetCustomersQuery, IList<Customer>>
+public sealed class GetCustomersQueryHandler : IQueryHandler<GetCustomersQuery, IList<Customer>>
 {
-    public GetCustomersQueryHandler(ICustomerRepository customerRepository) : base(customerRepository)
+    private readonly ICustomerRepository _customerRepository;
+
+    public GetCustomersQueryHandler(ICustomerRepository customerRepository)
     {
+        _customerRepository = customerRepository;
     }
 
-    public override async Task<IList<Customer>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+    public async Task<IList<Customer>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
     {
-        return await Repository.GetAllAsync(cancellationToken);
+        return await _customerRepository.GetAllAsync(cancellationToken);
     }
 }

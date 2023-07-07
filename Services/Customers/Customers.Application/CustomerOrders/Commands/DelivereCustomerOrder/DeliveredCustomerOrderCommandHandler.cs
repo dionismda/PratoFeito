@@ -1,14 +1,17 @@
 ﻿namespace Customers.Application.CustomerOrders.Commands.DelivereCustomerOrder;
 
-public class DeliveredCustomerOrderCommandHandler : CustomerOrderCommandHandler<DeliveredCustomerOrderCommand, CustomerOrder>
+public class DeliveredCustomerOrderCommandHandler : ICommandHandler<DeliveredCustomerOrderCommand, CustomerOrder>
 {
-    public DeliveredCustomerOrderCommandHandler(ICustomerOrderDomainService domainService) : base(domainService)
+    private readonly ICustomerOrderDomainService _customerOrderDomainService;
+
+    public DeliveredCustomerOrderCommandHandler(ICustomerOrderDomainService customerOrderDomainService)
     {
+        _customerOrderDomainService = customerOrderDomainService;
     }
 
-    public override async Task<CustomerOrder> Handle(DeliveredCustomerOrderCommand request, CancellationToken cancellationToken)
+    public async Task<CustomerOrder> Handle(DeliveredCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        var customerOrder = await DomainService.GetCustomerOrderAsync(request.Id, cancellationToken);
+        var customerOrder = await _customerOrderDomainService.GetByIdAsync(request.Id, cancellationToken);
 
         if (customerOrder is null)
         {
@@ -20,7 +23,7 @@ public class DeliveredCustomerOrderCommandHandler : CustomerOrderCommandHandler<
 
         customerOrder.Validate();
 
-        await DomainService.UpdateAsync(customerOrder, cancellationToken);
+        await _customerOrderDomainService.UpdateAsync(customerOrder, cancellationToken);
 
         return customerOrder;
     }
