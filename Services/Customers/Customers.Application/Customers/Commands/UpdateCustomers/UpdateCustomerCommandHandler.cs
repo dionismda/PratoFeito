@@ -1,0 +1,22 @@
+﻿using Customers.Application.Customers.Abstracts;
+
+namespace Customers.Application.Customers.Commands.UpdateCustomers;
+
+public sealed class UpdateCustomerCommandHandler : CustomerCommandHandler<UpdateCustomerCommand, Customer>
+{
+    private readonly IMapper _mapper;
+
+    public UpdateCustomerCommandHandler(IMapper mapper, ICustomerDomainService customerDomainService) : base(customerDomainService)
+    {
+        _mapper = mapper;
+    }
+
+    public override async Task<Customer> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    {
+        var customer = _mapper.Map<Customer>(request);
+
+        await DomainService.UpdateAsync(customer, cancellationToken);
+
+        return customer;
+    }
+}
