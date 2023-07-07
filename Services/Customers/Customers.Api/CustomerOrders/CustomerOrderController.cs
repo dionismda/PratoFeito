@@ -26,5 +26,5 @@ public class CustomerOrderController : BaseController
     [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<CustomerOrderViewModel>> OrderCanceled(CustomerOrderCanceledInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync<CustomerOrderViewModel, CustomerOrder>(async ()
-            => await _mediator.Send(Mapper.Map<CanceledCustomerOrderCommand>(inputModel), cancellation));
+            => await _mediator.Send(Mapper.Map<CancelCustomerOrderCommand>(inputModel), cancellation));
 }

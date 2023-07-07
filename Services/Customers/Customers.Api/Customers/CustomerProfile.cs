@@ -1,4 +1,11 @@
-﻿namespace PratoFeito_Customers.Api.Customers;
+﻿using Customers.Application.Customers._Commons;
+using Customers.Application.Customers.Commands.CreateCustomers;
+using Customers.Application.Customers.Commands.DeleteCustomers;
+using Customers.Application.Customers.Commands.UpdateCustomers;
+using Customers.Application.Customers.Queries.GetCustomerById;
+using Customers.Application.Customers.Queries.GetCustomers;
+
+namespace PratoFeito_Customers.Api.Customers;
 
 public class CustomerProfile : Profile
 {

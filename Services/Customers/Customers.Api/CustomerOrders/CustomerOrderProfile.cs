@@ -19,7 +19,7 @@ public class CustomerOrderProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
 
-        CreateMap<CustomerOrderCanceledInputModel, CanceledCustomerOrderCommand>()
+        CreateMap<CustomerOrderCanceledInputModel, CancelCustomerOrderCommand>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
     }
