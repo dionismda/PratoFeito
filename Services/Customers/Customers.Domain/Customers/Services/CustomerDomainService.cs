@@ -9,7 +9,7 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
     public override async Task InsertAsync(Customer entity, CancellationToken cancellationToken)
     {
         await ValidateFields(
-            async () => await Repository.GetAllAsync(cancellationToken, CustomerQueryExpressions.CheckCustomerDuplicate(entity)),
+            async () => await Repository.GetAllAsync(cancellationToken, CustomerSpecifications.CheckCustomerDuplicate(entity)),
             entity
             );
 
@@ -19,7 +19,7 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
     public override async Task UpdateAsync(Customer entity, CancellationToken cancellationToken)
     {
         await ValidateFields(
-            async () => await Repository.GetAllAsync(cancellationToken, CustomerQueryExpressions.CheckCustomerDuplicateExceptById(entity)),
+            async () => await Repository.GetAllAsync(cancellationToken, CustomerSpecifications.CheckCustomerDuplicateExceptById(entity)),
             entity
             );
 

@@ -19,6 +19,11 @@ public class PersonName : ValueObject<PersonName>, IValidation
         yield return LastName;
     }
 
+    public override string? ToString()
+    {
+        return $"{FirstName} {LastName}";
+    }
+
     public void Validate()
     {
         PersonNameValidator validator = new();

@@ -18,5 +18,5 @@ global using Customers.Domain.Customers.Services;
 global using Architecture.Domain.Exceptions;
 global using Architecture.Domain.Extensions;
 global using System.Linq.Expressions;
-global using Customers.Domain.Customers.QueryExpressions;
+global using Customers.Domain.Customers.Specifications;
 global using Customers.Domain.Customers.Extensions;

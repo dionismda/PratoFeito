@@ -3,24 +3,24 @@
 public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
     where TAggregateRoot : AggregateRoot
 {
-    protected MicroserviceContext Context { get; set; }
+    private readonly MicroserviceContext _context;
 
-    public IUnitOfWork UnitOfWork => Context;
+    public IUnitOfWork UnitOfWork => _context;
 
     protected Repository(MicroserviceContext context)
     {
-        Context = context;
+        _context = context;
     }
 
     public virtual async Task<IList<TAggregateRoot>> GetAllAsync(
-                                      CancellationToken cancellationToken,
-                                      Expression<Func<TAggregateRoot, bool>>? filter = null,
-                                      Func<IQueryable<TAggregateRoot>, IOrderedQueryable<TAggregateRoot>>? orderBy = null,
-                                      int? top = null,
-                                      int? skip = null,
-                                      params string[] includeProperties)
+        CancellationToken cancellationToken,
+        Expression<Func<TAggregateRoot, bool>>? filter = null,
+        Func<IQueryable<TAggregateRoot>, IOrderedQueryable<TAggregateRoot>>? orderBy = null,
+        int? top = null,
+        int? skip = null,
+        params string[] includeProperties)
     {
-        IQueryable<TAggregateRoot> query = Context.Set<TAggregateRoot>();
+        IQueryable<TAggregateRoot> query = _context.Set<TAggregateRoot>();
 
         if (filter != null)
         {
@@ -52,22 +52,22 @@ public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
 
     public virtual async Task<TAggregateRoot?> GetByIdAsync(Identifier id, CancellationToken cancellationToken)
     {
-        return await Context.Set<TAggregateRoot>().FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
+        return await _context.Set<TAggregateRoot>().FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
     }
 
     public virtual void Insert(TAggregateRoot entity)
     {
-        Context.Set<TAggregateRoot>().Add(entity);
+        _context.Set<TAggregateRoot>().Add(entity);
     }
 
     public virtual void Update(TAggregateRoot entity)
     {
-        Context.Set<TAggregateRoot>().Update(entity);
+        _context.Set<TAggregateRoot>().Update(entity);
     }
 
     public virtual void Delete(TAggregateRoot entity)
     {
-        Context.Set<TAggregateRoot>().Remove(entity);
+        _context.Set<TAggregateRoot>().Remove(entity);
     }
 
     public virtual async Task CommitAsync(CancellationToken cancellationToken)
