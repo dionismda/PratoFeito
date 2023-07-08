@@ -1,6 +1,6 @@
-﻿global using Architecture.Application.Interfaces;
-global using Architecture.Domain.Exceptions;
-global using Architecture.Domain.ValueObjects;
+﻿global using _Architecture.Application.Interfaces;
+global using _Architecture.Domain.Exceptions;
+global using _Architecture.Domain.ValueObjects;
 global using AutoMapper;
 global using Customers.Application.Customers._Commons;
 global using Customers.Domain.CustomerOrders.Entities;

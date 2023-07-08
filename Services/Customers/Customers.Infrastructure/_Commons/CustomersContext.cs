@@ -6,8 +6,8 @@ public sealed class CustomersContext : MicroserviceContext
     {
     }
 
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<CustomerOrder> CustomerOrders { get; set; }
+    public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<CustomerOrder> CustomerOrders { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

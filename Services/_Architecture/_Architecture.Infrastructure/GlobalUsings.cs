@@ -1,0 +1,14 @@
+﻿global using _Architecture.Domain.Abstracts;
+global using _Architecture.Domain.Interfaces;
+global using _Architecture.Domain.ValueObjects;
+global using _Architecture.Infrastructure.Abstracts;
+global using _Architecture.Infrastructure.Extensions;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Linq.Expressions;
+global using System.Text;
+global using System.Transactions;

@@ -2,8 +2,8 @@
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
-global using Architecture.Infrastructure.Abstracts;
-global using Architecture.Infrastructure.Extensions;
+global using _Architecture.Infrastructure.Abstracts;
+global using _Architecture.Infrastructure.Extensions;
 global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Interfaces;
 global using Customers.Domain.Customers.Entities;
@@ -12,4 +12,4 @@ global using Customers.Infrastructure._Commons;
 global using Customers.Infrastructure.CustomerOrders;
 global using Customers.Infrastructure.Customers;
 global using MediatR;
-global using Architecture.Domain.ValueObjects;
+global using _Architecture.Domain.ValueObjects;

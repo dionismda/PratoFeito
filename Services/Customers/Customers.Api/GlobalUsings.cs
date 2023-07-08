@@ -1,5 +1,5 @@
-﻿global using Architecture.Api.Abstracts;
-global using Architecture.Domain.ValueObjects;
+﻿global using _Architecture.Api.Abstracts;
+global using _Architecture.Domain.ValueObjects;
 global using AutoMapper;
 global using Customers.Application;
 global using Customers.Application.CustomerOrders._Commons.ViewModels;

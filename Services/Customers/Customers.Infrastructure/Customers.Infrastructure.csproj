@@ -7,13 +7,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-	<ItemGroup>
-    <ProjectReference Include="..\..\Architecture\Architecture.Infrastructure\Architecture.Infrastructure.csproj" />
-    <ProjectReference Include="..\Customers.Domain\Customers.Domain.csproj" />
+  <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Migrations\" />
-	</ItemGroup>
+    <ProjectReference Include="..\..\_Architecture\_Architecture.Infrastructure\_Architecture.Infrastructure.csproj" />
+    <ProjectReference Include="..\Customers.Domain\Customers.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

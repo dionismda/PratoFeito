@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Architecture\Architecture.Api\Architecture.Api.csproj" />
+    <ProjectReference Include="..\..\_Architecture\_Architecture.Api\_Architecture.Api.csproj" />
     <ProjectReference Include="..\Customers.Application\Customers.Application.csproj" />
   </ItemGroup>
 
