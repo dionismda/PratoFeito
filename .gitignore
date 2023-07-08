@@ -459,3 +459,5 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 Services/Customers.Infrastructure/Migrations/*
+
+.env

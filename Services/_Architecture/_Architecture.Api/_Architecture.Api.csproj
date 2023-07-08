@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Customers.Application</RootNamespace>
+    <RootNamespace>Architecture.Api</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_Architecture\_Architecture.Application\_Architecture.Application.csproj" />
-    <ProjectReference Include="..\Customers.Infrastructure\Customers.Infrastructure.csproj" />
+    <ProjectReference Include="..\_Architecture.Application\_Architecture.Application.csproj" />
   </ItemGroup>
 
 </Project>
