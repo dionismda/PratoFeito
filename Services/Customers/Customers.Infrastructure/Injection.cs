@@ -6,6 +6,8 @@ public static class Injection
     {
         services.AddMicroserviceDbContext<CustomersContext>(configuration);
 
+        services.AddDapperNpgSqlConnection();
+
         services
             .InjectionCustomers()
             .InjectionCustomerOrders();

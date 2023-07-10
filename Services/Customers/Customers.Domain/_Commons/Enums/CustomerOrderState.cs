@@ -1,4 +1,4 @@
-﻿namespace Customers.Domain.CustomerOrders.Enums;
+﻿namespace Customers.Domain._Commons.Enums;
 
 public enum CustomerOrderState
 {

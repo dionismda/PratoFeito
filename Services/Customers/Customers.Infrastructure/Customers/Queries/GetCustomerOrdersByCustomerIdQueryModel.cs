@@ -1,8 +1,6 @@
-﻿using Customers.Domain._Commons.Enums;
+﻿namespace Customers.Infrastructure.Customers.Queries;
 
-namespace Customers.Application.CustomerOrders._Commons.ViewModels;
-
-public class CustomerOrderViewModel
+public sealed class GetCustomerOrdersByCustomerIdQueryModel
 {
     public Guid Id { get; set; }
     public Guid CustomerId { get; set; }
