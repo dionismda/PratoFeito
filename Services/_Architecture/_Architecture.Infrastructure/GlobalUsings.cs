@@ -12,3 +12,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using System.Linq.Expressions;
 global using System.Text;
 global using System.Transactions;
+global using System.Data;
+global using Architecture.Infrastructure.Interfaces;
+global using Npgsql;
+global using Architecture.Infrastructure.Connetions;

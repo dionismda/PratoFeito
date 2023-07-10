@@ -1,1 +1,13 @@
+global using _Architecture.Domain.Exceptions;
+global using _Architecture.Domain.ValueObjects;
+global using _Architecture.UnitTests._Commons.Abstracts;
+global using _Architecture.UnitTests._Commons.Builders;
+global using _Architecture.UnitTests.Domain.ValueObjects.Helpers;
+global using Customers.Domain.Customers.Entities;
+global using Customers.Domain.Customers.Events;
+global using Customers.Domain.Customers.Interfaces;
+global using Customers.Domain.Customers.Services;
+global using Customers.UnitTests._Commons.Builders;
+global using Moq;
 global using Xunit;
+global using System.Linq.Expressions;

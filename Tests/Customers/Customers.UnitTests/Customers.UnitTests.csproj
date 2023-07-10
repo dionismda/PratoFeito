@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Customers\Builders\**" />
+    <EmbeddedResource Remove="Domain\Customers\Builders\**" />
+    <None Remove="Domain\Customers\Builders\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -24,10 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Services\Customers\Customers.Domain\Customers.Domain.csproj" />
     <ProjectReference Include="..\..\_Architecture\_Architecture.UnitTests\_Architecture.UnitTests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\Customers\Builders\" />
   </ItemGroup>
 
 </Project>

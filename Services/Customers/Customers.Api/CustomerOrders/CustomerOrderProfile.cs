@@ -22,9 +22,5 @@ public class CustomerOrderProfile : Profile
         CreateMap<CustomerOrderCanceledInputModel, CancelCustomerOrderCommand>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
-
-        CreateMap<GetCustomerOrdersByCustomerIdInputModel, GetCustomerOrdersByCustomerIdQuery>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-            .ReverseMap();
     }
 }

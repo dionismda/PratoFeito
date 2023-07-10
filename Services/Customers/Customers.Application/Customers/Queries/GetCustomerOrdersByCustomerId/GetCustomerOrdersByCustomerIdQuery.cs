@@ -1,15 +1,17 @@
-﻿namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
+﻿using Customers.Infrastructure.Customers.Queries;
 
-public sealed class GetCustomerOrdersByCustomerIdQuery : IQuery<GetCustomerOrdersByCustomerIdViewModel>
+namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
+
+public sealed class GetCustomerOrdersByCustomerIdQuery : IQuery<IList<GetCustomerOrdersByCustomerIdQueryModel>>
 {
-    public Identifier Id { get; private set; } = null!;
+    public Identifier CustomerId { get; private set; } = null!;
 
     public GetCustomerOrdersByCustomerIdQuery()
     {
     }
 
-    public GetCustomerOrdersByCustomerIdQuery(Identifier id)
+    public GetCustomerOrdersByCustomerIdQuery(Identifier customerId)
     {
-        Id = id;
+        CustomerId = customerId;
     }
 }

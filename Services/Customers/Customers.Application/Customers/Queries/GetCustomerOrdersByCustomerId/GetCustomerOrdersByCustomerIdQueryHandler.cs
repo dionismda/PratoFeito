@@ -1,16 +1,16 @@
 ﻿namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
 
-public sealed class GetCustomerOrdersByCustomerIdQueryHandler : IQueryHandler<GetCustomerOrdersByCustomerIdQuery, GetCustomerOrdersByCustomerIdViewModel?>
+public sealed class GetCustomerOrdersByCustomerIdQueryHandler : IQueryHandler<GetCustomerOrdersByCustomerIdQuery, IList<GetCustomerOrdersByCustomerIdQueryModel>>
 {
-    private readonly ICustomerQueires _customerQueires;
+    private readonly ICustomerQueries _customerQueries;
 
-    public GetCustomerOrdersByCustomerIdQueryHandler(ICustomerQueires customerQueires)
+    public GetCustomerOrdersByCustomerIdQueryHandler(ICustomerQueries customerQueries)
     {
-        _customerQueires = customerQueires;
+        _customerQueries = customerQueries;
     }
 
-    public async Task<GetCustomerOrdersByCustomerIdViewModel?> Handle(GetCustomerOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
+    public async Task<IList<GetCustomerOrdersByCustomerIdQueryModel>> Handle(GetCustomerOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
     {
-        return await _customerQueires.GetCustomerOrdersByCustomerIdAsync(request.Id, cancellationToken);
+        return await _customerQueries.GetCustomerOrdersByCustomerId(request.CustomerId, cancellationToken);
     }
 }

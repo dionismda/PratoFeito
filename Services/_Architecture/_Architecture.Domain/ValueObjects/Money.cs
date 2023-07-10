@@ -13,13 +13,14 @@ public class Money : ValueObject<Money>, IValidation
 
     public Money Add(decimal amount)
     {
-        var newAmount = Amount + amount;
-        return new Money(newAmount);
+        Amount += amount;
+        return this;
     }
 
     public Money Multiply(int value)
     {
-        return new Money(Amount * value);
+        Amount *= value;
+        return this;
     }
 
     public bool IsGreatThenOrEquals(Money moneyValueObject)
