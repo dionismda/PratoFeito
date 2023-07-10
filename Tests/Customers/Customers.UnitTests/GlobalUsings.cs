@@ -1,1 +1,10 @@
+global using Customers.Domain.Customers.Entities;
+global using _Architecture.UnitTests._Commons.Abstracts;
+global using _Architecture.Domain.ValueObjects;
+global using _Architecture.UnitTests._Commons.Builders;
+global using Customers.UnitTests._Commons.Builders;
 global using Xunit;
+global using Customers.Domain.Customers.Events;
+global using _Architecture.Domain.Exceptions;
+global using _Architecture.UnitTests._Commons.Helpers;
+global using _Architecture.UnitTests.Domain.ValueObjects.Helpers;
