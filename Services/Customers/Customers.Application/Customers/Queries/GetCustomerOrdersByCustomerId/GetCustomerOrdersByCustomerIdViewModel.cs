@@ -1,6 +1,4 @@
-﻿using Customers.Domain._Commons.Enums;
-
-namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
+﻿namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
 
 public sealed class GetCustomerOrdersByCustomerIdViewModel
 {

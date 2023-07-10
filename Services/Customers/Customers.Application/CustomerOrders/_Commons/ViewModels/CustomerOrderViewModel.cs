@@ -1,6 +1,4 @@
-﻿using Customers.Domain._Commons.Enums;
-
-namespace Customers.Application.CustomerOrders._Commons.ViewModels;
+﻿namespace Customers.Application.CustomerOrders._Commons.ViewModels;
 
 public class CustomerOrderViewModel
 {

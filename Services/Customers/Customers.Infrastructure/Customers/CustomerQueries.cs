@@ -18,10 +18,10 @@ public sealed class CustomerQueries : DapperQueries, ICustomerQueries
                     FROM
                         customer_orders
                     WHERE
-                        customer_order_id = @customer_order_id
+                        customer_id = @customer_id
                    ";
 
-        var results = await connection.QueryAsync<GetCustomerOrdersByCustomerIdQueryModel>(sql, new { customer_order_id = CustomerId.Id } );
+        var results = await connection.QueryAsync<GetCustomerOrdersByCustomerIdQueryModel>(sql, new { customer_id = CustomerId.Id } );
 
         return results.ToList();
     }

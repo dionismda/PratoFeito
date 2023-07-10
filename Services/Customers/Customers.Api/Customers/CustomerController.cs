@@ -22,6 +22,13 @@ public class CustomerController : BaseController
         => await ExecuteAsync<CustomerViewModel, Customer>(async ()
             => await _mediator.Send(Mapper.Map<GetCustomerByIdQuery>(inputModel), cancellation));
 
+    [HttpGet("{id:guid}/Orders")]
+    [ProducesResponseType(typeof(IList<GetCustomerOrdersByCustomerIdViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IList<GetCustomerOrdersByCustomerIdViewModel>>> GetCustomerOrdersByCustomerId(
+        GetCustomerOrdersByCustomerIdInputModel inputModel, CancellationToken cancellation)
+        => await ExecuteAsync<GetCustomerOrdersByCustomerIdViewModel, GetCustomerOrdersByCustomerIdQueryModel>(async ()
+            => await _mediator.Send(Mapper.Map<GetCustomerOrdersByCustomerIdQuery>(inputModel), cancellation));
+
     [HttpPost]
     [ProducesResponseType(typeof(CustomerViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<CustomerViewModel>> Post(CreateCustomerInputModel inputModel, CancellationToken cancellation)

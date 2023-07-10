@@ -40,5 +40,12 @@ public class CustomerProfile : Profile
         CreateMap<GetCustomerByIdInputModel, GetCustomerByIdQuery>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
+
+        CreateMap<GetCustomerOrdersByCustomerIdInputModel, GetCustomerOrdersByCustomerIdQuery>()
+            .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id))
+            .ReverseMap();
+
+        CreateMap<GetCustomerOrdersByCustomerIdQueryModel, GetCustomerOrdersByCustomerIdViewModel>()
+            .ForMember(dest => dest.OrderTotal, opt => opt.MapFrom(src => src.Order_Total));
     }
 }

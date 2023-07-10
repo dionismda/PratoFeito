@@ -21,3 +21,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
+global using Customers.Infrastructure.Customers.Queries;
