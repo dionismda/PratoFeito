@@ -11,7 +11,3 @@ global using Customers.Domain.Customers.Interfaces;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
-global using Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
-global using Customers.Infrastructure._Commons;
-global using Customers.Application.Customers.Queries;
-global using Microsoft.EntityFrameworkCore;

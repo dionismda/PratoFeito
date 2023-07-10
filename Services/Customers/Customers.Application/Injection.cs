@@ -16,7 +16,6 @@ public static class Injection
 
     private static IServiceCollection InjectionCustomers(this IServiceCollection services)
     {
-        services.AddScoped<ICustomerQueires, CustomerQueires>();
         return services;
     }
 
