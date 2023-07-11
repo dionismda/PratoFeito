@@ -10,7 +10,7 @@ public sealed class CustomerTest
     }
 
     [Fact]
-    public void Customer_MustCreatObject_WhenIsValid()
+    public void Customer_MustCreateObject_WhenIsValid()
     {
         Assert.NotNull(Customer);
         Assert.NotEmpty(Customer.DomainEvents.OfType<CustomerCreatedDomainEvent>());

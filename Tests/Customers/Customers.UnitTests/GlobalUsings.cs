@@ -14,3 +14,5 @@ global using System.Linq.Expressions;
 global using Customers.Domain._Commons.Enums;
 global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Events;
+global using Customers.Domain.CustomerOrders.Interfaces;
+global using Customers.Domain.CustomerOrders.Services;
