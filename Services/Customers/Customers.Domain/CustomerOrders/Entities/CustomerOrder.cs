@@ -6,7 +6,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
     public CustomerOrderState State { get; private set; } = CustomerOrderState.Created;
     public Money OrderTotal { get; private set; } = null!;
 
-    public CustomerOrder() : base() { }
+    private CustomerOrder() : base() { }
 
     public CustomerOrder(Identifier customerId, Money orderTotal) : this()
     {

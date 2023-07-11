@@ -5,7 +5,7 @@ public sealed class Customer : AggregateRoot, IValidation
     public PersonName Name { get; private set; } = null!;
     public Money OrderLimit { get; private set; } = null!;
 
-    public Customer() : base() { }
+    private Customer() : base() { }
 
     public Customer(PersonName name, Money orderLimit) : this()
     {
