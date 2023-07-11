@@ -20,3 +20,5 @@ global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Linq.Expressions;
 global using Customers.Domain._Commons.Enums;
+global using Architecture.Domain.Interfaces;
+global using Architecture.Domain.Services;

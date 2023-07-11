@@ -2,8 +2,11 @@
 
 public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDomainService
 {
-    public CustomerDomainService(ICustomerRepository repository) : base(repository)
+    private readonly INotificationDomainService _notificationDomainService;
+
+    public CustomerDomainService(INotificationDomainService notificationDomainService, ICustomerRepository repository) : base(repository)
     {
+        _notificationDomainService = notificationDomainService;
     }
 
     public override async Task InsertAsync(Customer entity, CancellationToken cancellationToken)
@@ -47,8 +50,9 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
 
         if (dbEntity.HasName(entity.Name))
         {
-            //Todo Ajustar mensagem de exception - notification/exception
-            throw new Exception();
+            _notificationDomainService.AddError(nameof(entity.Name), "Field already exists");
         }
+
+        _notificationDomainService.Validate("Error to save entity");
     }
 }

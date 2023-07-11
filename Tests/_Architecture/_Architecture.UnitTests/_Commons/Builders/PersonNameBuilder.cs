@@ -7,8 +7,8 @@ public sealed class PersonNameBuilder : Builders<PersonNameBuilder, PersonName>
 
     public PersonNameBuilder()
     {
-        FirstName = Bogus.Name.FirstName();
-        LastName = Bogus.Name.LastName();
+        FirstName = Bogus.Name.Random.String2(50);
+        LastName = Bogus.Name.Random.String2(200);
     }
 
     public PersonNameBuilder ChangeFirstName(string firstName)
