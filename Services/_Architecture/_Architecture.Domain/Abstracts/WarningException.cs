@@ -1,6 +1,5 @@
 ﻿namespace _Architecture.Domain.Abstracts;
 
-[Serializable]
 public abstract class WarningException : Exception
 {
     public Dictionary<string, List<string>> Errors { get; protected set; } = new();

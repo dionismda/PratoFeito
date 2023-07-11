@@ -1,6 +1,4 @@
-﻿using Customers.Domain._Commons.Enums;
-
-namespace Customers.Domain.CustomerOrders.Entities;
+﻿namespace Customers.Domain.CustomerOrders.Entities;
 
 public sealed class CustomerOrder : AggregateRoot, IValidation
 {

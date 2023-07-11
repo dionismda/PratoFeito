@@ -4,7 +4,6 @@ public sealed class CustomerDomainServiceTest
 {
     private Customer Customer { get; set; }
     private CustomerDomainService CustomerDomainService { get; set; }
-
     private readonly Mock<ICustomerRepository> customerRepository = new();
 
     public CustomerDomainServiceTest()

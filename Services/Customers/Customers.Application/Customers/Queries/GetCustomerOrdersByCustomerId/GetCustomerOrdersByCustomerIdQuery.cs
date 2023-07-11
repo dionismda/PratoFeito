@@ -1,6 +1,4 @@
-﻿using Customers.Infrastructure.Customers.Queries;
-
-namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
+﻿namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
 
 public sealed class GetCustomerOrdersByCustomerIdQuery : IQuery<IList<GetCustomerOrdersByCustomerIdQueryModel>>
 {
