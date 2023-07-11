@@ -9,3 +9,4 @@ global using System.Runtime.Serialization;
 global using FluentValidation.Results;
 global using _Architecture.Domain.Extensions;
 global using System.Linq.Expressions;
+global using Architecture.Domain.Interfaces;

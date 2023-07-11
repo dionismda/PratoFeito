@@ -16,3 +16,4 @@ global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Events;
 global using Customers.Domain.CustomerOrders.Interfaces;
 global using Customers.Domain.CustomerOrders.Services;
+global using Architecture.Domain.Interfaces;

@@ -5,10 +5,11 @@ public sealed class CustomerDomainServiceTest
     private Customer Customer { get; set; }
     private CustomerDomainService CustomerDomainService { get; set; }
     private readonly Mock<ICustomerRepository> customerRepository = new();
+    private readonly Mock<INotificationDomainService> notificationDomainService = new();
 
     public CustomerDomainServiceTest()
     {
-        CustomerDomainService = new CustomerDomainService(customerRepository.Object);
+        CustomerDomainService = new CustomerDomainService(notificationDomainService.Object, customerRepository.Object);
         Customer = CustomerBuilder.New().Build();
     }
 
@@ -101,6 +102,29 @@ public sealed class CustomerDomainServiceTest
 
         customerRepository
             .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task CustomerDomainService_MustUpdateDataReturnException_WhenObjectNotFound()
+    {
+        customerRepository
+            .Setup(x => x.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<Customer, bool>>>(), null, null, null))
+            .ReturnsAsync(new List<Customer>());
+
+        customerRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(It.IsAny<Customer>());
+
+        await Assert.ThrowsAsync<NotFoundException>(async () =>
+        {
+            await CustomerDomainService.UpdateAsync(Customer, It.IsAny<CancellationToken>());
+        });
+
+        customerRepository
+            .Verify(x => x.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<Customer, bool>>>(), null, null, null), Times.Once);
+
+        customerRepository
+            .Verify(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
