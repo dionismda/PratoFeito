@@ -11,3 +11,6 @@ global using Customers.UnitTests._Commons.Builders;
 global using Moq;
 global using Xunit;
 global using System.Linq.Expressions;
+global using Customers.Domain._Commons.Enums;
+global using Customers.Domain.CustomerOrders.Entities;
+global using Customers.Domain.CustomerOrders.Events;

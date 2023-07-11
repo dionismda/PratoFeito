@@ -19,3 +19,4 @@ global using Customers.Domain.Customers.Specifications;
 global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Linq.Expressions;
+global using Customers.Domain._Commons.Enums;
