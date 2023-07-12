@@ -22,3 +22,4 @@ global using System.Linq.Expressions;
 global using Customers.Domain._Commons.Enums;
 global using Architecture.Domain.Interfaces;
 global using Architecture.Domain.Services;
+global using Customers.Domain.CustomerOrders.Exceptions;

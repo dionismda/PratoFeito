@@ -31,8 +31,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
         else
         {
-            //Todo criar exception especifica?
-            throw new Exception("The corrent state is not Created");
+            throw new OrderStateNotCreatedException();
         }
     }
 
@@ -50,8 +49,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
         else
         {
-            //Todo criar exception especifica?
-            throw new Exception("The corrent state is not Created");
+            throw new OrderStateNotCreatedException();
         }
     }
 

@@ -1,4 +1,6 @@
-﻿namespace Customers.UnitTests.Domain.CustomerOrders.Entities;
+﻿using Customers.Domain.CustomerOrders.Exceptions;
+
+namespace Customers.UnitTests.Domain.CustomerOrders.Entities;
 
 public sealed class CustomerOrderTest
 {
@@ -39,7 +41,7 @@ public sealed class CustomerOrderTest
     public void CustomerOrder_MustReturnException_WhenFunctionMarkOrderAsDeliveredIsCalled()
     {
         CustomerOrder.MarkOrderAsDelivered();
-        Assert.Throws<Exception>(() =>
+        Assert.Throws<OrderStateNotCreatedException>(() =>
         {
             CustomerOrder.MarkOrderAsDelivered();
         });
@@ -57,7 +59,7 @@ public sealed class CustomerOrderTest
     public void CustomerOrder_MustReturnException_WhenFunctionMarkOrderAsCanceledIsCalled()
     {
         CustomerOrder.MarkOrderAsCanceled();
-        Assert.Throws<Exception>(() =>
+        Assert.Throws<OrderStateNotCreatedException>(() =>
         {
             CustomerOrder.MarkOrderAsCanceled();
         });

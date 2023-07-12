@@ -15,7 +15,6 @@ public class DeliveredCustomerOrderCommandHandler : ICommandHandler<DeliveredCus
 
         if (customerOrder is null)
         {
-            //Todo criar expception especifica?
             throw new NotFoundException($"Not found customer order id {request.Id}");
         }
 
