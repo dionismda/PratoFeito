@@ -4,11 +4,11 @@ public sealed class GetCustomerOrdersByCustomerIdQuery : IQuery<IList<GetCustome
 {
     public Identifier CustomerId { get; private set; } = null!;
 
-    public GetCustomerOrdersByCustomerIdQuery()
+    private GetCustomerOrdersByCustomerIdQuery()
     {
     }
 
-    public GetCustomerOrdersByCustomerIdQuery(Identifier customerId)
+    public GetCustomerOrdersByCustomerIdQuery(Identifier customerId) : this()
     {
         CustomerId = customerId;
     }

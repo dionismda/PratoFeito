@@ -6,7 +6,7 @@ public sealed class MoneyBuilder : Builders<MoneyBuilder, Money>
 
     public MoneyBuilder()
     {
-        Amount = Bogus.Random.Long(1, 100);
+        Amount = Bogus.Random.Long(1, 99);
     }
 
     public MoneyBuilder ChangeAmount(decimal amount)

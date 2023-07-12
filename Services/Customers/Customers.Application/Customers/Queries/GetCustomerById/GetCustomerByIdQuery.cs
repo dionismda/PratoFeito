@@ -4,11 +4,11 @@ public sealed class GetCustomerByIdQuery : IQuery<Customer>
 {
     public Identifier Id { get; private set; } = null!;
 
-    public GetCustomerByIdQuery()
+    private GetCustomerByIdQuery()
     {
     }
 
-    public GetCustomerByIdQuery(Identifier id)
+    public GetCustomerByIdQuery(Identifier id) : this()
     {
         Id = id;
     }
