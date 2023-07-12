@@ -7,3 +7,4 @@ global using Bogus;
 global using Xunit;
 global using Architecture.Domain.Interfaces;
 global using Moq;
+global using Architecture.Domain.Services;
