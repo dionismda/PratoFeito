@@ -6,9 +6,9 @@ public sealed class UpdateCustomerCommand : ICommand<Customer>
     public PersonName Name { get; private set; } = null!;
     public Money OrderLimit { get; private set; } = null!;
 
-    public UpdateCustomerCommand() { }
+    private UpdateCustomerCommand() { }
 
-    public UpdateCustomerCommand(Identifier id, PersonName name, Money orderLimit)
+    public UpdateCustomerCommand(Identifier id, PersonName name, Money orderLimit) : this()
     {
         Id = id;
         Name = name;

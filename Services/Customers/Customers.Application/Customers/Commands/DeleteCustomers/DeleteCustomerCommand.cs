@@ -4,11 +4,11 @@ public sealed class DeleteCustomerOrderCommand : ICommand
 {
     public Identifier Id { get; private set; } = null!;
 
-    public DeleteCustomerOrderCommand()
+    private DeleteCustomerOrderCommand()
     {
     }
 
-    public DeleteCustomerOrderCommand(Identifier id)
+    public DeleteCustomerOrderCommand(Identifier id) : this()
     {
         Id = id;
     }

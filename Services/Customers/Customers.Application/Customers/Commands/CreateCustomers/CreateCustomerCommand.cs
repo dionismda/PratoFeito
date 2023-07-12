@@ -5,9 +5,9 @@ public sealed class CreateCustomerCommand : ICommand<Customer>
     public PersonName Name { get; private set; } = null!;
     public Money OrderLimit { get; private set; } = null!;
 
-    public CreateCustomerCommand() { }
+    private CreateCustomerCommand() { }
 
-    public CreateCustomerCommand(PersonName name, Money orderLimit)
+    public CreateCustomerCommand(PersonName name, Money orderLimit) : this()
     {
         Name = name;
         OrderLimit = orderLimit;

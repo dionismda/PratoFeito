@@ -1,4 +1,4 @@
-﻿namespace Customers.UnitTests.Domain.CustomerOrders.Extensions;
+﻿namespace Customers.UnitTests._Commons.Extensions;
 
 public static class MockCustomerOrderRepository
 {
