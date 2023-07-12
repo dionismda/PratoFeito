@@ -17,3 +17,6 @@ global using Customers.Domain.CustomerOrders.Events;
 global using Customers.Domain.CustomerOrders.Interfaces;
 global using Customers.Domain.CustomerOrders.Services;
 global using Architecture.Domain.Interfaces;
+global using Customers.UnitTests.Domain.Customers.Extensions;
+global using _Architecture.UnitTests.Domain.Extensions;
+global using Customers.UnitTests.Domain.CustomerOrders.Extensions;

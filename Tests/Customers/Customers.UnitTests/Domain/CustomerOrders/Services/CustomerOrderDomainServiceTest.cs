@@ -4,11 +4,11 @@ public sealed class CustomerOrderDomainServiceTest
 {
     private CustomerOrder CustomerOrder { get; set; }
     private CustomerOrderDomainService CustomerOrderDomainService { get; set; }
-    private readonly Mock<ICustomerOrderRepository> customerOrderRepository = new();
+    private readonly Mock<ICustomerOrderRepository> mockCustomerOrderRepository = new();
 
     public CustomerOrderDomainServiceTest()
     {
-        CustomerOrderDomainService = new CustomerOrderDomainService(customerOrderRepository.Object);
+        CustomerOrderDomainService = new CustomerOrderDomainService(mockCustomerOrderRepository.Object);
         CustomerOrder = CustomerOrderBuilder.New().Build();
     }
 
@@ -21,87 +21,72 @@ public sealed class CustomerOrderDomainServiceTest
     [Fact]
     public async Task CustomerOrderDomainService_MustReturnAListOfCustomerOrder()
     {
-        customerOrderRepository
-            .Setup(x => x.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<CustomerOrder, bool>>>(), null, null, null))
-            .ReturnsAsync(new List<CustomerOrder>());
+        mockCustomerOrderRepository.SetupGetAllAsync(new List<CustomerOrder>());
 
         await CustomerOrderDomainService.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<CustomerOrder, bool>>>());
 
-        customerOrderRepository
-            .Verify(x => x.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<CustomerOrder, bool>>>(), null, null, null), Times.Once);
+        mockCustomerOrderRepository.VerifyGetAllAsync(Times.Once);
     }
 
     [Fact]
     public async Task CustomerOrderDomainService_MustReturnACustomerOrder()
     {
-        customerOrderRepository
-            .Setup(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(CustomerOrder);
+        mockCustomerOrderRepository.SetupGetByIdAsync(CustomerOrder);
 
         await CustomerOrderDomainService.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
 
-        customerOrderRepository
-            .Verify(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
     }
 
     [Fact]
     public async Task CustomerOrderDomainService_MustInsertData_WhenObjectIsValid()
     {
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Setup(x => x.Insert(CustomerOrder));
 
-        customerOrderRepository
-            .Setup(x => x.CommitAsync(It.IsAny<CancellationToken>()));
+        mockCustomerOrderRepository.SetupCommitAsync();
 
         await CustomerOrderDomainService.InsertAsync(CustomerOrder, It.IsAny<CancellationToken>());
 
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Verify(x => x.Insert(CustomerOrder), Times.Once);
 
-        customerOrderRepository
-            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository.VerifyCommitAsync(Times.Once);
     }
 
     [Fact]
     public async Task CustomerOrderDomainService_MustUpdateData_WhenObjectIsValid()
     {
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Setup(x => x.Update(CustomerOrder));
 
-        customerOrderRepository
-            .Setup(x => x.CommitAsync(It.IsAny<CancellationToken>()));
+        mockCustomerOrderRepository.SetupCommitAsync();
 
         await CustomerOrderDomainService.UpdateAsync(CustomerOrder, It.IsAny<CancellationToken>());
 
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Verify(x => x.Update(CustomerOrder), Times.Once);
 
-        customerOrderRepository
-            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository.VerifyCommitAsync(Times.Once);
     }
 
     [Fact]
     public async Task CustomerOrderDomainService_MustDeleteData_WhenObjectExists()
     {
-        customerOrderRepository
-            .Setup(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(CustomerOrder);
+        mockCustomerOrderRepository.SetupGetByIdAsync(CustomerOrder);
 
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Setup(x => x.Delete(CustomerOrder));
 
-        customerOrderRepository
-            .Setup(x => x.CommitAsync(It.IsAny<CancellationToken>()));
+        mockCustomerOrderRepository.SetupCommitAsync();
 
         await CustomerOrderDomainService.DeleteAsync(CustomerOrder.Id, It.IsAny<CancellationToken>());
 
-        customerOrderRepository
-            .Verify(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
 
-        customerOrderRepository
+        mockCustomerOrderRepository
             .Verify(x => x.Delete(CustomerOrder), Times.Once);
 
-        customerOrderRepository
-            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository.VerifyCommitAsync(Times.Once);
     }
 }

@@ -5,3 +5,5 @@ global using _Architecture.UnitTests._Commons.Builders;
 global using _Architecture.UnitTests._Commons.Helpers;
 global using Bogus;
 global using Xunit;
+global using Architecture.Domain.Interfaces;
+global using Moq;
