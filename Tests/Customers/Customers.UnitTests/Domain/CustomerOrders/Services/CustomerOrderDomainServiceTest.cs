@@ -1,6 +1,4 @@
-﻿using Customers.UnitTests._Commons.Extensions;
-
-namespace Customers.UnitTests.Domain.CustomerOrders.Services;
+﻿namespace Customers.UnitTests.Domain.CustomerOrders.Services;
 
 public sealed class CustomerOrderDomainServiceTest
 {
