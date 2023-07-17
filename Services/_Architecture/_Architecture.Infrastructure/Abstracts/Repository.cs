@@ -1,13 +1,13 @@
-﻿namespace _Architecture.Infrastructure.Abstracts;
+﻿namespace Architecture.Infrastructure.Abstracts;
 
 public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
     where TAggregateRoot : AggregateRoot
 {
-    private readonly MicroserviceContext _context;
+    private readonly BaseDbContext _context;
 
     public IUnitOfWork UnitOfWork => _context;
 
-    protected Repository(MicroserviceContext context)
+    protected Repository(BaseDbContext context)
     {
         _context = context;
     }

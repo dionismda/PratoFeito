@@ -1,6 +1,7 @@
-﻿namespace PratoFeito_Customers.Api.CustomerOrders;
+﻿namespace Customers.Api.CustomerOrders;
 
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = nameof(ContextEnum.Customers))]
 public class CustomerOrderController : BaseController
 {
     private readonly IMediator _mediator;

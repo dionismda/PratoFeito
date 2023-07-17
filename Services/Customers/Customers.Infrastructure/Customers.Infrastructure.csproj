@@ -5,13 +5,8 @@
     <RootNamespace>Customers.Infrastructure</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
 
 	<ItemGroup>
     <ProjectReference Include="..\..\_Architecture\_Architecture.Infrastructure\_Architecture.Infrastructure.csproj" />

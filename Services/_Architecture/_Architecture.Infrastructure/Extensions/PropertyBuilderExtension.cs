@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Infrastructure.Extensions;
+﻿namespace Architecture.Infrastructure.Extensions;
 
 public static class PropertyBuilderExtension
 {

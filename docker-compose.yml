@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  customers.api:
-    image: ${DOCKER_REGISTRY-}customersapi
-    build:
-      context: .
-      dockerfile: Services/Customers/Customers.Api/Dockerfile

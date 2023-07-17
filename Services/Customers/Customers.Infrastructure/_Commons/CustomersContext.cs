@@ -1,9 +1,10 @@
 ﻿namespace Customers.Infrastructure._Commons;
 
-public sealed class CustomersContext : MicroserviceContext
+public sealed class CustomersContext : BaseDbContext
 {
-    public CustomersContext(DbContextOptions options, IMediator mediator) : base(options, mediator)
+    public CustomersContext(DbContextOptions options, IMediator mediator, IConfiguration configuration) : base(options, mediator, configuration)
     {
+        Schema = nameof(ContextEnum.Customers).ToLower();
     }
 
     public DbSet<Customer> Customers { get; set; } = null!;

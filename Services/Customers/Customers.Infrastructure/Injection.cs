@@ -4,7 +4,7 @@ public static class Injection
 {
     public static IServiceCollection InjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMicroserviceDbContext<CustomersContext>(configuration);
+        services.AddDbContext<CustomersContext>();
 
         services.AddDapperNpgSqlConnection();
 
