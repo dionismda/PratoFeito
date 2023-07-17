@@ -458,6 +458,6 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-Services/Customers.Infrastructure/Migrations/*
+Services/Monolith/Migrations/*
 
 .env

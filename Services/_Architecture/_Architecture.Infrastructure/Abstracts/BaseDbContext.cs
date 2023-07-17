@@ -1,9 +1,9 @@
 ﻿namespace _Architecture.Infrastructure.Abstracts;
 
-public abstract class MicroserviceContext : DbContext, IUnitOfWork
+public abstract class BaseDbContext : DbContext, IUnitOfWork
 {
     private readonly IMediator _mediator;
-    protected MicroserviceContext(
+    protected BaseDbContext(
         DbContextOptions options,
         IMediator mediator) : base(options)
     {

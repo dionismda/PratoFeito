@@ -2,7 +2,7 @@
 
 public static class MediatorExtension
 {
-    public static async Task DispatchEventsAsync(this IMediator mediator, MicroserviceContext context, CancellationToken cancellationToken)
+    public static async Task DispatchEventsAsync(this IMediator mediator, BaseDbContext context, CancellationToken cancellationToken)
     {
         var domainEntities = context.ChangeTracker
                                     .Entries<AggregateRoot>()

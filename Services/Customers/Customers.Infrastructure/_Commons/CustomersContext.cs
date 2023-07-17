@@ -1,6 +1,6 @@
 ﻿namespace Customers.Infrastructure._Commons;
 
-public sealed class CustomersContext : MicroserviceContext
+public sealed class CustomersContext : BaseDbContext
 {
     public CustomersContext(DbContextOptions options, IMediator mediator) : base(options, mediator)
     {
