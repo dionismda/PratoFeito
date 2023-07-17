@@ -1,6 +1,7 @@
 ﻿namespace Customers.Api.Customers;
 
 [Route("api/[controller]")]
+[ApiExplorerSettings(GroupName = nameof(ContextEnum.Customers))]
 public class CustomerController : BaseController
 {
     private readonly IMediator _mediator;
