@@ -1,6 +1,5 @@
 ﻿global using _Architecture.Api.Abstracts;
 global using _Architecture.Domain.ValueObjects;
-global using Architecture.Api.Enums;
 global using AutoMapper;
 global using Customers.Application;
 global using Customers.Application.CustomerOrders._Commons.ViewModels;
@@ -22,3 +21,4 @@ global using Customers.Infrastructure.Customers.Queries;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
+global using Architecture.Infrastructure.Enums;

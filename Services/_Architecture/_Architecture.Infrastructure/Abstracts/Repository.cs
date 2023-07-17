@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Infrastructure.Abstracts;
+﻿namespace Architecture.Infrastructure.Abstracts;
 
 public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
     where TAggregateRoot : AggregateRoot

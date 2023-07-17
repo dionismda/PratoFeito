@@ -1,13 +1,19 @@
-﻿namespace _Architecture.Infrastructure.Abstracts;
+﻿namespace Architecture.Infrastructure.Abstracts;
 
 public abstract class BaseDbContext : DbContext, IUnitOfWork
 {
     private readonly IMediator _mediator;
+    private readonly IConfiguration _configuration;
+
+    public string Schema { get; protected set; } = string.Empty;
+
     protected BaseDbContext(
         DbContextOptions options,
-        IMediator mediator) : base(options)
+        IMediator mediator,
+        IConfiguration configuration) : base(options)
     {
         _mediator = mediator;
+        _configuration = configuration;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -15,6 +21,24 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasPostgresExtension("uuid-ossp");
+
+        if (Schema != "")
+            modelBuilder.HasDefaultSchema(Schema);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var connectionString = _configuration.GetConnectionString("PratoFeitoDb");
+
+        optionsBuilder
+            .UseNpgsql(connectionString, x =>
+            {
+                x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
+                x.MigrationsAssembly("Monolith");
+            })
+            .UseSnakeCaseNamingConvention()
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors();
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
