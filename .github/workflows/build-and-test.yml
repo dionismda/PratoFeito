@@ -27,10 +27,10 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ./PratoFeito.sln
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./PratoFeito.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ./PratoFeito.sln --no-restore --verbosity normal
