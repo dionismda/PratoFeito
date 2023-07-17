@@ -10,10 +10,7 @@ public static class DbContextExtension
             var connectionString = configuration.GetConnectionString("MicroserviceDb");
 
             opt
-            .UseNpgsql(connectionString, (opt) =>
-            {
-                //opt.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
-            })
+            .UseNpgsql(connectionString)
             .UseSnakeCaseNamingConvention()
             .EnableSensitiveDataLogging()
             .EnableDetailedErrors();
