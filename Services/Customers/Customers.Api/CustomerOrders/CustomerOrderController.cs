@@ -1,4 +1,4 @@
-﻿namespace PratoFeito_Customers.Api.CustomerOrders;
+﻿namespace Customers.Api.CustomerOrders;
 
 [Route("api/[controller]")]
 public class CustomerOrderController : BaseController
