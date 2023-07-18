@@ -2,7 +2,7 @@
 
 # PratoFeito
 
-O PratoFeito é um clone simplificado do iFood, criado com o objetivo de oferecer uma plataforma simples e fácil de usar para pedir comida online. Este projeto é uma ótima oportunidade para aprender e praticar habilidades de programação, além de ser um bom ponto de partida para projetos maiores. Ele foi elaborado seguindo a elaboração feita pelo [Lucas Gertel](https://github.com/lgertel) durante suas [lives](https://www.youtube.com/watch?v=6BfJb7RPW-o&list=PLs-l5bSgIMhBDOtatiLQXeNarcdeaekZI&index=10) onde ele desenvolveu a mesma aplicação mas em kotlyn e usando outras abordagens você pode ver a estrutura proposta para o projeto no seguinte [link](https://miro.com/app/board/uXjVMR2I6DI=/).
+O PratoFeito é um clone simplificado do iFood, criado com o objetivo de fornecer uma plataforma intuitiva e conveniente para fazer pedidos de comida online. Este projeto representa uma excelente oportunidade para aprender e aprimorar habilidades de programação, ao mesmo tempo em que serve como um ponto de partida para projetos mais complexos. Inspirado nas [lives](https://www.youtube.com/watch?v=6BfJb7RPW-o&list=PLs-l5bSgIMhBDOtatiLQXeNarcdeaekZI&index=10) do [Lucas Gertel](https://github.com/lgertel), onde ele desenvolveu uma aplicação similar em Kotlin e explorou abordagens diferentes, você pode conferir a estrutura proposta para o projeto no seguinte [link](https://miro.com/app/board/uXjVMR2I6DI=/).
 
 # Tecnologias usadas
 
@@ -18,11 +18,11 @@ O PratoFeito é um clone simplificado do iFood, criado com o objetivo de oferece
 # Visão geral dos contextos
 
 ## Customer
-O contexto "customer" do PratoFeito é responsável por gerenciar as funcionalidades relacionadas aos clientes. Algumas das suas principais funcionalidades podem incluir:
+O contexto "cliente" do PratoFeito é responsável por gerenciar as funcionalidades relacionadas aos clientes. Algumas das principais funcionalidades incluídas são:
 
-1. Cadastro de clientes: o contexto permite o cadastro de novos clientes, com informações basicas como nome, sobrenome e limite de valor do pedido.
-2. Gerenciamento de contas: o contexto permite que os clientes gerenciem suas contas, alterando informações de perfil, como nome, sobrenome e limite de valor do pedido.
-3. Histórico de pedidos: o contexto mantém um histórico de todos os pedidos feitos por um cliente, permitindo que ele visualize o status de cada um deles.
+1. Cadastro de clientes: o contexto permite o cadastro de novos clientes, com informações básicas como nome, sobrenome e limite de valor para pedidos.
+2. Gerenciamento de contas: os clientes podem gerenciar suas contas, alterando informações de perfil, como nome, sobrenome e limite de valor para pedidos.
+3. Histórico de pedidos: o contexto mantém um histórico de todos os pedidos realizados por um cliente, permitindo que ele visualize o status de cada um deles.
 
 ## Order
 
