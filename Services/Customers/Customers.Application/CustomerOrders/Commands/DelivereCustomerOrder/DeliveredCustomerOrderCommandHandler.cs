@@ -11,7 +11,7 @@ public class DeliveredCustomerOrderCommandHandler : ICommandHandler<DeliveredCus
 
     public async Task<CustomerOrder> Handle(DeliveredCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        var customerOrder = await _customerOrderDomainService.GetByIdAsync(request.Id, cancellationToken);
+        var customerOrder = await _customerOrderDomainService.GetCustomerOrderByIdAsync(request.Id, cancellationToken);
 
         if (customerOrder is null)
         {

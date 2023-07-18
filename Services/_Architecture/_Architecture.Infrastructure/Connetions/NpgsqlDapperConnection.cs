@@ -1,4 +1,4 @@
-﻿namespace Architecture.Infrastructure.Connetions;
+﻿namespace _Architecture.Infrastructure.Connetions;
 
 public sealed class NpgsqlDapperConnection : IConnectionDapper
 {

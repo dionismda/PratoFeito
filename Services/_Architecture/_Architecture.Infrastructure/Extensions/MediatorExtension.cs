@@ -1,6 +1,4 @@
-﻿using Architecture.Infrastructure.Abstracts;
-
-namespace Architecture.Infrastructure.Extensions;
+﻿namespace _Architecture.Infrastructure.Extensions;
 
 public static class MediatorExtension
 {

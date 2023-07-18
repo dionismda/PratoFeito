@@ -1,6 +1,4 @@
-﻿using Customers.Domain.CustomerOrders.Exceptions;
-
-namespace Customers.UnitTests.Domain.CustomerOrders.Entities;
+﻿namespace Customers.UnitTests.Domain.CustomerOrders.Entities;
 
 public sealed class CustomerOrderTest
 {

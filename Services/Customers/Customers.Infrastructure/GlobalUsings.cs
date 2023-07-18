@@ -1,8 +1,8 @@
 ﻿global using _Architecture.Domain.ValueObjects;
-global using Architecture.Infrastructure.Abstracts;
-global using Architecture.Infrastructure.Enums;
-global using Architecture.Infrastructure.Extensions;
-global using Architecture.Infrastructure.Interfaces;
+global using _Architecture.Infrastructure.Abstracts;
+global using _Architecture.Infrastructure.Enums;
+global using _Architecture.Infrastructure.Extensions;
+global using _Architecture.Infrastructure.Interfaces;
 global using Customers.Domain._Commons.Enums;
 global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Interfaces;

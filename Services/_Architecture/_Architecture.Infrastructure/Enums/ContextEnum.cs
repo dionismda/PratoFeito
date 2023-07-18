@@ -1,4 +1,4 @@
-﻿namespace Architecture.Infrastructure.Enums;
+﻿namespace _Architecture.Infrastructure.Enums;
 
 public enum ContextEnum
 {

@@ -5,13 +5,7 @@ public static class MockCustomerOrderRepository
     public static void SetupGetAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, List<CustomerOrder> customerOrders)
     {
         mockCustomerOrderRepository
-            .Setup(x => x.GetAllAsync(
-                It.IsAny<CancellationToken>(),
-                It.IsAny<Expression<Func<CustomerOrder, bool>>>(),
-                It.IsAny<Func<IQueryable<CustomerOrder>, IOrderedQueryable<CustomerOrder>>>(),
-                It.IsAny<int?>(),
-                It.IsAny<int?>(),
-                It.IsAny<string[]?>()))
+            .Setup(x => x.GetAllAsync(It.IsAny<GetCustomerOrderAllSpecification>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(customerOrders);
 
         mockCustomerOrderRepository.SetupAllProperties();
@@ -20,15 +14,7 @@ public static class MockCustomerOrderRepository
     public static void VerifyGetAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
     {
         mockCustomerOrderRepository
-            .Verify(
-                x => x.GetAllAsync(
-                It.IsAny<CancellationToken>(),
-                It.IsAny<Expression<Func<CustomerOrder, bool>>>(),
-                It.IsAny<Func<IQueryable<CustomerOrder>, IOrderedQueryable<CustomerOrder>>>(),
-                It.IsAny<int?>(),
-                It.IsAny<int?>(),
-                It.IsAny<string[]?>()),
-                times);
+            .Verify(x => x.GetAllAsync(It.IsAny<GetCustomerOrderAllSpecification>(), It.IsAny<CancellationToken>()), times);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }
@@ -36,7 +22,7 @@ public static class MockCustomerOrderRepository
     public static void SetupGetByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, CustomerOrder customerOrder)
     {
         mockCustomerOrderRepository
-            .Setup(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.GetByIdAsync(It.IsAny<GetCustomerOrderByIdSpecification>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(customerOrder);
 
         mockCustomerOrderRepository.SetupAllProperties();
@@ -45,7 +31,7 @@ public static class MockCustomerOrderRepository
     public static void VerifyGetByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
     {
         mockCustomerOrderRepository
-            .Verify(x => x.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), times);
+            .Verify(x => x.GetByIdAsync(It.IsAny<GetCustomerOrderByIdSpecification>(), It.IsAny<CancellationToken>()), times);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }

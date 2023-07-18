@@ -23,7 +23,7 @@ public sealed class CustomerOrderDomainServiceTest
     {
         mockCustomerOrderRepository.SetupGetAllAsync(new List<CustomerOrder>());
 
-        await CustomerOrderDomainService.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<CustomerOrder, bool>>>());
+        await CustomerOrderDomainService.GetCustomerOrderAllAsync(It.IsAny<CancellationToken>());
 
         mockCustomerOrderRepository.VerifyGetAllAsync(Times.Once);
     }
@@ -33,7 +33,7 @@ public sealed class CustomerOrderDomainServiceTest
     {
         mockCustomerOrderRepository.SetupGetByIdAsync(CustomerOrder);
 
-        await CustomerOrderDomainService.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
+        await CustomerOrderDomainService.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
 
         mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
     }
@@ -80,7 +80,7 @@ public sealed class CustomerOrderDomainServiceTest
 
         mockCustomerOrderRepository.SetupCommitAsync();
 
-        await CustomerOrderDomainService.DeleteAsync(CustomerOrder.Id, It.IsAny<CancellationToken>());
+        await CustomerOrderDomainService.DeleteAsync(new GetCustomerOrderByIdSpecification(CustomerOrder.Id), It.IsAny<CancellationToken>());
 
         mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
 

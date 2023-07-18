@@ -1,4 +1,4 @@
-﻿namespace Architecture.Infrastructure.Abstracts;
+﻿namespace _Architecture.Infrastructure.Abstracts;
 
 public abstract class AggregateTypeMap<TAggregate> : EntityTypeMap<TAggregate>
     where TAggregate : AggregateRoot

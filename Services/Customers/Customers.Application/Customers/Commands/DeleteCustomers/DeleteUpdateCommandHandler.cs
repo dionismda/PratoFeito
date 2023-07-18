@@ -11,6 +11,6 @@ public sealed class DeleteUpdateCommandHandler : ICommandHandler<DeleteCustomerO
 
     public async Task Handle(DeleteCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        await _customerDomainService.DeleteAsync(request.Id, cancellationToken);
+        await _customerDomainService.DeleteAsync(new GetCustomerByIdSpecification(request.Id), cancellationToken);
     }
 }

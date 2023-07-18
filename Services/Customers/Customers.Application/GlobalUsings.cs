@@ -13,3 +13,5 @@ global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
 global using Customers.Infrastructure.Customers;
 global using Customers.Infrastructure.Customers.Queries;
+global using Customers.Domain.CustomerOrders.Specifications;
+global using Customers.Domain.Customers.Specifications;
