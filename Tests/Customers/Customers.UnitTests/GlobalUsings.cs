@@ -32,3 +32,5 @@ global using Customers.UnitTests._Commons.Builders;
 global using Customers.UnitTests._Commons.Extensions;
 global using Moq;
 global using Xunit;
+global using Customers.Application.CustomerOrders.Commands.DelivereCustomerOrder;
+global using Customers.Application.CustomerOrders.Commands.CreateCustomerOrder;
