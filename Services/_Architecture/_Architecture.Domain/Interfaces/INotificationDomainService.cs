@@ -1,4 +1,4 @@
-﻿namespace Architecture.Domain.Interfaces;
+﻿namespace _Architecture.Domain.Interfaces;
 
 public interface INotificationDomainService
 {

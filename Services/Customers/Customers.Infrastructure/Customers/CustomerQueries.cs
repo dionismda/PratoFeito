@@ -21,7 +21,7 @@ public sealed class CustomerQueries : DapperQueries, ICustomerQueries
                         customer_id = @customer_id
                    ";
 
-        var results = await connection.QueryAsync<GetCustomerOrdersByCustomerIdQueryModel>(sql, new { customer_id = CustomerId.Id } );
+        var results = await connection.QueryAsync<GetCustomerOrdersByCustomerIdQueryModel>(sql, new { customer_id = CustomerId.Id });
 
         return results.ToList();
     }

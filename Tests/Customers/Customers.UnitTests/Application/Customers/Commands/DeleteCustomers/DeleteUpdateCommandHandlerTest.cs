@@ -18,6 +18,6 @@ public sealed class DeleteUpdateCommandHandlerTest
         await DeleteUpdateCommandHandler.Handle(command, It.IsAny<CancellationToken>());
 
         mockCustomerDomainService
-            .Verify(x => x.DeleteAsync(command.Id, It.IsAny<CancellationToken>()), Times.Once);
+            .Verify(x => x.DeleteAsync(It.IsAny<GetCustomerByIdSpecification>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }

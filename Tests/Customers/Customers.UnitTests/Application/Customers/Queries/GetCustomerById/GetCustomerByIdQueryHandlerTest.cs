@@ -16,14 +16,11 @@ public sealed class GetCustomerByIdQueryHandlerTest
     [MemberData(nameof(GetCustomerByIdQueryData.ValidGetCustomerByIdQuery), MemberType = typeof(GetCustomerByIdQueryData))]
     public async Task GetCustomerByIdQueryHandler_MustReturnCustomerObecjt_WhenCustomerIdExists(GetCustomerByIdQuery getCustomerByIdQuery)
     {
-        mockCustomerRepository
-            .Setup(x => x.GetByIdAsync(getCustomerByIdQuery.Id, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Customer);
+        mockCustomerRepository.SetupGetByIdAsync(Customer);
 
         var result = await GetCustomerByIdQueryHandler.Handle(getCustomerByIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository
-            .Verify(x => x.GetByIdAsync(getCustomerByIdQuery.Id, It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
 
         Assert.Equal(Customer, result);
     }
@@ -32,14 +29,11 @@ public sealed class GetCustomerByIdQueryHandlerTest
     [MemberData(nameof(GetCustomerByIdQueryData.ValidGetCustomerByIdQuery), MemberType = typeof(GetCustomerByIdQueryData))]
     public async Task GetCustomerByIdQueryHandler_MustReturnNull_WhenCustomerIdNotExists(GetCustomerByIdQuery getCustomerByIdQuery)
     {
-        mockCustomerRepository
-            .Setup(x => x.GetByIdAsync(getCustomerByIdQuery.Id, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(It.IsAny<Customer>());
+        mockCustomerRepository.SetupGetByIdAsync(It.IsAny<Customer>());
 
         var result = await GetCustomerByIdQueryHandler.Handle(getCustomerByIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository
-            .Verify(x => x.GetByIdAsync(getCustomerByIdQuery.Id, It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
 
         Assert.Null(result);
     }

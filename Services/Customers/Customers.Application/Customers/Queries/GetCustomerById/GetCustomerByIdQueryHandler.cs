@@ -11,6 +11,6 @@ public sealed class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQ
 
     public async Task<Customer?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        return await _customerRepository.GetByIdAsync(request.Id, cancellationToken);
+        return await _customerRepository.GetByIdAsync(new GetCustomerByIdSpecification(request.Id), cancellationToken);
     }
 }

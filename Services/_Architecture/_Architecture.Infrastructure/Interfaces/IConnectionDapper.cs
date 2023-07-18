@@ -1,4 +1,4 @@
-﻿namespace Architecture.Infrastructure.Interfaces;
+﻿namespace _Architecture.Infrastructure.Interfaces;
 
 public interface IConnectionDapper
 {

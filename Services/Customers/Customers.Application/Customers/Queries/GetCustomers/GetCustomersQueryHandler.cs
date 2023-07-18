@@ -11,6 +11,6 @@ public sealed class GetCustomersQueryHandler : IQueryHandler<GetCustomersQuery, 
 
     public async Task<IList<Customer>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
     {
-        return await _customerRepository.GetAllAsync(cancellationToken);
+        return await _customerRepository.GetAllAsync(new GetCustomerAllSpecification(), cancellationToken);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Architecture.Domain.Services;
+﻿namespace _Architecture.Domain.Services;
 
 public sealed class NotificationDomainService : INotificationDomainService
 {
@@ -11,7 +11,7 @@ public sealed class NotificationDomainService : INotificationDomainService
 
     public void AddError(string index, string errorMessage)
     {
-        if (_errors.TryGetValue(index, out List<string>? listError))
+        if (_errors.TryGetValue(index, out var listError))
         {
             _errors[index].Add(errorMessage);
         }

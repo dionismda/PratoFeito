@@ -21,4 +21,4 @@ global using Customers.Infrastructure.Customers.Queries;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
-global using Architecture.Infrastructure.Enums;
+global using _Architecture.Infrastructure.Enums;

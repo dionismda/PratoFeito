@@ -24,7 +24,7 @@ public sealed class CustomerDomainServiceTest
     {
         mockCustomerRepository.SetupGetAllAsync(new List<Customer>());
 
-        await CustomerDomainService.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<Customer, bool>>>());
+        await CustomerDomainService.GetCustomerAllAsync(It.IsAny<CancellationToken>());
 
         mockCustomerRepository.VerifyGetAllAsync(Times.Once);
     }
@@ -34,7 +34,7 @@ public sealed class CustomerDomainServiceTest
     {
         mockCustomerRepository.SetupGetByIdAsync(Customer);
 
-        await CustomerDomainService.GetByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
+        await CustomerDomainService.GetCustomerByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
 
         mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
     }
@@ -42,7 +42,9 @@ public sealed class CustomerDomainServiceTest
     [Fact]
     public async Task CustomerDomainService_MustInsertData_WhenObjectIsValid()
     {
-        mockCustomerRepository.SetupGetAllAsync(new List<Customer>());
+        mockCustomerRepository
+            .Setup(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicate>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<Customer>());
 
         mockCustomerRepository
             .Setup(x => x.Insert(Customer));
@@ -51,7 +53,8 @@ public sealed class CustomerDomainServiceTest
 
         await CustomerDomainService.InsertAsync(Customer, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository.VerifyGetAllAsync(Times.Once);
+        mockCustomerRepository
+            .Verify(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicate>(), It.IsAny<CancellationToken>()), Times.Once);
 
         mockCustomerRepository
             .Verify(x => x.Insert(Customer), Times.Once);
@@ -64,7 +67,9 @@ public sealed class CustomerDomainServiceTest
     {
         var customer = CustomerBuilder.New().Build();
 
-        mockCustomerRepository.SetupGetAllAsync(new List<Customer>());
+        mockCustomerRepository
+            .Setup(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicateExceptId>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<Customer>());
 
         mockCustomerRepository.SetupGetByIdAsync(customer);
 
@@ -75,7 +80,8 @@ public sealed class CustomerDomainServiceTest
 
         await CustomerDomainService.UpdateAsync(Customer, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository.VerifyGetAllAsync(Times.Once);
+        mockCustomerRepository
+            .Verify(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicateExceptId>(), It.IsAny<CancellationToken>()), Times.Once);
 
         mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
 
@@ -88,7 +94,9 @@ public sealed class CustomerDomainServiceTest
     [Fact]
     public async Task CustomerDomainService_MustUpdateDataReturnException_WhenObjectNotFound()
     {
-        mockCustomerRepository.SetupGetAllAsync(new List<Customer>());
+        mockCustomerRepository
+            .Setup(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicateExceptId>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<Customer>());
 
         mockCustomerRepository.SetupGetByIdAsync(It.IsAny<Customer>());
 
@@ -97,7 +105,8 @@ public sealed class CustomerDomainServiceTest
             await CustomerDomainService.UpdateAsync(Customer, It.IsAny<CancellationToken>());
         });
 
-        mockCustomerRepository.VerifyGetAllAsync(Times.Once);
+        mockCustomerRepository
+            .Verify(x => x.GetAllAsync(It.IsAny<GetCustomerDuplicateExceptId>(), It.IsAny<CancellationToken>()), Times.Once);
 
         mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
     }
@@ -112,7 +121,7 @@ public sealed class CustomerDomainServiceTest
 
         mockCustomerRepository.SetupCommitAsync();
 
-        await CustomerDomainService.DeleteAsync(Customer.Id, It.IsAny<CancellationToken>());
+        await CustomerDomainService.DeleteAsync(new GetCustomerByIdSpecification(Customer.Id), It.IsAny<CancellationToken>());
 
         mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
 
@@ -132,7 +141,7 @@ public sealed class CustomerDomainServiceTest
             });
 
         Func<Task<IList<Customer>>> getResultQueryValidate = ()
-            => mockCustomerRepository.Object.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<Customer, bool>>>(), null, null, null);
+            => mockCustomerRepository.Object.GetAllAsync(It.IsAny<GetCustomerDuplicate>(), It.IsAny<CancellationToken>());
 
         await CustomerDomainService.ValidateFields(getResultQueryValidate, Customer);
 
@@ -151,7 +160,7 @@ public sealed class CustomerDomainServiceTest
             });
 
         Func<Task<IList<Customer>>> getResultQueryValidate = ()
-            => mockCustomerRepository.Object.GetAllAsync(It.IsAny<CancellationToken>(), It.IsAny<Expression<Func<Customer, bool>>>(), null, null, null);
+            => mockCustomerRepository.Object.GetAllAsync(It.IsAny<GetCustomerDuplicate>(), It.IsAny<CancellationToken>());
 
         mockNotificationDomainService.SetupThrows();
 
