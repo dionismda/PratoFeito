@@ -17,7 +17,7 @@ public class CancelCustomerOrderCommandHandler : ICommandHandler<CancelCustomerO
             throw new NotFoundException($"Not found customer order id {request.Id}");
         }
 
-        customerOrder.MarkOrderAsDelivered();
+        customerOrder.MarkOrderAsCanceled();
 
         customerOrder.Validate();
 
