@@ -41,7 +41,6 @@ jobs:
       
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: pwsh
         run: |
           dotnet tool install --global dotnet-sonarscanner
       
@@ -49,7 +48,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: pwsh
         run: |
           dotnet-sonarscanner begin /k:"colin-sonarsource_dotnet_core_sample" /o:"colin-sonarsource" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ./PratoFeito.sln --configuration Release --no-restore
