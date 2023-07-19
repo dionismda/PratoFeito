@@ -14,17 +14,14 @@ public sealed class GetCustomerOrdersByCustomerIdQueryHandlerTest
     [MemberData(nameof(GetCustomerOrdersByCustomerIdQueryData.ValidGetCustomerOrdersByCustomerIdQuery), MemberType = typeof(GetCustomerOrdersByCustomerIdQueryData))]
     public async Task GetCustomerOrdersByCustomerIdQueryHandler_MustReturnAListOfGetCustomerOrdersByCustomerIdQueryModel_WhenCustomerIdHasCustomerOrder(GetCustomerOrdersByCustomerIdQuery getCustomerOrdersByCustomerIdQuery)
     {
-        mockCustomerQueries
-            .Setup(x => x.GetCustomerOrdersByCustomerIdAsync(getCustomerOrdersByCustomerIdQuery.CustomerId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new List<GetCustomerOrdersByCustomerIdQueryModel>()
-            {
-                new GetCustomerOrdersByCustomerIdQueryModel()
-            });
+        mockCustomerQueries.SetupGetCustomerOrdersByCustomerIdAsync(new List<GetCustomerOrdersByCustomerIdQueryModel>()
+        {
+            new GetCustomerOrdersByCustomerIdQueryModel()
+        });
 
         var result = await GetCustomerOrdersByCustomerIdQueryHandler.Handle(getCustomerOrdersByCustomerIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerQueries
-            .Verify(x => x.GetCustomerOrdersByCustomerIdAsync(getCustomerOrdersByCustomerIdQuery.CustomerId, It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerQueries.VerifyGetCustomerOrdersByCustomerIdAsync(Times.Once);
 
         Assert.True(result.Any());
     }
@@ -33,14 +30,11 @@ public sealed class GetCustomerOrdersByCustomerIdQueryHandlerTest
     [MemberData(nameof(GetCustomerOrdersByCustomerIdQueryData.ValidGetCustomerOrdersByCustomerIdQuery), MemberType = typeof(GetCustomerOrdersByCustomerIdQueryData))]
     public async Task GetCustomerOrdersByCustomerIdQueryHandler_MustReturnAEmptyListOfGetCustomerOrdersByCustomerIdQueryModel_WhenCustomerIdHasentCustomerOrder(GetCustomerOrdersByCustomerIdQuery getCustomerOrdersByCustomerIdQuery)
     {
-        mockCustomerQueries
-            .Setup(x => x.GetCustomerOrdersByCustomerIdAsync(getCustomerOrdersByCustomerIdQuery.CustomerId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new List<GetCustomerOrdersByCustomerIdQueryModel>());
+        mockCustomerQueries.SetupGetCustomerOrdersByCustomerIdAsync(new List<GetCustomerOrdersByCustomerIdQueryModel>());
 
         var result = await GetCustomerOrdersByCustomerIdQueryHandler.Handle(getCustomerOrdersByCustomerIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerQueries
-            .Verify(x => x.GetCustomerOrdersByCustomerIdAsync(getCustomerOrdersByCustomerIdQuery.CustomerId, It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerQueries.VerifyGetCustomerOrdersByCustomerIdAsync(Times.Once);
 
         Assert.False(result.Any());
     }

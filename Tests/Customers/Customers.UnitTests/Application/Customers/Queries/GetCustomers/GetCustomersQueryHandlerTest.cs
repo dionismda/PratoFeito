@@ -14,17 +14,14 @@ public sealed class GetCustomersQueryHandlerTest
     [MemberData(nameof(GetCustomersQueryData.ValidGetCustomersQuery), MemberType = typeof(GetCustomersQueryData))]
     public async Task GetCustomersQueryHandler_MustReturnAListOfCustomer_WhenGetCustomersQueryIsCalled(GetCustomersQuery getCustomersQuery)
     {
-        mockCustomerQueries
-            .Setup(x => x.GetCustomersAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new List<GetCustomersQueryModel>()
-            {
-                new GetCustomersQueryModel()
-            });
+        mockCustomerQueries.SetupGetCustomersAsync(new List<GetCustomersQueryModel>()
+        {
+            new GetCustomersQueryModel()
+        });
 
         var result = await GetCustomersQueryHandler.Handle(getCustomersQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerQueries
-            .Verify(x => x.GetCustomersAsync(It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerQueries.VerifyGetCustomersAsync(Times.Once);
 
         Assert.NotNull(result);
         Assert.True(result.Any());
