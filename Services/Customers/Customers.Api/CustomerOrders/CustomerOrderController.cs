@@ -12,20 +12,26 @@ public class CustomerOrderController : BaseController
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CustomerOrderViewModel>> Post([FromBody] CreateCustomerOrderInputModel inputModel, CancellationToken cancellation)
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseWarning<WarningResponseType>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseError), (int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<ResponseSuccess<CustomerOrderViewModel>>> Post([FromBody] CreateCustomerOrderInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync<CustomerOrderViewModel, CustomerOrder>(async ()
             => await _mediator.Send(Mapper.Map<CreateCustomerOrderCommand>(inputModel), cancellation));
 
     [HttpPut("{id:guid}/Delivered")]
-    [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CustomerOrderViewModel>> OrderDelivered(CustomerOrderDeliveredInputModel inputModel, CancellationToken cancellation)
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseWarning<WarningResponseType>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseError), (int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<ResponseSuccess<CustomerOrderViewModel>>> OrderDelivered(CustomerOrderDeliveredInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync<CustomerOrderViewModel, CustomerOrder>(async ()
             => await _mediator.Send(Mapper.Map<DeliveredCustomerOrderCommand>(inputModel), cancellation));
 
     [HttpPut("{id:guid}/Canceled")]
-    [ProducesResponseType(typeof(CustomerOrderViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CustomerOrderViewModel>> OrderCanceled(CustomerOrderCanceledInputModel inputModel, CancellationToken cancellation)
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseWarning<WarningResponseType>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseError), (int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<ResponseSuccess<CustomerOrderViewModel>>> OrderCanceled(CustomerOrderCanceledInputModel inputModel, CancellationToken cancellation)
         => await ExecuteAsync<CustomerOrderViewModel, CustomerOrder>(async ()
             => await _mediator.Send(Mapper.Map<CancelCustomerOrderCommand>(inputModel), cancellation));
 }

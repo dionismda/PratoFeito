@@ -12,22 +12,22 @@ public abstract class BaseController : ControllerBase
         Mapper = mapper;
     }
 
-    protected async Task<ActionResult<IList<TDto>>> ExecuteAsync<TDto, TEntity>(Func<Task<IList<TEntity>>> func)
+    protected async Task<ActionResult<ResponseSuccess<IList<TDto>>>> ExecuteAsync<TDto, TEntity>(Func<Task<IList<TEntity>>> func)
     {
         var dbResult = await func();
 
         var apiResult = Mapper.Map<IList<TDto>>(dbResult);
 
-        return Ok(apiResult);
+        return ResponseSuccess("Request completed successfully", apiResult);
     }
 
-    protected async Task<ActionResult<TDto>> ExecuteAsync<TDto, TEntity>(Func<Task<TEntity>> func)
+    protected async Task<ActionResult<ResponseSuccess<TDto>>> ExecuteAsync<TDto, TEntity>(Func<Task<TEntity>> func)
     {
         var dbResult = await func();
 
         var apiResult = Mapper.Map<TDto>(dbResult);
 
-        return Ok(apiResult);
+        return ResponseSuccess("Request completed successfully", apiResult);
     }
 
     protected async Task<ActionResult> ExecuteAsync(Func<Task> func)
@@ -35,5 +35,10 @@ public abstract class BaseController : ControllerBase
         await func();
 
         return NoContent();
+    }
+
+    protected OkObjectResult ResponseSuccess<TResponse>(string message, TResponse result)
+    {
+        return Ok(new ResponseSuccess<TResponse>(message, result));
     }
 }
