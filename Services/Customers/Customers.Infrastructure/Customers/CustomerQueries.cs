@@ -8,6 +8,24 @@ public sealed class CustomerQueries : DapperQueries, ICustomerQueries
     {
     }
 
+    public async Task<IList<GetCustomersQueryModel>> GetCustomersAsync(CancellationToken cancellationToken)
+    {
+        using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
+
+        var sql = @"SELECT
+                        customer_id as id,
+                        firstname,
+                        lastname,
+                        order_limit
+                    FROM
+                        customers
+                   ";
+
+        var results = await connection.QueryAsync<GetCustomersQueryModel>(sql);
+
+        return results.ToList();
+    }
+
     public async Task<GetCustomerByIdQueryModel?> GetCustomerByIdAsync(Identifier CustomerId, CancellationToken cancellationToken)
     {
         using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
