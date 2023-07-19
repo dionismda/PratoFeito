@@ -19,6 +19,7 @@ public sealed class CustomerOrderTypeMap : AggregateTypeMap<CustomerOrder>
 
         builder
             .Property(x => x.OrderTotal)
+            .HasColumnName("order_total")
             .IsRequired()
             .MoneyConversion();
     }

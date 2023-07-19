@@ -9,9 +9,14 @@ public sealed class NpgsqlDapperConnection : IConnectionDapper
         _configuration = configuration;
     }
 
-    public async Task<IDbConnection> GetConnectionAsync()
+    public async Task<IDbConnection> GetConnectionAsync(string? schema = null)
     {
-        var connection = new NpgsqlConnection(_configuration.GetConnectionString("MicroserviceDb"));
+        var connectionString = _configuration.GetConnectionString("PratoFeitoDb") ?? throw new NullReferenceException("connectionString");
+
+        if (schema is not null)
+            connectionString += $"SearchPath={schema}";
+
+        var connection = new NpgsqlConnection(connectionString);
 
         await connection.OpenAsync();
 

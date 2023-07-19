@@ -2,5 +2,5 @@
 
 public interface IConnectionDapper
 {
-    Task<IDbConnection> GetConnectionAsync();
+    Task<IDbConnection> GetConnectionAsync(string? schema = null);
 }

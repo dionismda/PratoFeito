@@ -1,6 +1,6 @@
 ﻿namespace Customers.UnitTests._Commons.Extensions;
 
-public static class MockCustomerOrderRepository
+public static class MockCustomerOrderRepositoryExtension
 {
     public static void SetupGetAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, List<CustomerOrder> customerOrders)
     {
