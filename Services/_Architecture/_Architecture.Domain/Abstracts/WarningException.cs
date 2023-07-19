@@ -2,7 +2,7 @@
 
 public abstract class WarningException : Exception
 {
-    public Dictionary<string, List<string>> Errors { get; protected set; } = new();
+    public Dictionary<string, List<string>> Errors { get; set; } = new();
 
     protected WarningException()
     {

@@ -1,4 +1,12 @@
-﻿global using Microsoft.AspNetCore.Mvc;
-global using AutoMapper;
+﻿global using System.ComponentModel;
+global using System.Net.Mime;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using _Architecture.Api.Extensions;
+global using _Architecture.Application.Interfaces;
 global using _Architecture.Application.Responses;
-global using System.ComponentModel;
+global using AutoMapper;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Logging;
+global using DomainWarningException = _Architecture.Domain.Abstracts.WarningException;
