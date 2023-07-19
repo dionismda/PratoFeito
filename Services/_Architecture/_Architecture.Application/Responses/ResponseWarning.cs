@@ -1,6 +1,6 @@
 ﻿namespace _Architecture.Application.Responses;
 
-public sealed class ResponseWarning<TObject> : IResponse
+public sealed class ResponseWarning<TObject> : IResponse<TObject?>
 {
     [DefaultValue(ResponseEnum.Warning)]
     public ResponseEnum Type { get; set; }
