@@ -7,7 +7,7 @@ public class GetCustomerAllSpecification : Specification<Customer>
 
 public class GetCustomerByIdSpecification : Specification<Customer>
 {
-    public GetCustomerByIdSpecification(Identifier Id) : base(customer => customer.Id.Id == Id.Id)
+    public GetCustomerByIdSpecification(Identifier Id) : base(customer => customer.Id == Id)
     {
     }
 }

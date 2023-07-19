@@ -2,13 +2,15 @@
 
 public sealed class CustomerQueries : DapperQueries, ICustomerQueries
 {
+    private const string CustomerSchema = "Customers";
+
     public CustomerQueries(IConnectionDapper connectionDapper) : base(connectionDapper)
     {
     }
 
     public async Task<IList<GetCustomerOrdersByCustomerIdQueryModel>> GetCustomerOrdersByCustomerId(Identifier CustomerId, CancellationToken cancellationToken)
     {
-        using var connection = await ConnectionDapper.GetConnectionAsync();
+        using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
 
         var sql = @"SELECT
                         customer_order_id as id,
