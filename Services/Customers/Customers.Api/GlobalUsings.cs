@@ -22,3 +22,5 @@ global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
 global using _Architecture.Infrastructure.Enums;
+global using _Architecture.Application.Responses;
+global using _Architecture.Api.Swaggers.Exemples;
