@@ -2,11 +2,11 @@
 
 public static class HttpContextExtension
 {
-    private static string JsonResponseSerializer(IResponse response)
+    private static string JsonResponseSerializer(object @object)
     {
-        return JsonSerializer.Serialize(response, new JsonSerializerOptions
+        return JsonSerializer.Serialize(@object, @object.GetType(), new JsonSerializerOptions
         {
-            WriteIndented = true,
+            WriteIndented = false,
             Converters =
             {
                 new JsonStringEnumConverter()
