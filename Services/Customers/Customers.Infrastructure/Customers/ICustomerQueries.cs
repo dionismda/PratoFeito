@@ -2,5 +2,6 @@
 
 public interface ICustomerQueries
 {
-    Task<IList<GetCustomerOrdersByCustomerIdQueryModel>> GetCustomerOrdersByCustomerId(Identifier CustomerId, CancellationToken cancellationToken);
+    Task<GetCustomerByIdQueryModel?> GetCustomerByIdAsync(Identifier CustomerId, CancellationToken cancellationToken);
+    Task<IList<GetCustomerOrdersByCustomerIdQueryModel>> GetCustomerOrdersByCustomerIdAsync(Identifier CustomerId, CancellationToken cancellationToken);
 }

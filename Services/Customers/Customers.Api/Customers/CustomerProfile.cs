@@ -47,5 +47,9 @@ public class CustomerProfile : Profile
 
         CreateMap<GetCustomerOrdersByCustomerIdQueryModel, GetCustomerOrdersByCustomerIdViewModel>()
             .ForMember(dest => dest.OrderTotal, opt => opt.MapFrom(src => src.Order_Total));
+
+        CreateMap<GetCustomerByIdQueryModel, CustomerViewModel>()
+            .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Order_limit));
+
     }
 }

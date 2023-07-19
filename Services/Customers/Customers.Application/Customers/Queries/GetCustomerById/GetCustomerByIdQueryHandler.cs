@@ -1,16 +1,16 @@
 ﻿namespace Customers.Application.Customers.Queries.GetCustomerById;
 
-public sealed class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQuery, Customer?>
+public sealed class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQuery, GetCustomerByIdQueryModel?>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ICustomerQueries _customerQueries;
 
-    public GetCustomerByIdQueryHandler(ICustomerRepository customerRepository)
+    public GetCustomerByIdQueryHandler(ICustomerQueries customerRepository)
     {
-        _customerRepository = customerRepository;
+        _customerQueries = customerRepository;
     }
 
-    public async Task<Customer?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+    public async Task<GetCustomerByIdQueryModel?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        return await _customerRepository.GetByIdAsync(new GetCustomerByIdSpecification(request.Id), cancellationToken);
+        return await _customerQueries.GetCustomerByIdAsync(request.Id, cancellationToken);
     }
 }

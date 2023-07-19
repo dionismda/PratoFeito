@@ -21,7 +21,7 @@ public class CustomerController : BaseController
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(CustomerViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<CustomerViewModel>> GetById([FromQuery] GetCustomerByIdInputModel inputModel, CancellationToken cancellation)
-        => await ExecuteAsync<CustomerViewModel, Customer>(async ()
+        => await ExecuteAsync<CustomerViewModel, GetCustomerByIdQueryModel>(async ()
             => await _mediator.Send(Mapper.Map<GetCustomerByIdQuery>(inputModel), cancellation));
 
     [HttpGet("{id:guid}/Orders")]
