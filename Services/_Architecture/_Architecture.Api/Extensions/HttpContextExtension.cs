@@ -6,7 +6,7 @@ public static class HttpContextExtension
     {
         return JsonSerializer.Serialize(@object, @object.GetType(), new JsonSerializerOptions
         {
-            WriteIndented = false,
+            WriteIndented = true,
             Converters =
             {
                 new JsonStringEnumConverter()

@@ -1,11 +1,11 @@
 ﻿namespace _Architecture.Application.Responses;
 
-public class ResponseWarning<TObject> : IResponse
+public sealed class ResponseWarning<TObject> : IResponse
 {
     [DefaultValue(ResponseEnum.Warning)]
     public ResponseEnum Type { get; set; }
 
-    [DefaultValue("Alguns erros foram encontrados")]
+    [DefaultValue("Error to save entity")]
     public string Message { get; private set; }
     public TObject? Result { get; private set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace _Architecture.Application.Responses;
 
-public class ResponseError : IResponse
+public sealed class ResponseError : IResponse
 {
     [DefaultValue(ResponseEnum.Error)]
     public ResponseEnum Type { get; private set; }

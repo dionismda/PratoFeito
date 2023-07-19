@@ -1,6 +1,6 @@
 ﻿namespace _Architecture.Application.Responses;
 
-public class ResponseSuccess<TObject> : IResponse
+public sealed class ResponseSuccess<TObject> : IResponse
 {
     [DefaultValue(ResponseEnum.Success)]
     public ResponseEnum Type { get; private set; }
