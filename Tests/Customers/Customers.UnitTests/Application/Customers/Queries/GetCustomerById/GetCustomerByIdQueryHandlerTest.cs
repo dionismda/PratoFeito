@@ -3,37 +3,41 @@
 public sealed class GetCustomerByIdQueryHandlerTest
 {
     private GetCustomerByIdQueryHandler GetCustomerByIdQueryHandler { get; set; }
-    private Customer Customer { get; set; }
-    private readonly Mock<ICustomerRepository> mockCustomerRepository = new();
+    private readonly Mock<ICustomerQueries> mockCustomerQueries = new();
 
     public GetCustomerByIdQueryHandlerTest()
     {
-        GetCustomerByIdQueryHandler = new GetCustomerByIdQueryHandler(mockCustomerRepository.Object);
-        Customer = CustomerBuilder.New().Build();
+        GetCustomerByIdQueryHandler = new GetCustomerByIdQueryHandler(mockCustomerQueries.Object);
     }
 
     [Theory]
     [MemberData(nameof(GetCustomerByIdQueryData.ValidGetCustomerByIdQuery), MemberType = typeof(GetCustomerByIdQueryData))]
     public async Task GetCustomerByIdQueryHandler_MustReturnCustomerObecjt_WhenCustomerIdExists(GetCustomerByIdQuery getCustomerByIdQuery)
     {
-        mockCustomerRepository.SetupGetByIdAsync(Customer);
+        mockCustomerQueries
+            .Setup(x => x.GetCustomerByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new GetCustomerByIdQueryModel());
 
         var result = await GetCustomerByIdQueryHandler.Handle(getCustomerByIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
+        mockCustomerQueries
+            .Verify(x => x.GetCustomerByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
 
-        Assert.Equal(Customer, result);
+        Assert.NotNull(result);
     }
 
     [Theory]
     [MemberData(nameof(GetCustomerByIdQueryData.ValidGetCustomerByIdQuery), MemberType = typeof(GetCustomerByIdQueryData))]
     public async Task GetCustomerByIdQueryHandler_MustReturnNull_WhenCustomerIdNotExists(GetCustomerByIdQuery getCustomerByIdQuery)
     {
-        mockCustomerRepository.SetupGetByIdAsync(It.IsAny<Customer>());
+        mockCustomerQueries
+            .Setup(x => x.GetCustomerByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(It.IsAny<GetCustomerByIdQueryModel>());
 
         var result = await GetCustomerByIdQueryHandler.Handle(getCustomerByIdQuery, It.IsAny<CancellationToken>());
 
-        mockCustomerRepository.VerifyGetByIdAsync(Times.Once);
+        mockCustomerQueries
+            .Verify(x => x.GetCustomerByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
 
         Assert.Null(result);
     }
