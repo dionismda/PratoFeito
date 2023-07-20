@@ -5,16 +5,16 @@ public interface IEventBusSubscriptionsManager
     event EventHandler<string> OnEventRemoved;
     bool IsEmpty { get; }
 
-    void AddSubscription<T, TH>()
-        where T : IntegrationEvent
-        where TH : IIntegrationEventHandler<T>;
+    void AddSubscription<TIntegrationEvent, TIIntegrationEventHandler>()
+        where TIntegrationEvent : IntegrationEvent
+        where TIIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>;
 
-    void RemoveSubscription<T, TH>()
-            where TH : IIntegrationEventHandler<T>
-            where T : IntegrationEvent;
+    void RemoveSubscription<TIntegrationEvent, TIIntegrationEventHandler>()
+            where TIIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
+            where TIntegrationEvent : IntegrationEvent;
 
-    bool HasSubscriptionsForEvent<T>()
-        where T : IntegrationEvent;
+    bool HasSubscriptionsForEvent<TIntegrationEvent>()
+        where TIntegrationEvent : IntegrationEvent;
 
     bool HasSubscriptionsForEvent(string eventName);
 
@@ -22,10 +22,10 @@ public interface IEventBusSubscriptionsManager
 
     void Clear();
 
-    IEnumerable<SubscriptionInfo> GetHandlersForEvent<T>()
-        where T : IntegrationEvent;
+    IEnumerable<SubscriptionInfo> GetHandlersForEvent<TIntegrationEvent>()
+        where TIntegrationEvent : IntegrationEvent;
 
     IEnumerable<SubscriptionInfo> GetHandlersForEvent(string eventName);
 
-    string GetEventKey<T>();
+    string GetEventKey<TIntegrationEvent>();
 }

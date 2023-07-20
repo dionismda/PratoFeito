@@ -7,6 +7,10 @@ public record IntegrationEvent
 
     [JsonInclude]
     public DateTime CreationDate { get; private init; }
+
+    [JsonIgnore]
+    public string IntegrationTypeName => GetType().Name;
+
     public IntegrationEvent()
     {
         Id = Guid.NewGuid();

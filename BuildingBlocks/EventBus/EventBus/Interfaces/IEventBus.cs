@@ -2,13 +2,13 @@
 
 public interface IEventBus
 {
-    void Publish(IntegrationEvent @event);
+    Task PublishAsync(IntegrationEvent @integrationEvent);
 
-    void Subscribe<TIntegrationEvent, TIntegrationEventHandler>()
+    Task SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEvent : IntegrationEvent
         where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>;
 
-    void Unsubscribe<TIntegrationEvent, TIntegrationEventHandler>()
+    Task UnsubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
         where TIntegrationEvent : IntegrationEvent;
 }
