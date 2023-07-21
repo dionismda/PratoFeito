@@ -3,34 +3,26 @@
 public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDomainService
 {
     private readonly INotificationDomainService _notificationDomainService;
+    private readonly ICustomerRepository _customerRepository;
 
     public CustomerDomainService(INotificationDomainService notificationDomainService, ICustomerRepository repository) : base(repository)
     {
         _notificationDomainService = notificationDomainService;
-    }
-
-    public async Task<IList<Customer>> GetCustomerAllAsync(CancellationToken cancellationToken)
-    {
-        return await Repository.GetAllAsync(new GetCustomerAllSpecification(), cancellationToken);
-    }
-
-    public async Task<Customer?> GetCustomerByIdAsync(Identifier id, CancellationToken cancellationToken)
-    {
-        return await Repository.GetByIdAsync(new GetCustomerByIdSpecification(id), cancellationToken);
+        _customerRepository = repository;
     }
 
     public override async Task InsertAsync(Customer entity, CancellationToken cancellationToken)
     {
-        await ValidateFields(async () => await Repository.GetAllAsync(new GetCustomerDuplicate(entity), cancellationToken), entity);
+        await ValidateFields(async () => await _customerRepository.GetAllAsync(new GetCustomerDuplicate(entity), cancellationToken), entity);
 
         await base.InsertAsync(entity, cancellationToken);
     }
 
     public override async Task UpdateAsync(Customer entity, CancellationToken cancellationToken)
     {
-        await ValidateFields(async () => await Repository.GetAllAsync(new GetCustomerDuplicateExceptId(entity), cancellationToken), entity);
+        await ValidateFields(async () => await _customerRepository.GetAllAsync(new GetCustomerDuplicateExceptId(entity), cancellationToken), entity);
 
-        var customer = await GetCustomerByIdAsync(entity.Id, cancellationToken);
+        var customer = await _customerRepository.GetCustomerByIdAsync(entity.Id, cancellationToken);
 
         if (customer is null)
             throw new NotFoundException($"Customer not found {entity.Id}");
@@ -43,9 +35,9 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
 
         customer.Validate();
 
-        Repository.Update(customer);
+        _customerRepository.Update(customer);
 
-        await Repository.CommitAsync(cancellationToken);
+        await _customerRepository.CommitAsync(cancellationToken);
     }
 
     public async Task ValidateFields(Func<Task<IList<Customer>>> getResultQueryValidate, Customer entity)

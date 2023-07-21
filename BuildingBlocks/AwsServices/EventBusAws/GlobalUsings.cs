@@ -1,0 +1,10 @@
+﻿global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using Amazon.SimpleNotificationService;
+global using Amazon.SimpleNotificationService.Model;
+global using Amazon.SQS;
+global using Amazon.SQS.Model;
+global using AwsConfiguration.Interfaces;
+global using EventBus.Events;
+global using EventBus.Interfaces;
+global using SNSMessageAttributeValue = Amazon.SimpleNotificationService.Model.MessageAttributeValue;

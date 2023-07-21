@@ -19,26 +19,6 @@ public sealed class CustomerOrderDomainServiceTest
     }
 
     [Fact]
-    public async Task CustomerOrderDomainService_MustReturnAListOfCustomerOrder()
-    {
-        mockCustomerOrderRepository.SetupGetAllAsync(new List<CustomerOrder>());
-
-        await CustomerOrderDomainService.GetCustomerOrderAllAsync(It.IsAny<CancellationToken>());
-
-        mockCustomerOrderRepository.VerifyGetAllAsync(Times.Once);
-    }
-
-    [Fact]
-    public async Task CustomerOrderDomainService_MustReturnACustomerOrder()
-    {
-        mockCustomerOrderRepository.SetupGetByIdAsync(CustomerOrder);
-
-        await CustomerOrderDomainService.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>());
-
-        mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
-    }
-
-    [Fact]
     public async Task CustomerOrderDomainService_MustInsertData_WhenObjectIsValid()
     {
         mockCustomerOrderRepository
