@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\_Architecture.Domain\_Architecture.Domain.csproj" />
     <ProjectReference Include="..\_Architecture.Infrastructure\_Architecture.Infrastructure.csproj" />
   </ItemGroup>

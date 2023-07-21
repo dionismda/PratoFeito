@@ -8,6 +8,18 @@ public static class Injection
 
         services.AddDapperNpgSqlConnection();
 
+        services.AddEventBusAwsService(configuration);
+
+        services.AddSingleton<ICustomerEventBusAws, CustomerEventBusAws>(sp =>
+        {
+            var subscribe = sp.GetRequiredService<IEventBusSubscriptionsManager>();
+            var polly = sp.GetRequiredService<IPollyPolicy>();
+            var sns = sp.GetRequiredService<IAmazonSimpleNotificationService>();
+            var sqs = sp.GetRequiredService<IAmazonSQS>();
+
+            return new CustomerEventBusAws(subscribe, polly, sns, sqs);
+        });
+
         services
             .InjectionCustomers()
             .InjectionCustomerOrders();

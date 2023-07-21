@@ -1,4 +1,4 @@
-﻿namespace Customers.Infrastructure._Commons;
+﻿namespace Customers.Infrastructure._Commons.Persistences;
 
 public sealed class CustomersContext : BaseDbContext
 {

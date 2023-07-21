@@ -8,6 +8,10 @@
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
 	<ItemGroup>
     <ProjectReference Include="..\..\_Architecture\_Architecture.Infrastructure\_Architecture.Infrastructure.csproj" />
     <ProjectReference Include="..\Customers.Domain\Customers.Domain.csproj" />
