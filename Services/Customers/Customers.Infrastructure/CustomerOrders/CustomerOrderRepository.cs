@@ -5,4 +5,14 @@ public sealed class CustomerOrderRepository : Repository<CustomerOrder>, ICustom
     public CustomerOrderRepository(CustomersContext context) : base(context)
     {
     }
+
+    public async Task<IList<CustomerOrder>> GetCustomerOrderAllAsync(CancellationToken cancellationToken)
+    {
+        return await GetAllAsync(new GetCustomerOrderAllSpecification(), cancellationToken);
+    }
+
+    public async Task<CustomerOrder?> GetCustomerOrderByIdAsync(Identifier id, CancellationToken cancellationToken)
+    {
+        return await GetByIdAsync(new GetCustomerOrderByIdSpecification(id), cancellationToken);
+    }
 }

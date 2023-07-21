@@ -3,14 +3,16 @@
 public class CancelCustomerOrderCommandHandler : ICommandHandler<CancelCustomerOrderCommand, CustomerOrder>
 {
     private readonly ICustomerOrderDomainService _customerOrderDomainService;
-    public CancelCustomerOrderCommandHandler(ICustomerOrderDomainService customerOrderDomainService)
+    private readonly ICustomerOrderRepository _customerOrderRepository;
+    public CancelCustomerOrderCommandHandler(ICustomerOrderDomainService customerOrderDomainService, ICustomerOrderRepository customerOrderRepository)
     {
         _customerOrderDomainService = customerOrderDomainService;
+        _customerOrderRepository = customerOrderRepository;
     }
 
     public async Task<CustomerOrder> Handle(CancelCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        var customerOrder = await _customerOrderDomainService.GetCustomerOrderByIdAsync(request.Id, cancellationToken);
+        var customerOrder = await _customerOrderRepository.GetCustomerOrderByIdAsync(request.Id, cancellationToken);
 
         if (customerOrder is null)
         {

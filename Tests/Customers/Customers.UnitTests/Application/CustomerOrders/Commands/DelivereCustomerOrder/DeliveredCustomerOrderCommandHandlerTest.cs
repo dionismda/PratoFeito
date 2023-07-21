@@ -6,10 +6,12 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
     private CustomerOrder CustomerOrder { get; set; }
 
     private readonly Mock<ICustomerOrderDomainService> mockCustomerOrderDomainService = new();
+    private readonly Mock<ICustomerOrderRepository> mockCustomerOrderRepository = new();
 
     public DeliveredCustomerOrderCommandHandlerTest()
     {
-        DeliveredCustomerOrderCommandHandler = new DeliveredCustomerOrderCommandHandler(mockCustomerOrderDomainService.Object);
+        DeliveredCustomerOrderCommandHandler = new DeliveredCustomerOrderCommandHandler(
+            mockCustomerOrderDomainService.Object, mockCustomerOrderRepository.Object);
         CustomerOrder = CustomerOrderBuilder.New().Build();
     }
 
@@ -17,7 +19,7 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
     [MemberData(nameof(DeliveredCustomerOrderCommandData.ValidDeliveredCustomerOrderCommand), MemberType = typeof(DeliveredCustomerOrderCommandData))]
     public async Task DeliveredCustomerOrderCommand_MustReturnCustomerOrderObecjtDelivered_WhenDeliveredCustomerOrderCommandIsCalledAndCustomerOrderIsValid(DeliveredCustomerOrderCommand deliveredCustomerOrderCommand)
     {
-        mockCustomerOrderDomainService
+        mockCustomerOrderRepository
             .Setup(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(CustomerOrder);
 
@@ -26,7 +28,7 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
 
         var result = await DeliveredCustomerOrderCommandHandler.Handle(deliveredCustomerOrderCommand, It.IsAny<CancellationToken>());
 
-        mockCustomerOrderDomainService
+        mockCustomerOrderRepository
             .Verify(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
 
         mockCustomerOrderDomainService
@@ -40,14 +42,14 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
     [MemberData(nameof(DeliveredCustomerOrderCommandData.ValidDeliveredCustomerOrderCommand), MemberType = typeof(DeliveredCustomerOrderCommandData))]
     public async Task CancelCustomerOrderCommandHandler_MustReturnNotFoundException_WhenDeliveredCustomerOrderCommandIsCalledAndCustomerOrderNotExists(DeliveredCustomerOrderCommand deliveredCustomerOrderCommand)
     {
-        mockCustomerOrderDomainService
+        mockCustomerOrderRepository
             .Setup(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(It.IsAny<CustomerOrder>());
 
         await Assert.ThrowsAsync<NotFoundException>(async ()
             => await DeliveredCustomerOrderCommandHandler.Handle(deliveredCustomerOrderCommand, It.IsAny<CancellationToken>()));
 
-        mockCustomerOrderDomainService
+        mockCustomerOrderRepository
             .Verify(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }
