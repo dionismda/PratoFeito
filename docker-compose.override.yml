@@ -5,9 +5,16 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Amazon__Credentials__ServiceUrl=http://localstack:4566
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - pratofeito_localstack-network
+
+networks: 
+  pratofeito_localstack-network:
+    external: true  

@@ -9,7 +9,8 @@ public static class Injection
 
         services
             .InjectionCustomers()
-            .InjectionCustomerOrders();
+            .InjectionCustomerOrders()
+            .AddInMemoryEventBusSubscriptionsManager();
 
         return services;
     }
@@ -21,6 +22,15 @@ public static class Injection
 
     private static IServiceCollection InjectionCustomerOrders(this IServiceCollection services)
     {
-        return services;
+        return services
+                .AddIntegrationEventHandler<CustomerOrderCreatedIntegrationEvent, CustomerOrderCreatedIntegrationEventHandler>();
+    }
+
+    public static async Task<IApplicationBuilder> InjectionApplicationAsync(this IApplicationBuilder app)
+    {
+        var eventBus = app.ApplicationServices.GetRequiredService<ICustomerEventBusAws>();
+        await eventBus.CreateTopicAsync<CustomerOrderCreatedIntegrationEvent>();
+
+        return app;
     }
 }

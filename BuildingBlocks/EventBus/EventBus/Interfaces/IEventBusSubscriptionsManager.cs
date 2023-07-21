@@ -18,7 +18,7 @@ public interface IEventBusSubscriptionsManager
 
     bool HasSubscriptionsForEvent(string eventName);
 
-    Type GetEventTypeByName(string eventName);
+    Type? GetEventTypeByName(string eventName);
 
     void Clear();
 

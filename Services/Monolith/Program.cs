@@ -1,3 +1,5 @@
+using Customers.Application;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -52,4 +54,5 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
+await app.InjectionApplicationAsync();
 app.Run();
