@@ -43,13 +43,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{F57818A3-BA2F-4D3A-8691-7603EF5454E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "BuildingBlocks\EventBus\EventBus\EventBus.csproj", "{9FC87CB5-31E9-41CA-A513-783ED25922C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "BuildingBlocks\EventBus\EventBus\EventBus.csproj", "{9FC87CB5-31E9-41CA-A513-783ED25922C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AwsServices", "AwsServices", "{090A78DA-AFEF-4DFA-B580-8C265CDB0B8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusAws", "BuildingBlocks\AwsServices\EventBusAws\EventBusAws.csproj", "{88F04CF6-D420-4665-B6F3-76D28D1CB507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConfiguration", "BuildingBlocks\AwsServices\AwsConfiguration\AwsConfiguration.csproj", "{F47927D5-3F99-42B9-8F69-DF661371EE3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConfiguration", "BuildingBlocks\AwsServices\AwsConfiguration\AwsConfiguration.csproj", "{F47927D5-3F99-42B9-8F69-DF661371EE3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loggings", "Loggings", "{13F2052D-8F56-4109-B483-A5A86FD19262}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogServices", "BuildingBlocks\Loggings\SerilogServices\SerilogServices.csproj", "{16CD1F07-1B77-4D08-99DD-EB50619219C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +121,10 @@ Global
 		{F47927D5-3F99-42B9-8F69-DF661371EE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F47927D5-3F99-42B9-8F69-DF661371EE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F47927D5-3F99-42B9-8F69-DF661371EE3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16CD1F07-1B77-4D08-99DD-EB50619219C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CD1F07-1B77-4D08-99DD-EB50619219C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CD1F07-1B77-4D08-99DD-EB50619219C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CD1F07-1B77-4D08-99DD-EB50619219C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +150,8 @@ Global
 		{090A78DA-AFEF-4DFA-B580-8C265CDB0B8B} = {B194FB9A-FEFC-495E-A4AC-591EAD2163F6}
 		{88F04CF6-D420-4665-B6F3-76D28D1CB507} = {090A78DA-AFEF-4DFA-B580-8C265CDB0B8B}
 		{F47927D5-3F99-42B9-8F69-DF661371EE3F} = {090A78DA-AFEF-4DFA-B580-8C265CDB0B8B}
+		{13F2052D-8F56-4109-B483-A5A86FD19262} = {B194FB9A-FEFC-495E-A4AC-591EAD2163F6}
+		{16CD1F07-1B77-4D08-99DD-EB50619219C5} = {13F2052D-8F56-4109-B483-A5A86FD19262}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6089D8D6-A7ED-4E76-AA68-A91BC9AF81F4}

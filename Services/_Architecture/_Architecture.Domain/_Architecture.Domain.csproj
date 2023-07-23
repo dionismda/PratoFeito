@@ -13,4 +13,8 @@
     <PackageReference Include="MediatR" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Loggings\SerilogServices\SerilogServices.csproj" />
+  </ItemGroup>
+
 </Project>
