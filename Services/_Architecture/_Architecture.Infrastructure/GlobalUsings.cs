@@ -1,7 +1,7 @@
 ﻿global using _Architecture.Domain.Abstractions;
 global using _Architecture.Domain.Interfaces;
 global using _Architecture.Domain.ValueObjects;
-global using _Architecture.Infrastructure.Abstractions.DbContexts;
+global using _Architecture.Infrastructure.Abstractions;
 global using _Architecture.Infrastructure.Connections;
 global using _Architecture.Infrastructure.Enums;
 global using _Architecture.Infrastructure.Evaluators;
@@ -29,3 +29,5 @@ global using System.Text;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using System.Transactions;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using _Architecture.Infrastructure.Interceptors;

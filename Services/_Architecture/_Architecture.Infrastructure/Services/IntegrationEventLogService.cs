@@ -2,12 +2,12 @@
 
 public abstract class IntegrationEventLogService : IIntegrationEventLogService, IDisposable
 {
-    private readonly IntegrationEventLogDbContext _integrationEventLogContext;
+    private readonly BaseDbContext _context;
     private volatile bool _disposedValue;
 
-    protected IntegrationEventLogService(IntegrationEventLogDbContext integrationEventLogContext)
+    protected IntegrationEventLogService(BaseDbContext context)
     {
-        _integrationEventLogContext = integrationEventLogContext;
+        _context = context;
     }
 
     public Task MarkEventAsFailedAsync(Guid eventId)
@@ -27,15 +27,15 @@ public abstract class IntegrationEventLogService : IIntegrationEventLogService, 
 
     private Task UpdateEventStatus(Guid eventId, EventStateEnum status)
     {
-        var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.EventId == eventId);
+        var eventLogEntry = _context.IntegrationEventLogs.Single(ie => ie.EventId == eventId);
         eventLogEntry.ChangeStatus(status);
 
         if (status == EventStateEnum.InProgress)
             eventLogEntry.IncrementTimesSent();
 
-        _integrationEventLogContext.IntegrationEventLogs.Update(eventLogEntry);
+        _context.IntegrationEventLogs.Update(eventLogEntry);
 
-        return _integrationEventLogContext.SaveChangesAsync();
+        return _context.SaveChangesAsync();
     }
 
     protected virtual void Dispose(bool disposing)
@@ -44,7 +44,7 @@ public abstract class IntegrationEventLogService : IIntegrationEventLogService, 
         {
             if (disposing)
             {
-                _integrationEventLogContext?.Dispose();
+                _context?.Dispose();
             }
 
             _disposedValue = true;

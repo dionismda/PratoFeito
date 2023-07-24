@@ -4,8 +4,9 @@ public static class Injection
 {
     public static IServiceCollection InjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton<EventsInterceptor<ICustomerIntegrationEventMapper>>();
         services.AddDbContext<CustomersContext>();
-        services.AddDbContext<CustomerIntegrationEventLogContext>();
+
         services.AddDapperNpgSqlConnection();
 
         services.AddEventBusAwsService(configuration);

@@ -2,7 +2,7 @@
 
 public sealed class CustomerIntegrationEventLogService : IntegrationEventLogService, ICustomerIntegrationEventLogService
 {
-    public CustomerIntegrationEventLogService(CustomerIntegrationEventLogContext integrationEventLogContext) : base(integrationEventLogContext)
+    public CustomerIntegrationEventLogService(CustomersContext integrationEventLogContext) : base(integrationEventLogContext)
     {
     }
 }
