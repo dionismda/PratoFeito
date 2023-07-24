@@ -9,8 +9,7 @@ public static class Injection
 
         services
             .InjectionCustomers()
-            .InjectionCustomerOrders()
-            .AddInMemoryEventBusSubscriptionsManager();
+            .InjectionCustomerOrders();
 
         return services;
     }
@@ -29,6 +28,7 @@ public static class Injection
     public static async Task<IApplicationBuilder> InjectionApplicationAsync(this IApplicationBuilder app)
     {
         var eventBus = app.ApplicationServices.GetRequiredService<ICustomerEventBusAws>();
+
         await eventBus.CreateTopicAsync<CustomerOrderCreatedIntegrationEvent>();
 
         return app;

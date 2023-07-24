@@ -20,3 +20,4 @@ global using EventBus.Interfaces;
 global using Customers.Application.CustomerOrders.IntegrationEvents.CustomerOrderCreated;
 global using Microsoft.AspNetCore.Builder;
 global using Customers.Infrastructure._Commons.Interfaces;
+global using Customers.Infrastructure._Commons.EventBus;

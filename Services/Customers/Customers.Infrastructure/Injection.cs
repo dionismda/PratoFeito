@@ -10,9 +10,11 @@ public static class Injection
 
         services.AddEventBusAwsService(configuration);
 
+        services.AddSingleton<ICustomerEventBusSubscriptionsManager, CustomerEventBusSubscriptionsManager>();
+
         services.AddSingleton<ICustomerEventBusAws, CustomerEventBusAws>(sp =>
         {
-            var subscribe = sp.GetRequiredService<IEventBusSubscriptionsManager>();
+            var subscribe = sp.GetRequiredService<ICustomerEventBusSubscriptionsManager>();
             var polly = sp.GetRequiredService<IPollyPolicy>();
             var sns = sp.GetRequiredService<IAmazonSimpleNotificationService>();
             var sqs = sp.GetRequiredService<IAmazonSQS>();

@@ -1,12 +1,12 @@
-﻿namespace EventBus.Subscriptions;
+﻿namespace EventBus.Abstractions;
 
-public sealed class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
+public abstract class EventBusSubscriptionsManager : IEventBusSubscriptionsManager
 {
     private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
     private readonly List<Type> _eventTypes;
     public event EventHandler<string>? OnEventRemoved;
 
-    public InMemoryEventBusSubscriptionsManager()
+    protected EventBusSubscriptionsManager()
     {
         _handlers = new Dictionary<string, List<SubscriptionInfo>>();
         _eventTypes = new List<Type>();

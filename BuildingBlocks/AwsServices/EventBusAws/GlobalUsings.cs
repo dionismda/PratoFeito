@@ -8,4 +8,6 @@ global using Amazon.SQS.Model;
 global using AwsConfiguration.Interfaces;
 global using EventBus.Events;
 global using EventBus.Interfaces;
+global using SerilogServices;
+global using SerilogTag = SerilogServices.Tag;
 global using SNSMessageAttributeValue = Amazon.SimpleNotificationService.Model.MessageAttributeValue;
