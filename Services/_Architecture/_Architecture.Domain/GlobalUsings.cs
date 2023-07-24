@@ -1,4 +1,4 @@
-﻿global using _Architecture.Domain.Abstracts;
+﻿global using _Architecture.Domain.Abstractions;
 global using _Architecture.Domain.Interfaces;
 global using FluentValidation;
 global using FluentValidation.Results;

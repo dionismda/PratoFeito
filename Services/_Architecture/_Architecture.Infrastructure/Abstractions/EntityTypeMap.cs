@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Infrastructure.Abstracts;
+﻿namespace _Architecture.Infrastructure.Abstractions;
 
 public abstract class EntityTypeMap<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : Entity

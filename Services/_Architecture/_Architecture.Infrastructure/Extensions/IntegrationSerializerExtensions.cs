@@ -1,6 +1,6 @@
-﻿namespace EventBusDbContext;
+﻿namespace _Architecture.Infrastructure.Extensions;
 
-public static class JsonIntegrationSerializer
+public static class IntegrationSerializerExtensions
 {
     public static JsonSerializerOptions GetSerializerOptionsDefault()
     {

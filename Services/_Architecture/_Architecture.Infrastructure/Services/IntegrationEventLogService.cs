@@ -1,4 +1,4 @@
-﻿namespace EventBusDbContext.Services;
+﻿namespace _Architecture.Infrastructure.Services;
 
 public abstract class IntegrationEventLogService : IIntegrationEventLogService, IDisposable
 {

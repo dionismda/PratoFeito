@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Domain.Abstracts;
+﻿namespace _Architecture.Domain.Abstractions;
 
 public abstract class Specification<TAggregateRoot> : ISpecification<TAggregateRoot>
     where TAggregateRoot : AggregateRoot

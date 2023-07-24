@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Api.Abstracts;
+﻿namespace _Architecture.Api.Abstractions;
 
 [ApiController]
 [Produces("application/json")]

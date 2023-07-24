@@ -1,4 +1,4 @@
-﻿namespace EventBusDbContext.Interfaces;
+﻿namespace _Architecture.Infrastructure.Interfaces;
 
 public interface IIntegrationEventLogService
 {

@@ -1,4 +1,4 @@
-﻿namespace EventBusDbContext;
+﻿namespace _Architecture.Infrastructure.Enums;
 
 public enum EventStateEnum
 {

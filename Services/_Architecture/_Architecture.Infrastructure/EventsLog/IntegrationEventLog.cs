@@ -1,4 +1,4 @@
-﻿namespace EventBusDbContext;
+﻿namespace _Architecture.Infrastructure.EventsLog;
 
 public class IntegrationEventLog
 {
@@ -23,7 +23,7 @@ public class IntegrationEventLog
 
         EventId = integration.Id;
         EventTypeName = integration.GetType().FullName ?? "";
-        Content = JsonIntegrationSerializer.Serialize(integration);
+        Content = IntegrationSerializerExtensions.Serialize(integration);
         State = EventStateEnum.NotPublished;
         TimesSent = 0;
         TransactionId = Guid.NewGuid().ToString();
@@ -42,7 +42,7 @@ public class IntegrationEventLog
 
     public IntegrationEventLog DeserializeJsonContent(Type type)
     {
-        IntegrationEvent = JsonIntegrationSerializer.Deserialize(Content, type);
+        IntegrationEvent = IntegrationSerializerExtensions.Deserialize(Content, type);
         return this;
     }
 }

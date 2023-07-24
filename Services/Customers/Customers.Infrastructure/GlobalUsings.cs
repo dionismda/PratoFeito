@@ -1,5 +1,5 @@
 ﻿global using _Architecture.Domain.ValueObjects;
-global using _Architecture.Infrastructure.Abstracts;
+global using _Architecture.Infrastructure.Abstractions;
 global using _Architecture.Infrastructure.Enums;
 global using _Architecture.Infrastructure.Extensions;
 global using _Architecture.Infrastructure.Interfaces;
@@ -16,7 +16,7 @@ global using Customers.Domain.Customers.Specifications;
 global using Customers.Infrastructure._Commons.Interfaces;
 global using Customers.Infrastructure._Commons.Persistences;
 global using Customers.Infrastructure._Commons.EventBus;
-global using Customers.Infrastructure.Abstracts.Queries._Commons;
+global using Customers.Infrastructure.Abstractions.Queries._Commons;
 global using Customers.Infrastructure.CustomerOrders;
 global using Customers.Infrastructure.Customers;
 global using Customers.Infrastructure.Customers.Queries;
