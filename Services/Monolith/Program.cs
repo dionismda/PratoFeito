@@ -1,4 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
+SerilogExtensions.AddSerilogApi();
+builder.Host.UseSerilog(Log.Logger);
 
 // Add services to the container.
 builder.Services.AddControllers();

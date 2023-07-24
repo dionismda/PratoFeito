@@ -7,6 +7,7 @@ public static class Injection
         services.AddQuartzJobInSeconds<CustomerIntegrationEventLogBackgroundService>(10);
 
         services.AddSingleton<EventsInterceptor<ICustomerIntegrationEventMapper>>();
+
         services.AddDbContext<CustomersContext>();
 
         services.AddDapperNpgSqlConnection();
