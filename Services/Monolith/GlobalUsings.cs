@@ -7,3 +7,5 @@ global using System.Text.Json;
 global using _Architecture.Api.Middlewares;
 global using Customers.Application;
 global using Quartz;
+global using Serilog;
+global using SerilogServices;
