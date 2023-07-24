@@ -1,6 +1,6 @@
-﻿namespace _Architecture.Infrastructure.Evaluators;
+﻿namespace _Architecture.Infrastructure.Extensions;
 
-public static class SpecificationEvaluator
+public static class QueryableExtension
 {
     public static IQueryable<TAggregateRoot> GetQuery<TAggregateRoot>(
         IQueryable<TAggregateRoot> inputQueryable,

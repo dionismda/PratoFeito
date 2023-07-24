@@ -61,7 +61,7 @@ public abstract class EventBusAws : IEventBusAws
 
             await policy.ExecuteAsync(async () =>
             {
-                var responseTopic = await _amazonSNS.FindTopicAsync(integrationEvent.IntegrationTypeName);
+                var responseTopic = await _amazonSNS.FindTopicAsync($"{Environment}{integrationEvent.IntegrationTypeName}");
 
                 await _amazonSNS.PublishAsync(new PublishRequest
                 {
