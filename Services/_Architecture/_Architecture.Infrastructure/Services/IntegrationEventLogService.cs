@@ -10,24 +10,32 @@ public abstract class IntegrationEventLogService : IIntegrationEventLogService, 
         _context = context;
     }
 
-    public Task MarkEventAsFailedAsync(Guid eventId)
+    public async Task<IEnumerable<IntegrationEventLog>> GetAllIntegrationEventLogNotPublishedAsync(CancellationToken cancellationToken)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.PublishedFailed);
+        return await _context.IntegrationEventLogs
+            .Where(e => e.State != EventStateEnum.Published && e.State != EventStateEnum.InProgress)
+            .Take(20)
+            .ToListAsync(cancellationToken);
     }
 
-    public Task MarkEventAsInProgressAsync(Guid eventId)
+    public async Task MarkEventAsFailedAsync(Guid eventId)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.InProgress);
+       await UpdateEventStatus(eventId, EventStateEnum.PublishedFailed);
     }
 
-    public Task MarkEventAsPublishedAsync(Guid eventId)
+    public async Task MarkEventAsInProgressAsync(Guid eventId)
     {
-        return UpdateEventStatus(eventId, EventStateEnum.Published);
+        await UpdateEventStatus(eventId, EventStateEnum.InProgress);
     }
 
-    private Task UpdateEventStatus(Guid eventId, EventStateEnum status)
+    public async Task MarkEventAsPublishedAsync(Guid eventId)
     {
-        var eventLogEntry = _context.IntegrationEventLogs.Single(ie => ie.EventId == eventId);
+        await UpdateEventStatus(eventId, EventStateEnum.Published);
+    }
+
+    private async Task UpdateEventStatus(Guid eventId, EventStateEnum status)
+    {
+        var eventLogEntry = await _context.IntegrationEventLogs.SingleAsync(ie => ie.EventId == eventId);
         eventLogEntry.ChangeStatus(status);
 
         if (status == EventStateEnum.InProgress)
@@ -35,7 +43,7 @@ public abstract class IntegrationEventLogService : IIntegrationEventLogService, 
 
         _context.IntegrationEventLogs.Update(eventLogEntry);
 
-        return _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 
     protected virtual void Dispose(bool disposing)

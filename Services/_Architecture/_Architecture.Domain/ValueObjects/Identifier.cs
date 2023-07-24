@@ -1,9 +1,12 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using System.Text.Json.Serialization;
+
+namespace _Architecture.Domain.ValueObjects;
 
 public class Identifier : ValueObject<Identifier>
 {
     public Guid Id { get; private set; }
 
+    [JsonConstructor]
     public Identifier(Guid id)
     {
         Id = id;

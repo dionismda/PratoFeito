@@ -9,7 +9,7 @@ public record IntegrationEvent
     public DateTime CreationDate { get; private init; }
 
     [JsonIgnore]
-    public string IntegrationTypeName => GetType().Name;
+    public string IntegrationTypeName => GetType().Name.Replace(nameof(IntegrationEvent), "");
 
     public IntegrationEvent()
     {

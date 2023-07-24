@@ -14,7 +14,7 @@ public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
 
     private IQueryable<TAggregateRoot> ApplySpecification(Specification<TAggregateRoot> specification)
     {
-        return SpecificationEvaluator.GetQuery(_context.Set<TAggregateRoot>(), specification);
+        return QueryableExtension.GetQuery(_context.Set<TAggregateRoot>(), specification);
     }
 
     public async virtual Task<IList<TAggregateRoot>> GetAllAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)

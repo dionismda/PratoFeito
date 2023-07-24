@@ -4,6 +4,25 @@ public static class Injection
 {
     public static IServiceCollection InjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddQuartz(conf =>
+        {
+            var jobKey = new JobKey(nameof(CustomerIntegrationEventLogBackgroundService));
+
+            conf.AddJob<CustomerIntegrationEventLogBackgroundService>(jobKey)
+                .AddTrigger(trigger =>
+                {
+                    trigger.ForJob(jobKey)
+                           .WithSimpleSchedule(schedule =>
+                           {
+                               schedule.WithIntervalInSeconds(10000)
+                                       .RepeatForever();
+                           });
+                })
+                .UseMicrosoftDependencyInjectionJobFactory();
+        });
+
+        services.AddQuartzHostedService();
+
         services.AddSingleton<EventsInterceptor<ICustomerIntegrationEventMapper>>();
         services.AddDbContext<CustomersContext>();
 
