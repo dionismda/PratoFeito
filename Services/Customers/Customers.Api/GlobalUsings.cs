@@ -1,4 +1,4 @@
-﻿global using _Architecture.Api.Abstracts;
+﻿global using _Architecture.Api.Abstractions;
 global using _Architecture.Domain.ValueObjects;
 global using AutoMapper;
 global using Customers.Application;

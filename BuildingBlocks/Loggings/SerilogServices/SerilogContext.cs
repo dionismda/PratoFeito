@@ -16,8 +16,7 @@ public abstract class SerilogContext : IDisposable
 
     public virtual SerilogContext CreateLog()
     {
-        if (_action != null)
-            _action.Invoke(Tags);
+        _action?.Invoke(Tags);
 
         SerilogLogContext = LogContext.Push(Tags.Select(it => new PropertyEnricher(it.Key, it.Value, true)).ToArray());
 

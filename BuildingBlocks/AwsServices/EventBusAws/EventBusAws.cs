@@ -43,7 +43,9 @@ public abstract class EventBusAws : IEventBusAws
 
     public async Task PublishAsync(IntegrationEvent integrationEvent)
     {
-        var messageAttributes = new Dictionary<string, SNSMessageAttributeValue>
+        using (new EventBusLog(nameof(EventBusAws), "PublishAsync").CreateLog())
+        {
+            var messageAttributes = new Dictionary<string, SNSMessageAttributeValue>
             {
                 {
                     nameof(integrationEvent.IntegrationTypeName),
@@ -55,90 +57,103 @@ public abstract class EventBusAws : IEventBusAws
                 }
             };
 
-        var policy = _pollyPolicy.RetryPolicyEvent(integrationEvent.Id);
+            var policy = _pollyPolicy.RetryPolicyEvent(integrationEvent.Id);
 
-        await policy.ExecuteAsync(async () =>
-        {
-            var responseTopic = await _amazonSNS.FindTopicAsync(integrationEvent.IntegrationTypeName);
-
-            await _amazonSNS.PublishAsync(new PublishRequest
+            await policy.ExecuteAsync(async () =>
             {
-                TopicArn = responseTopic.TopicArn,
-                Message = JsonIntegrationSerializer.Serialize(@integrationEvent),
-                MessageAttributes = messageAttributes
+                var responseTopic = await _amazonSNS.FindTopicAsync(integrationEvent.IntegrationTypeName);
+
+                await _amazonSNS.PublishAsync(new PublishRequest
+                {
+                    TopicArn = responseTopic.TopicArn,
+                    Message = JsonIntegrationSerializer.Serialize(@integrationEvent),
+                    MessageAttributes = messageAttributes
+                });
             });
-        });
+        }
     }
 
     public async Task SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEvent : IntegrationEvent
         where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
     {
-        SubsManager.AddSubscription<TIntegrationEvent, TIntegrationEventHandler>();
-
-        var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
-
-        await policy.ExecuteAsync(async () =>
+        using (new EventBusLog(nameof(EventBusAws), "SubscribeAsync").CreateLog())
         {
-            var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
+            SubsManager.AddSubscription<TIntegrationEvent, TIntegrationEventHandler>();
 
-            var responseQueue = await _amazonSQS.CreateQueueAsync(new CreateQueueRequest
-            {
-                QueueName = GetQueueNameAws<TIntegrationEvent>(),
-            });
+            var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
 
-            await _amazonSNS.SubscribeAsync(new SubscribeRequest
+            await policy.ExecuteAsync(async () =>
             {
-                TopicArn = responseTopic.TopicArn,
-                Endpoint = responseQueue.QueueUrl,
-                Protocol = "http"
+                var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
+
+                var responseQueue = await _amazonSQS.CreateQueueAsync(new CreateQueueRequest
+                {
+                    QueueName = GetQueueNameAws<TIntegrationEvent>(),
+                });
+
+                await _amazonSNS.SubscribeAsync(new SubscribeRequest
+                {
+                    TopicArn = responseTopic.TopicArn,
+                    Endpoint = responseQueue.QueueUrl,
+                    Protocol = "http"
+                });
             });
-        });
+        }
     }
 
     public async Task UnsubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEvent : IntegrationEvent
         where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
     {
-        var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
-
-        var subscriptionsTopic = await _amazonSNS.ListSubscriptionsByTopicAsync(responseTopic.TopicArn);
-
-        if (subscriptionsTopic.HttpStatusCode == HttpStatusCode.OK)
+        using (new EventBusLog(nameof(EventBusAws), "SubscribeAsync").CreateLog())
         {
-            foreach (var subscription in subscriptionsTopic.Subscriptions)
-            {
-                await _amazonSNS.UnsubscribeAsync(subscription.SubscriptionArn);
-            }
-        }
+            var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
 
-        SubsManager.RemoveSubscription<TIntegrationEvent, TIntegrationEventHandler>();
+            var subscriptionsTopic = await _amazonSNS.ListSubscriptionsByTopicAsync(responseTopic.TopicArn);
+
+            if (subscriptionsTopic.HttpStatusCode == HttpStatusCode.OK)
+            {
+                foreach (var subscription in subscriptionsTopic.Subscriptions)
+                {
+                    await _amazonSNS.UnsubscribeAsync(subscription.SubscriptionArn);
+                }
+            }
+
+            SubsManager.RemoveSubscription<TIntegrationEvent, TIntegrationEventHandler>();
+        }
     }
 
     public async Task CreateTopicAsync<TIntegrationEvent>()
         where TIntegrationEvent : IntegrationEvent
     {
-        var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
-
-        await policy.ExecuteAsync(async () =>
+        using (new EventBusLog(nameof(EventBusAws), "SubscribeAsync").CreateLog())
         {
-            await _amazonSNS.CreateTopicAsync(new CreateTopicRequest
+            var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
+
+            await policy.ExecuteAsync(async () =>
             {
-                Name = GetTopicNameAws<TIntegrationEvent>(),
+                await _amazonSNS.CreateTopicAsync(new CreateTopicRequest
+                {
+                    Name = GetTopicNameAws<TIntegrationEvent>(),
+                });
             });
-        });
+        }
     }
 
     public async Task DeleteTopicAsync<TIntegrationEvent>()
         where TIntegrationEvent : IntegrationEvent
     {
-        var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
-
-        await policy.ExecuteAsync(async () =>
+        using (new EventBusLog(nameof(EventBusAws), "SubscribeAsync").CreateLog())
         {
-            var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
+            var policy = _pollyPolicy.RetryPolicyEvent(Guid.NewGuid());
 
-            await _amazonSNS.DeleteTopicAsync(responseTopic.TopicArn);
-        });
+            await policy.ExecuteAsync(async () =>
+            {
+                var responseTopic = await _amazonSNS.FindTopicAsync(GetTopicNameAws<TIntegrationEvent>());
+
+                await _amazonSNS.DeleteTopicAsync(responseTopic.TopicArn);
+            });
+        }
     }
 }

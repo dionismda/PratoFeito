@@ -3,7 +3,7 @@
 public sealed class CustomerEventBusAws : EventBusAws.EventBusAws, ICustomerEventBusAws, IDisposable
 {
     public CustomerEventBusAws(
-        IEventBusSubscriptionsManager subsManager,
+        ICustomerEventBusSubscriptionsManager subsManager,
         IPollyPolicy pollyPolicy,
         IAmazonSimpleNotificationService amazonSNS,
         IAmazonSQS amazonSQS) : base(subsManager, pollyPolicy, amazonSNS, amazonSQS)

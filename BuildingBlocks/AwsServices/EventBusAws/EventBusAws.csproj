@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\..\Loggings\SerilogServices\SerilogServices.csproj" />
     <ProjectReference Include="..\AwsConfiguration\AwsConfiguration.csproj" />
   </ItemGroup>
 

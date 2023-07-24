@@ -1,8 +1,12 @@
 ﻿namespace Customers.Infrastructure._Commons.Persistences;
 
-public sealed class CustomersContext : BaseDbContext
+public sealed class CustomersContext : ApplicationDbContext
 {
-    public CustomersContext(DbContextOptions options, IMediator mediator, IConfiguration configuration) : base(options, mediator, configuration)
+    public CustomersContext(
+        DbContextOptions<CustomersContext> options,
+        IMediator mediator,
+        IConfiguration configuration,
+        CustomerIntegrationEventLogContext eventLogContext) : base(options, configuration, mediator, eventLogContext)
     {
         Schema = nameof(ContextEnum.Customers).ToLower();
     }
