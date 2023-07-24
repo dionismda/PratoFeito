@@ -1,6 +1,6 @@
 ﻿namespace _Architecture.Infrastructure.EventsLog;
 
-public class IntegrationEventLog
+public sealed class IntegrationEventLog
 {
     public Guid EventId { get; }
     public string EventTypeName { get; } = string.Empty;
@@ -15,6 +15,8 @@ public class IntegrationEventLog
     public string Content { get; } = string.Empty;
     public string TransactionId { get; } = string.Empty;
     public DateTime CreationTime { get; private set; }
+
+    private IntegrationEventLog() { }
 
     public IntegrationEventLog(IntegrationEvent? integration)
     {
@@ -40,9 +42,8 @@ public class IntegrationEventLog
         TimesSent++;
     }
 
-    public IntegrationEventLog DeserializeJsonContent(Type type)
+    public IntegrationEvent DeserializeIntegrationEvent(Type type)
     {
-        IntegrationEvent = IntegrationSerializerExtensions.Deserialize(Content, type);
-        return this;
+        return IntegrationSerializerExtensions.Deserialize(Content, type);
     }
 }

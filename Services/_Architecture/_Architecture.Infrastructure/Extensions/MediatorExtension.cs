@@ -2,7 +2,7 @@
 
 public static class MediatorExtension
 {
-    public static async Task DispatchEventsAsync(this IMediator mediator, BaseDbContext context, CancellationToken cancellationToken)
+    public static async Task DispatchEventsAsync(this IMediator mediator, ApplicationDbContext context, CancellationToken cancellationToken)
     {
         var domainEntities = context.ChangeTracker
                                     .Entries<AggregateRoot>()
@@ -16,6 +16,8 @@ public static class MediatorExtension
 
         await mediator.DispatchDomainEventsAsync(domainEvents, cancellationToken);
 
+        await DispatchIntegrationEventsAsync(domainEvents, context, cancellationToken);
+
         ClearDomainEvents(domainEntities);
     }
 
@@ -24,6 +26,18 @@ public static class MediatorExtension
         foreach (var domainEvent in domainEvents)
         {
             await mediator.Publish(domainEvent, cancellationToken);
+        }
+    }
+
+    private static async Task DispatchIntegrationEventsAsync(IEnumerable<DomainEvent> domainEvents, ApplicationDbContext logContext, CancellationToken cancellationToken)
+    {
+        var integrationEvents = logContext.EventLogContext?.EventMapper.Map(domainEvents);
+
+        if (integrationEvents != null)
+        {
+            await logContext.EventLogContext.IntegrationEventLogs.AddRangeAsync(integrationEvents, cancellationToken);
+
+            await logContext.EventLogContext.SaveChangesAsync(cancellationToken);
         }
     }
 

@@ -2,42 +2,12 @@
 
 public abstract class IntegrationEventLogService : IIntegrationEventLogService, IDisposable
 {
-    private readonly IntegrationEventLogContext _integrationEventLogContext;
-    private readonly List<Type> _eventTypes;
+    private readonly IntegrationEventLogDbContext _integrationEventLogContext;
     private volatile bool _disposedValue;
 
-    protected IntegrationEventLogService(IntegrationEventLogContext integrationEventLogContext)
+    protected IntegrationEventLogService(IntegrationEventLogDbContext integrationEventLogContext)
     {
         _integrationEventLogContext = integrationEventLogContext;
-
-        _eventTypes = Assembly.Load(Assembly.GetEntryAssembly().FullName)
-            .GetTypes()
-            .Where(t => t.Name.EndsWith(nameof(IntegrationEvent)))
-            .ToList();
-    }
-
-    public async Task<IEnumerable<IntegrationEventLog>> RetrieveEventLogsPendingToPublishAsync(Guid transactionId)
-    {
-        var result = await _integrationEventLogContext.IntegrationEventLogs
-            .Where(e => e.TransactionId == transactionId.ToString() && e.State == EventStateEnum.NotPublished)
-            .ToListAsync();
-
-        if (result.Any())
-        {
-            return result.OrderBy(o => o.CreationTime)
-                .Select(e => e.DeserializeJsonContent(_eventTypes.Find(t => t.Name == e.EventTypeShortName)));
-        }
-
-        return Enumerable.Empty<IntegrationEventLog>();
-    }
-
-    public Task SaveEventAsync(IntegrationEvent @event)
-    {
-        var eventLogEntry = new IntegrationEventLog(@event);
-
-        _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
-
-        return _integrationEventLogContext.SaveChangesAsync();
     }
 
     public Task MarkEventAsFailedAsync(Guid eventId)

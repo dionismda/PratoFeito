@@ -3,11 +3,11 @@
 public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
     where TAggregateRoot : AggregateRoot
 {
-    private readonly BaseDbContext _context;
+    private readonly ApplicationDbContext _context;
 
     public IUnitOfWork UnitOfWork => _context;
 
-    protected Repository(BaseDbContext context)
+    protected Repository(ApplicationDbContext context)
     {
         _context = context;
     }

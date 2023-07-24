@@ -5,12 +5,13 @@ public static class Injection
     public static IServiceCollection InjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<CustomersContext>();
-
+        services.AddDbContext<CustomerIntegrationEventLogContext>();
         services.AddDapperNpgSqlConnection();
 
         services.AddEventBusAwsService(configuration);
 
         services.AddSingleton<ICustomerEventBusSubscriptionsManager, CustomerEventBusSubscriptionsManager>();
+        services.AddScoped<ICustomerIntegrationEventLogService, CustomerIntegrationEventLogService>();
 
         services.AddSingleton<ICustomerEventBusAws, CustomerEventBusAws>(sp =>
         {

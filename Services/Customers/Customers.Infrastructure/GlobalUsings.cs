@@ -29,3 +29,6 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using EventBus.Abstractions;
+global using _Architecture.Infrastructure.Services;
+global using Customers.Infrastructure._Commons.Services;
+global using _Architecture.Infrastructure.Abstractions.DbContexts;

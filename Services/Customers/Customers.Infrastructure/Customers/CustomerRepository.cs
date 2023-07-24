@@ -1,6 +1,4 @@
-﻿using Customers.Infrastructure._Commons.Persistences;
-
-namespace Customers.Infrastructure.Customers;
+﻿namespace Customers.Infrastructure.Customers;
 
 public sealed class CustomerRepository : Repository<Customer>, ICustomerRepository
 {

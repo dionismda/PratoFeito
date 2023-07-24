@@ -6,6 +6,7 @@ public static class Injection
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());
+        services.AddScoped<ICustomerIntegrationEventMapper, CustomerIntegrationEventMapper>();
 
         services
             .InjectionCustomers()
