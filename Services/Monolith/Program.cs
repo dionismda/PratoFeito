@@ -1,5 +1,3 @@
-using Customers.Application;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +6,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
+
+builder.Services.AddQuartzHostedService();
 
 builder.Services.CustomAddSwaggerService(builder.Configuration);
 

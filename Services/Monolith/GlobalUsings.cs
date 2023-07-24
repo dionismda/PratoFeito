@@ -5,3 +5,5 @@ global using Monolith.Settings;
 global using System.Text.Json.Serialization;
 global using System.Text.Json;
 global using _Architecture.Api.Middlewares;
+global using Customers.Application;
+global using Quartz;
