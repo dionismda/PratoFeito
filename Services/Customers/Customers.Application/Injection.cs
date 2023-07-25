@@ -2,7 +2,7 @@
 
 public static class Injection
 {
-    public static IServiceCollection InjectionApplication(this IServiceCollection services)
+    public static IServiceCollection InjectionCustomersApplication(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());

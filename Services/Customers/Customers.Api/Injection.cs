@@ -5,9 +5,9 @@ public static class Injection
     public static IServiceCollection InjectionCustomerApi(this IServiceCollection services, IConfiguration configuration)
     {
         return services
-            .InjectionApplication()
-            .InjectionDomain()
-            .InjectionInfrastructure(configuration)
+            .InjectionCustomersApplication()
+            .InjectionCustomersDomain()
+            .InjectionCustomersInfrastructure(configuration)
             .InjectionCustomers()
             .InjectionCustomerOrders();
     }

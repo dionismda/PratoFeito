@@ -1,0 +1,12 @@
+﻿global using Microsoft.Extensions.DependencyInjection;
+global using _Architecture.Domain.Abstractions;
+global using _Architecture.Domain.Interfaces;
+global using Ordering.Domain.Orders.Enums;
+global using _Architecture.Domain.ValueObjects;
+global using Ordering.Domain.Orders.Aggregates;
+global using FluentValidation;
+global using _Architecture.Domain.ValueObjects.Validators;
+global using _Architecture.Domain.Exceptions;
+global using _Architecture.Domain.Extensions;
+global using Ordering.Domain.Orders.Aggregates.Validators;
+global using Ordering.Domain.Orders.ValueObjects.ValueObjects;
