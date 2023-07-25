@@ -2,7 +2,7 @@
 
 public static class Injection
 {
-    public static IServiceCollection InjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection InjectionCustomersInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddQuartzJobInSeconds<CustomerIntegrationEventLogBackgroundService>(10);
 

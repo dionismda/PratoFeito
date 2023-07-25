@@ -9,3 +9,4 @@ global using Customers.Application;
 global using Quartz;
 global using Serilog;
 global using SerilogServices;
+global using Ordering.Api;

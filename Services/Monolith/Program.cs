@@ -14,6 +14,7 @@ builder.Services.AddQuartzHostedService();
 builder.Services.CustomAddSwaggerService(builder.Configuration);
 
 builder.Services.InjectionCustomerApi(builder.Configuration);
+builder.Services.InjectionOrderingApi(builder.Configuration);
 
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 
