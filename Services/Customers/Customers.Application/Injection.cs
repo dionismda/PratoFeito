@@ -22,8 +22,7 @@ public static class Injection
 
     private static IServiceCollection InjectionCustomerOrders(this IServiceCollection services)
     {
-        return services
-                .AddIntegrationEventHandler<CustomerOrderCreatedIntegrationEvent, CustomerOrderCreatedIntegrationEventHandler>();
+        return services;
     }
 
     public static async Task<IApplicationBuilder> InjectionApplicationAsync(this IApplicationBuilder app)
