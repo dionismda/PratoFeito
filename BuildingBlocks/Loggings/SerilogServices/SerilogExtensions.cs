@@ -17,7 +17,7 @@ public static class SerilogExtensions
             .Enrich.FromLogContext()
             .Enrich.WithExceptionDetails()
             .Enrich.WithCorrelationId()
-            .Enrich.WithProperty("ApplicationName", $"API Serilog - {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}")
+            .Enrich.WithProperty("PratoFeito", $"API Serilog - {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}")
             .Filter.ByExcluding(Matching.FromSource("Microsoft.AspNetCore.StaticFiles"))
             .Filter.ByExcluding(z => z.MessageTemplate.Text.Contains("Business error"))
             .WriteTo.Async(wt => wt.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"))

@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  PratoFeitoDb:
+  pratofeitodb:
     image: postgres
-    container_name: PratoFeitoDb
+    container_name: pratofeitodb
     restart: always
     command:
       - "postgres"
@@ -19,9 +19,9 @@ services:
     networks:
       - postgres-network
 
-  PgAdmin:
+  pgadmin:
     image: dpage/pgadmin4
-    container_name: PgAdmin
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_SENHA}
@@ -32,31 +32,35 @@ services:
     networks:
       - postgres-network
     depends_on:
-      - PratoFeitoDb
+      - pratofeitodb
 
-  LocalStack:
+  localstack:
     image: localstack/localstack
-    container_name: LocalStack
+    container_name: localstack
     ports:
       - "127.0.0.1:4510-4530:4510-4530"
       - "127.0.0.1:4566:4566"
       - "127.0.0.1:4571:4571"
       - "127.0.0.1:9999:8080"
-    environment:
-      - AWS_DEFAULT_REGION=us-east-1
-      - AWS_ACCESS_KEY_ID=futura
-      - AWS_SECRET_ACCESS_KEY=131313
-      - DEFAULT_REGION=us-east-1
+    environment:      
+      - AWS_ACCESS_KEY_ID=${LOCALSTACK_AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${LOCALSTACK_AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${LOCALSTACK_AWS_DEFAULT_REGION}
       - SERVICES=sns,sqs
       - DEBUG=1
-      - DATA_DIR=/tmp/localstack/data
+      - DATA_DIR=/var/lib/localstack/data
     volumes:
+      - "./InitialScripts/LocalStack/profile.sh:/docker-entrypoint-initaws.d/profile.sh"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "${LOCALSTACK_VOLUMES}:/var/tmp/localstack"      
+      - "${LOCALSTACK_VOLUMES}:/var/tmp/localstack"  
+    networks:
+      - localstack-network      
 
 networks:
   postgres-network:
     driver: bridge
+  localstack-network:
+    driver: bridge     
     
 volumes:
   pgadmin_data:
