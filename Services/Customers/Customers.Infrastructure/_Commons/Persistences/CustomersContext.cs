@@ -13,15 +13,6 @@ public sealed class CustomersContext : BaseDbContext
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<CustomerOrder> CustomerOrders { get; set; } = null!;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-        var interceptor = Services.GetRequiredService<EventsInterceptor<ICustomerIntegrationEventMapper>>();
-
-        optionsBuilder
-            .AddInterceptors(interceptor);
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -1,4 +1,6 @@
-﻿namespace _Architecture.Infrastructure.Abstractions;
+﻿using MassTransit;
+
+namespace _Architecture.Infrastructure.Abstractions;
 
 public abstract class BaseDbContext : DbContext, IUnitOfWork
 {
@@ -16,8 +18,6 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
         Services = services;
     }
 
-    public DbSet<IntegrationEventLog> IntegrationEventLogs { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -27,7 +27,9 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
         if (Schema != "")
             modelBuilder.HasDefaultSchema(Schema);
 
-        modelBuilder.ApplyConfiguration(new IntegrationEventLogTypeMap());
+        modelBuilder.AddInboxStateEntity();
+        modelBuilder.AddOutboxMessageEntity();
+        modelBuilder.AddOutboxStateEntity();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

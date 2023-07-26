@@ -1,15 +1,34 @@
-﻿namespace Customers.Api.Customers;
+﻿using Customers.Infrastructure.Masstransit.Events;
+using MassTransit;
+
+namespace Customers.Api.Customers;
 
 [Route("api/[controller]")]
 [ApiExplorerSettings(GroupName = nameof(ContextEnum.Customers))]
 public class CustomerController : BaseController
 {
     private readonly IMediator _mediator;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public CustomerController(IMediator mediator, IMapper mapper) : base(mapper)
+    public CustomerController(
+        IMediator mediator,
+        IMapper mapper,
+        IPublishEndpoint publishEndpoint) : base(mapper)
     {
         _mediator = mediator;
+        _publishEndpoint = publishEndpoint;
+    }
 
+    [HttpPost("initialize/order")]
+    public async Task<IActionResult> OrderProcessInitializedEvent()
+    {
+        //if (!request.IsRequestResponsePattern)
+        //{
+            await _publishEndpoint.Publish<OrderProcessInitializationEvent>(new { OrderId = Guid.NewGuid() });
+            return new NoContentResult();
+        //}
+        //var result = await _orderProcessInitializationEventRequestClient.GetResponse(new { request.OrderId });
+        //return new NoContentResult();
     }
 
     [HttpGet]

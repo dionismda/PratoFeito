@@ -9,8 +9,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
-builder.Services.AddQuartzHostedService();
-
 builder.Services.CustomAddSwaggerService(builder.Configuration);
 
 builder.Services.InjectionCustomerApi(builder.Configuration);
@@ -58,5 +56,4 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
-await app.InjectionApplicationAsync();
 app.Run();

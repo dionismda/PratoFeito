@@ -2,9 +2,3 @@
 global using _Architecture.Application.Interfaces;
 global using MediatR;
 global using System.ComponentModel;
-global using _Architecture.Infrastructure.Interfaces;
-global using _Architecture.Domain.Abstractions;
-global using _Architecture.Infrastructure.EventsLog;
-global using EventBus.Events;
-global using System.Reflection;
-global using System.Text.Json;

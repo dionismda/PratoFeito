@@ -1,30 +1,56 @@
-﻿namespace Customers.Infrastructure;
+﻿using _Architecture.Infrastructure.MassTransit;
+using Amazon.SimpleNotificationService;
+using Amazon.SQS;
+using Customers.Infrastructure.Masstransit;
+using Customers.Infrastructure.Masstransit.Consumers;
+using MassTransit;
+using System.Reflection;
+
+namespace Customers.Infrastructure;
 
 public static class Injection
 {
     public static IServiceCollection InjectionCustomersInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddQuartzJobInSeconds<CustomerIntegrationEventLogBackgroundService>(10);
-
-        services.AddSingleton<EventsInterceptor<ICustomerIntegrationEventMapper>>();
-
         services.AddDbContext<CustomersContext>();
 
         services.AddDapperNpgSqlConnection();
 
-        services.AddEventBusAwsService(configuration);
-
-        services.AddSingleton<ICustomerEventBusSubscriptionsManager, CustomerEventBusSubscriptionsManager>();
-        services.AddScoped<ICustomerIntegrationEventLogService, CustomerIntegrationEventLogService>();
-
-        services.AddSingleton<ICustomerEventBusAws, CustomerEventBusAws>(sp =>
+        services.ConfigureMassTransit(x =>
         {
-            var subscribe = sp.GetRequiredService<ICustomerEventBusSubscriptionsManager>();
-            var polly = sp.GetRequiredService<IPollyPolicy>();
-            var sns = sp.GetRequiredService<IAmazonSimpleNotificationService>();
-            var sqs = sp.GetRequiredService<IAmazonSQS>();
+            x.AddConsumer<OrderProcessInitializationEventConsumer>();
+            x.AddRequestClient<OrderProcessInitializationEventConsumer>();
 
-            return new CustomerEventBusAws(subscribe, polly, sns, sqs);
+            x.AddConsumer<OrderProcessInitializationFaultEventConsumer>();
+            x.AddRequestClient<OrderProcessInitializationFaultEventConsumer>();
+
+            x.AddConsumer<CheckProductStockEventConsumer>();
+            x.AddRequestClient<CheckProductStockEventConsumer>();
+
+            x.AddConsumer<CheckProductStockFaultEventConsumer>();
+            x.AddRequestClient<CheckProductStockFaultEventConsumer>();
+
+            x.AddConsumer<TakePaymentEventConsumer>();
+            x.AddRequestClient<TakePaymentEventConsumer>();
+
+            x.AddConsumer<TakePaymentFaultEventConsumer>();
+            x.AddRequestClient<TakePaymentFaultEventConsumer>();
+
+            x.AddConsumer<CreateOrderEventConsumer>();
+            x.AddRequestClient<CreateOrderEventConsumer>();
+
+            x.AddConsumer<CreateOrderFaultEventConsumer>();
+            x.AddRequestClient<CreateOrderFaultEventConsumer>();
+
+            x.AddConsumer<OrderProcessFailedEventConsumer>();
+            x.AddRequestClient<OrderProcessFailedEventConsumer>();
+
+            x.AddSagaStateMachine<OrderStateMachine, OrderState, OrderStateDefinition>()
+                .EntityFrameworkRepository(r =>
+                {
+                    r.ExistingDbContext<CustomersContext>();
+                    r.UsePostgres();
+                });
         });
 
         services

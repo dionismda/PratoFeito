@@ -6,7 +6,6 @@ public static class Injection
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());
-        services.AddSingleton<ICustomerIntegrationEventMapper, CustomerIntegrationEventMapper>();
 
         services
             .InjectionCustomers()
@@ -23,14 +22,5 @@ public static class Injection
     private static IServiceCollection InjectionCustomerOrders(this IServiceCollection services)
     {
         return services;
-    }
-
-    public static async Task<IApplicationBuilder> InjectionApplicationAsync(this IApplicationBuilder app)
-    {
-        var eventBus = app.ApplicationServices.GetRequiredService<ICustomerEventBusAws>();
-
-        await eventBus.CreateTopicAsync<CustomerOrderCreatedIntegrationEvent>();
-
-        return app;
     }
 }
