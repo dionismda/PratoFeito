@@ -13,14 +13,14 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
 
     public override async Task InsertAsync(Customer entity, CancellationToken cancellationToken)
     {
-        await ValidateFields(async () => await _customerRepository.GetAllAsync(new GetCustomerDuplicate(entity), cancellationToken), entity);
+        await ValidateFields(async () => await _customerRepository.GetCustomerDuplicateAsync(entity, cancellationToken), entity);
 
         await base.InsertAsync(entity, cancellationToken);
     }
 
     public override async Task UpdateAsync(Customer entity, CancellationToken cancellationToken)
     {
-        await ValidateFields(async () => await _customerRepository.GetAllAsync(new GetCustomerDuplicateExceptId(entity), cancellationToken), entity);
+        await ValidateFields(async () => await _customerRepository.GetCustomerDuplicateAsync(entity, cancellationToken), entity);
 
         var customer = await _customerRepository.GetCustomerByIdAsync(entity.Id, cancellationToken);
 

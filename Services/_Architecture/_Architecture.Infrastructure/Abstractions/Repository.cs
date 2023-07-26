@@ -17,12 +17,12 @@ public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
         return QueryableExtension.GetQuery(_context.Set<TAggregateRoot>(), specification);
     }
 
-    public async virtual Task<IList<TAggregateRoot>> GetAllAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
+    protected async Task<IList<TAggregateRoot>> GetAllAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
     {
         return await ApplySpecification(specification).ToListAsync(cancellationToken);
     }
 
-    public async virtual Task<TAggregateRoot?> GetByIdAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
+    protected async Task<TAggregateRoot?> GetByIdAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
     {
         return await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
     }

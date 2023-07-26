@@ -15,4 +15,9 @@ public sealed class CustomerRepository : Repository<Customer>, ICustomerReposito
     {
         return await GetByIdAsync(new GetCustomerByIdSpecification(id), cancellationToken);
     }
+
+    public async Task<IList<Customer>> GetCustomerDuplicateAsync(Customer customer, CancellationToken cancellationToken)
+    {
+        return await GetAllAsync(new GetCustomerDuplicate(customer), cancellationToken);
+    }
 }

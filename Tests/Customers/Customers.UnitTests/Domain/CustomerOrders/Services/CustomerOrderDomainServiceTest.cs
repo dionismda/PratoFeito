@@ -53,16 +53,12 @@ public sealed class CustomerOrderDomainServiceTest
     [Fact]
     public async Task CustomerOrderDomainService_MustDeleteData_WhenObjectExists()
     {
-        mockCustomerOrderRepository.SetupGetByIdAsync(CustomerOrder);
-
         mockCustomerOrderRepository
             .Setup(x => x.Delete(CustomerOrder));
 
         mockCustomerOrderRepository.SetupCommitAsync();
 
-        await CustomerOrderDomainService.DeleteAsync(new GetCustomerOrderByIdSpecification(CustomerOrder.Id), It.IsAny<CancellationToken>());
-
-        mockCustomerOrderRepository.VerifyGetByIdAsync(Times.Once);
+        await CustomerOrderDomainService.DeleteAsync(CustomerOrder, It.IsAny<CancellationToken>());
 
         mockCustomerOrderRepository
             .Verify(x => x.Delete(CustomerOrder), Times.Once);
