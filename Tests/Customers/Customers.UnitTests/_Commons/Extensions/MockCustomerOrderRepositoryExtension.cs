@@ -2,36 +2,36 @@
 
 public static class MockCustomerOrderRepositoryExtension
 {
-    public static void SetupGetAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, List<CustomerOrder> customerOrders)
+    public static void SetupGetCustomerOrderAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, List<CustomerOrder> customerOrders)
     {
         mockCustomerOrderRepository
-            .Setup(x => x.GetAllAsync(It.IsAny<GetCustomerOrderAllSpecification>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.GetCustomerOrderAllAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(customerOrders);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }
 
-    public static void VerifyGetAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
+    public static void VerifyGetCustomerOrderAllAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
     {
         mockCustomerOrderRepository
-            .Verify(x => x.GetAllAsync(It.IsAny<GetCustomerOrderAllSpecification>(), It.IsAny<CancellationToken>()), times);
+            .Verify(x => x.GetCustomerOrderAllAsync(It.IsAny<CancellationToken>()), times);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }
 
-    public static void SetupGetByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, CustomerOrder customerOrder)
+    public static void SetupGetCustomerOrderByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, CustomerOrder customerOrder)
     {
         mockCustomerOrderRepository
-            .Setup(x => x.GetByIdAsync(It.IsAny<GetCustomerOrderByIdSpecification>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(customerOrder);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }
 
-    public static void VerifyGetByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
+    public static void VerifyGetCustomerOrderByIdAsync(this Mock<ICustomerOrderRepository> mockCustomerOrderRepository, Func<Times> times)
     {
         mockCustomerOrderRepository
-            .Verify(x => x.GetByIdAsync(It.IsAny<GetCustomerOrderByIdSpecification>(), It.IsAny<CancellationToken>()), times);
+            .Verify(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), times);
 
         mockCustomerOrderRepository.SetupAllProperties();
     }

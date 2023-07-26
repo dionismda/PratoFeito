@@ -7,7 +7,7 @@ public class MoneyValidator : AbstractValidator<Money>
         RuleFor(x => x.Amount)
             .NotNull()
             .NotEmpty()
-            .LessThanOrEqualTo(0)
+            .GreaterThanOrEqualTo(0)
             .PrecisionScale(4, 2, false);
     }
 }

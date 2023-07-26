@@ -22,9 +22,8 @@ public abstract class DomainService<TAggregateRoot> : IDomainService<TAggregateR
         await _repository.CommitAsync(cancellationToken);
     }
 
-    public virtual async Task DeleteAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
+    public virtual async Task DeleteAsync(TAggregateRoot entity, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByIdAsync(specification, cancellationToken) ?? throw new NotFoundException();
         _repository.Delete(entity);
         await _repository.CommitAsync(cancellationToken);
     }

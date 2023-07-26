@@ -1,4 +1,4 @@
-﻿namespace Customers.Infrastructure.Abstractions.Queries._Commons;
+﻿namespace Customers.Infrastructure.Customers.Queries.Abstractions;
 
 public abstract class CustomerQueryModel
 {

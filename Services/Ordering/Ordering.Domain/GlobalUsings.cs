@@ -10,3 +10,4 @@ global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Extensions;
 global using Ordering.Domain.Orders.Aggregates.Validators;
 global using Ordering.Domain.Orders.ValueObjects.ValueObjects;
+global using Ordering.Domain.Orders.ValueObjects;

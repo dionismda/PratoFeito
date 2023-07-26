@@ -1,4 +1,4 @@
-﻿namespace Customers.Domain.Customers.Specifications;
+﻿namespace Customers.Infrastructure.Customers.Specifications;
 
 public class GetCustomerAllSpecification : Specification<Customer>
 {
@@ -15,13 +15,6 @@ public class GetCustomerByIdSpecification : Specification<Customer>
 public class GetCustomerDuplicate : Specification<Customer>
 {
     public GetCustomerDuplicate(Customer customer) : base(CustomerCriteria.CheckCustomerDuplicate(customer))
-    {
-    }
-}
-
-public class GetCustomerDuplicateExceptId : Specification<Customer>
-{
-    public GetCustomerDuplicateExceptId(Customer customer) : base(CustomerCriteria.CheckCustomerDuplicateExceptId(customer))
     {
     }
 }

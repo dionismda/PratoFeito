@@ -22,6 +22,7 @@
 	<ItemGroup>
     <ProjectReference Include="..\Customers\Customers.Api\Customers.Api.csproj" />
     <ProjectReference Include="..\Ordering\Ordering.Api\Ordering.Api.csproj" />
+    <ProjectReference Include="..\Restaurants\Restaurants.Api\Restaurants.Api.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
