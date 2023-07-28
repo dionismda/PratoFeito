@@ -1,4 +1,7 @@
-﻿namespace EventBusAws;
+﻿using EventBus.Extensions;
+using EventBus.Interfaces;
+
+namespace EventBusAws;
 
 public abstract class EventBusAws : IEventBusAws
 {
@@ -26,16 +29,18 @@ public abstract class EventBusAws : IEventBusAws
         return $"{Environment}{SubsManager.GetEventKey<TIntegrationEvent>()}";
     }
 
-    private string GetContextName<TIntegrationEvent>()
+    private string GetContextName<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEvent : IntegrationEvent
+        where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
     {
-        return typeof(TIntegrationEvent).FullName.Split(".").First();
+        return typeof(TIntegrationEventHandler).FullName.Split(".").First();
     }
 
-    private string GetQueueNameAws<TIntegrationEvent>()
+    private string GetQueueNameAws<TIntegrationEvent, TIntegrationEventHandler>()
         where TIntegrationEvent : IntegrationEvent
+        where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
     {
-        var contextName = GetContextName<TIntegrationEvent>();
+        var contextName = GetContextName<TIntegrationEvent, TIntegrationEventHandler>();
         var integrationEventName = SubsManager.GetEventKey<TIntegrationEvent>();
 
         return $"{Environment}{contextName}{integrationEventName}";
@@ -89,7 +94,7 @@ public abstract class EventBusAws : IEventBusAws
 
                 var responseQueue = await _amazonSQS.CreateQueueAsync(new CreateQueueRequest
                 {
-                    QueueName = GetQueueNameAws<TIntegrationEvent>(),
+                    QueueName = GetQueueNameAws<TIntegrationEvent, TIntegrationEventHandler>(),
                 });
 
                 await _amazonSNS.SubscribeAsync(new SubscribeRequest
