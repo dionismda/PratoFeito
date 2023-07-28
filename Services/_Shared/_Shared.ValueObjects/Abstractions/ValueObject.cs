@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Domain.Abstractions;
+﻿namespace _Shared.ValueObjects.Abstractions;
 
 public abstract class ValueObject<TValueObject>
         where TValueObject : ValueObject<TValueObject>

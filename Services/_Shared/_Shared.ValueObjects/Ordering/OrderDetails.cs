@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.Orders.ValueObjects;
+﻿using _Shared.ValueObjects._Commons;
+
+namespace _Shared.ValueObjects.Ordering;
 
 public sealed class OrderDetails : OrderInfo
 {
@@ -8,26 +10,16 @@ public sealed class OrderDetails : OrderInfo
         Money orderTotal,
         Identifier customerId,
         Identifier restaurantId,
-        List<OrderItem> orderItems) : base(customerId, restaurantId, orderItems)
+        List<OrderItemInfo> orderItemInfos) : base(customerId, restaurantId, orderItemInfos)
     {
         OrderTotal = orderTotal;
-    }
-
-    public new void Validate()
-    {
-        OrderDetailsValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 
     protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return CustomerId;
         yield return RestaurantId;
-        yield return OrderItems;
+        yield return OrderItemInfos;
         yield return OrderTotal;
     }
 }

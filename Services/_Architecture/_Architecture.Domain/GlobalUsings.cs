@@ -1,11 +1,10 @@
 ﻿global using _Architecture.Domain.Abstractions;
+global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Interfaces;
 global using FluentValidation;
 global using FluentValidation.Results;
 global using MediatR;
 global using System.Linq.Expressions;
 global using System.Runtime.Serialization;
-global using _Architecture.Domain.ValueObjects;
-global using _Architecture.Domain.Exceptions;
-global using _Architecture.Domain.Extensions;
-global using _Architecture.Domain.ValueObjects.Validators;
+global using _Shared.ValueObjects._Commons;
+global using _Shared.ValueObjects.Ordering;

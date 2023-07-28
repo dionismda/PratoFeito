@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\_Architecture\_Architecture.Application\_Architecture.Application.csproj" />
+    <ProjectReference Include="..\..\_Shared\_Shared.IntegrationEvents\_Shared.IntegrationEvents.csproj" />
     <ProjectReference Include="..\Customers.Infrastructure\Customers.Infrastructure.csproj" />
   </ItemGroup>
 

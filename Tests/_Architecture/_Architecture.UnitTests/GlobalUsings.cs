@@ -9,3 +9,4 @@ global using _Architecture.Domain.Interfaces;
 global using Moq;
 global using _Architecture.Domain.Services;
 global using AutoMapper;
+global using _Shared.ValueObjects._Commons;

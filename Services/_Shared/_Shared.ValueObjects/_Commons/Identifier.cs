@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using _Shared.ValueObjects.Abstractions;
 
-namespace _Architecture.Domain.ValueObjects;
+namespace _Shared.ValueObjects._Commons;
 
 public class Identifier : ValueObject<Identifier>
 {

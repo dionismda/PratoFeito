@@ -1,6 +1,8 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using _Shared.ValueObjects.Abstractions;
 
-public class PersonName : ValueObject<PersonName>, IValidation
+namespace _Shared.ValueObjects._Commons;
+
+public class PersonName : ValueObject<PersonName>
 {
     public string FirstName { get; private set; } = null!;
     public string LastName { get; private set; } = null!;
@@ -22,15 +24,5 @@ public class PersonName : ValueObject<PersonName>, IValidation
     public override string? ToString()
     {
         return $"{FirstName} {LastName}";
-    }
-
-    public void Validate()
-    {
-        PersonNameValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }
