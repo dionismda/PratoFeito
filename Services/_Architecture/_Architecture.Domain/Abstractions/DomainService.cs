@@ -3,9 +3,9 @@
 public abstract class DomainService<TAggregateRoot> : IDomainService<TAggregateRoot>
     where TAggregateRoot : AggregateRoot
 {
-    private readonly IRepository<TAggregateRoot> _repository;
+    private readonly IGenericRepository<TAggregateRoot> _repository;
 
-    protected DomainService(IRepository<TAggregateRoot> repository)
+    protected DomainService(IGenericRepository<TAggregateRoot> repository)
     {
         _repository = repository;
     }

@@ -1,18 +1,16 @@
-﻿namespace Ordering.Domain.Orders.ValueObjects;
+﻿namespace _Architecture.Domain.ValueObjects;
 
 public class OrderInfo : ValueObject<OrderInfo>, IValidation
 {
     public Identifier CustomerId { get; private set; }
     public Identifier RestaurantId { get; private set; }
-    public List<OrderItem> OrderItems { get; private set; }
+    public List<OrderItemInfo> OrderItemInfos { get; private set; }
 
-    public OrderInfo(Identifier customerId, Identifier restaurantId, List<OrderItem> orderItems)
+    public OrderInfo(Identifier customerId, Identifier restaurantId, List<OrderItemInfo> orderItemInfos)
     {
         CustomerId = customerId;
         RestaurantId = restaurantId;
-        OrderItems = orderItems;
-
-        Validate();
+        OrderItemInfos = orderItemInfos;
     }
 
     public void Validate()
@@ -29,6 +27,6 @@ public class OrderInfo : ValueObject<OrderInfo>, IValidation
     {
         yield return CustomerId;
         yield return RestaurantId;
-        yield return OrderItems;
+        yield return OrderItemInfos;
     }
 }

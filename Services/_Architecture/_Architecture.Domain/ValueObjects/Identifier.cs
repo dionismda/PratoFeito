@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace _Architecture.Domain.ValueObjects;
+﻿namespace _Architecture.Domain.ValueObjects;
 
 public class Identifier : ValueObject<Identifier>
 {

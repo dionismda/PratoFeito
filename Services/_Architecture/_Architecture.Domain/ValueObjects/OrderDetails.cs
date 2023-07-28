@@ -1,4 +1,4 @@
-﻿namespace Ordering.Domain.Orders.ValueObjects;
+﻿namespace _Architecture.Domain.ValueObjects;
 
 public sealed class OrderDetails : OrderInfo
 {
@@ -8,7 +8,7 @@ public sealed class OrderDetails : OrderInfo
         Money orderTotal,
         Identifier customerId,
         Identifier restaurantId,
-        List<OrderItem> orderItems) : base(customerId, restaurantId, orderItems)
+        List<OrderItemInfo> orderItemInfos) : base(customerId, restaurantId, orderItemInfos)
     {
         OrderTotal = orderTotal;
     }
@@ -27,7 +27,7 @@ public sealed class OrderDetails : OrderInfo
     {
         yield return CustomerId;
         yield return RestaurantId;
-        yield return OrderItems;
+        yield return OrderItemInfos;
         yield return OrderTotal;
     }
 }

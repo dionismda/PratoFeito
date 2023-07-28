@@ -1,4 +1,6 @@
-﻿namespace Ordering.Application.Orders.Commands.CreateOrder;
+﻿using _Architecture.Domain.ValueObjects;
+
+namespace Ordering.Application.Orders.Commands.CreateOrder;
 
 public sealed class CreateOrderCommand : ICommand<Order>
 {

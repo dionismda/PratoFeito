@@ -1,4 +1,4 @@
-﻿namespace Ordering.Domain.Orders.ValueObjects.ValueObjects;
+﻿namespace _Architecture.Domain.ValueObjects.Validators;
 
 public class OrderInfoValidator : AbstractValidator<OrderInfo>
 {
@@ -12,7 +12,7 @@ public class OrderInfoValidator : AbstractValidator<OrderInfo>
             .NotEmpty()
             .NotNull();
 
-        RuleForEach(x => x.OrderItems)
-            .SetValidator(new OrderItemValidator());
+        RuleForEach(x => x.OrderItemInfos)
+            .SetValidator(new OrderItemInfoValidator());
     }
 }

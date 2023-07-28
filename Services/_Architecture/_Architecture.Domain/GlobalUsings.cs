@@ -9,3 +9,4 @@ global using _Architecture.Domain.ValueObjects;
 global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Extensions;
 global using _Architecture.Domain.ValueObjects.Validators;
+global using System.Text.Json.Serialization;

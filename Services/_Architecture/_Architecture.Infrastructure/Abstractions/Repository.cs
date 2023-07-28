@@ -1,6 +1,6 @@
 ﻿namespace _Architecture.Infrastructure.Abstractions;
 
-public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
+public abstract class Repository<TAggregateRoot> : IGenericRepository<TAggregateRoot>
     where TAggregateRoot : AggregateRoot
 {
     private readonly BaseDbContext _context;
@@ -17,12 +17,12 @@ public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot>
         return QueryableExtension.GetQuery(_context.Set<TAggregateRoot>(), specification);
     }
 
-    protected async Task<IList<TAggregateRoot>> GetAllAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
+    public async Task<IList<TAggregateRoot>> FindAllAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
     {
         return await ApplySpecification(specification).ToListAsync(cancellationToken);
     }
 
-    protected async Task<TAggregateRoot?> GetByIdAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
+    public async Task<TAggregateRoot?> FindByAsync(Specification<TAggregateRoot> specification, CancellationToken cancellationToken)
     {
         return await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
     }

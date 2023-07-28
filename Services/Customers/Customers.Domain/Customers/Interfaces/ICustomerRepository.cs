@@ -1,6 +1,6 @@
 ﻿namespace Customers.Domain.Customers.Interfaces;
 
-public interface ICustomerRepository : IRepository<Customer>
+public interface ICustomerRepository : IGenericRepository<Customer>
 {
     Task<IList<Customer>> GetCustomerAllAsync(CancellationToken cancellationToken);
     Task<IList<Customer>> GetCustomerDuplicateAsync(Customer customer, CancellationToken cancellationToken);
