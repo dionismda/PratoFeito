@@ -1,4 +1,4 @@
-﻿namespace SerilogServices;
+﻿namespace Logging.Serilog;
 
 public class Tag
 {

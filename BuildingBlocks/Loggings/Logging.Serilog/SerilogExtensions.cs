@@ -1,4 +1,4 @@
-﻿namespace SerilogServices;
+﻿namespace Logging.Serilog;
 
 public static class SerilogExtensions
 {
