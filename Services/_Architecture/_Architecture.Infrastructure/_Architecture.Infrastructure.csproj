@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\AwsServices\EventBusAws\EventBusAws.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Loggings\Logging.Serilog\Logging.Serilog.csproj" />
     <ProjectReference Include="..\_Architecture.Domain\_Architecture.Domain.csproj" />
   </ItemGroup>
 

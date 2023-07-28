@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\Loggings\SerilogServices\SerilogServices.csproj" />
     <ProjectReference Include="..\..\_Shared\_Shared.ValueObjects\_Shared.ValueObjects.csproj" />
   </ItemGroup>
 

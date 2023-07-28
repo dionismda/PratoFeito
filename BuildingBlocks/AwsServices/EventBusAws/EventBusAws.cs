@@ -1,7 +1,4 @@
-﻿using EventBus.Extensions;
-using EventBus.Interfaces;
-
-namespace EventBusAws;
+﻿namespace EventBusAws;
 
 public abstract class EventBusAws : IEventBusAws
 {
