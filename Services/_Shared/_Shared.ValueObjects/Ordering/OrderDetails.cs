@@ -1,4 +1,6 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using _Shared.ValueObjects._Commons;
+
+namespace _Shared.ValueObjects.Ordering;
 
 public sealed class OrderDetails : OrderInfo
 {
@@ -11,16 +13,6 @@ public sealed class OrderDetails : OrderInfo
         List<OrderItemInfo> orderItemInfos) : base(customerId, restaurantId, orderItemInfos)
     {
         OrderTotal = orderTotal;
-    }
-
-    public new void Validate()
-    {
-        OrderDetailsValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 
     protected override IEnumerable<object?> GetEqualityComponents()

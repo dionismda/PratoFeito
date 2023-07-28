@@ -1,7 +1,6 @@
 ﻿global using _Architecture.Application.Abstractions;
 global using _Architecture.Application.Interfaces;
 global using _Architecture.Domain.Exceptions;
-global using _Architecture.Domain.ValueObjects;
 global using AutoMapper;
 global using Customers.Application._Commons.EventMappers;
 global using Customers.Application.CustomerOrders.IntegrationEvents.CustomerOrderCreated;
@@ -21,3 +20,4 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
+global using _Shared.ValueObjects._Commons;

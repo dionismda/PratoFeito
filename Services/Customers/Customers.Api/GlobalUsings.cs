@@ -24,3 +24,4 @@ global using System.Net;
 global using _Architecture.Infrastructure.Enums;
 global using _Architecture.Application.Responses;
 global using _Architecture.Api.Swaggers.Exemples;
+global using _Shared.ValueObjects._Commons;

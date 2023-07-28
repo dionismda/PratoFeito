@@ -1,6 +1,8 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using _Shared.ValueObjects.Abstractions;
 
-public class Money : ValueObject<Money>, IValidation
+namespace _Shared.ValueObjects._Commons;
+
+public class Money : ValueObject<Money>
 {
     public decimal Amount { get; private set; }
 
@@ -31,15 +33,5 @@ public class Money : ValueObject<Money>, IValidation
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Amount;
-    }
-
-    public void Validate()
-    {
-        MoneyValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

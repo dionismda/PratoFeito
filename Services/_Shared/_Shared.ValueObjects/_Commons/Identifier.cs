@@ -1,4 +1,6 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using _Shared.ValueObjects.Abstractions;
+
+namespace _Shared.ValueObjects._Commons;
 
 public class Identifier : ValueObject<Identifier>
 {

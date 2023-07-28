@@ -1,6 +1,9 @@
-﻿namespace _Architecture.Domain.ValueObjects;
+﻿using _Shared.ValueObjects._Commons;
+using _Shared.ValueObjects.Abstractions;
 
-public class OrderInfo : ValueObject<OrderInfo>, IValidation
+namespace _Shared.ValueObjects.Ordering;
+
+public class OrderInfo : ValueObject<OrderInfo>
 {
     public Identifier CustomerId { get; private set; }
     public Identifier RestaurantId { get; private set; }
@@ -11,16 +14,6 @@ public class OrderInfo : ValueObject<OrderInfo>, IValidation
         CustomerId = customerId;
         RestaurantId = restaurantId;
         OrderItemInfos = orderItemInfos;
-    }
-
-    public void Validate()
-    {
-        OrderInfoValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 
     protected override IEnumerable<object?> GetEqualityComponents()
