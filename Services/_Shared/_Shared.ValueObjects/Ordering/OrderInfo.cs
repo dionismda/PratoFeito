@@ -1,7 +1,4 @@
-﻿using _Shared.ValueObjects._Commons;
-using _Shared.ValueObjects.Abstractions;
-
-namespace _Shared.ValueObjects.Ordering;
+﻿namespace _Shared.ValueObjects.Ordering;
 
 public class OrderInfo : ValueObject<OrderInfo>
 {

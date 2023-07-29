@@ -1,6 +1,4 @@
-﻿using _Shared.ValueObjects.Abstractions;
-
-namespace _Shared.ValueObjects._Commons;
+﻿namespace _Shared.ValueObjects._Commons;
 
 public class PersonName : ValueObject<PersonName>
 {
@@ -15,7 +13,7 @@ public class PersonName : ValueObject<PersonName>
         LastName = lastName;
     }
 
-    protected override IEnumerable<object> GetEqualityComponents()
+    protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return FirstName;
         yield return LastName;
