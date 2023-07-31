@@ -10,10 +10,7 @@ public sealed class Restaurant : AggregateRoot, IValidation
 
     public Restaurant(string name, RestaurantMenu menu) : this()
     {
-
         AddDomainEvent(new RestaurantCreatedDomainEvent(name, menu));
-
-        Validate();
     }
 
     private void Apply(RestaurantCreatedDomainEvent @event)

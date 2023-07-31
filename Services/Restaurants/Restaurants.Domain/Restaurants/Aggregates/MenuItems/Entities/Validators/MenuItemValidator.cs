@@ -1,4 +1,6 @@
-﻿namespace Restaurants.Domain.Restaurants.ValueObjects.Validators;
+﻿using Restaurants.Domain.Restaurants.Aggregates.MenuItems.Entities;
+
+namespace Restaurants.Domain.Restaurants.Aggregates.MenuItems.Entities.Validators;
 
 public sealed class MenuItemValidator : AbstractValidator<MenuItem>
 {

@@ -1,8 +1,8 @@
-﻿namespace Restaurants.Domain.Restaurants.ValueObjects.Validators;
+﻿namespace Restaurants.Domain.RestaurantOrders.Aggregates.RestaurantOrderItems.Entities.Validators;
 
-public sealed class RestaurantOrderLineItemValidator : AbstractValidator<RestaurantOrderLineItem>
+public sealed class RestaurantOrderItemValidator : AbstractValidator<RestaurantOrderItem>
 {
-    public RestaurantOrderLineItemValidator()
+    public RestaurantOrderItemValidator()
     {
         RuleFor(x => x.MenuItemId)
             .NotEmpty()
