@@ -14,7 +14,7 @@ public sealed class Customer : AggregateRoot, IValidation
         Validate();
     }
 
-    public void Apply(CustomerCreatedDomainEvent @event)
+    private void Apply(CustomerCreatedDomainEvent @event)
     {
         Id = @event.CustomerId;
         Name = @event.Name;
@@ -26,7 +26,7 @@ public sealed class Customer : AggregateRoot, IValidation
         AddDomainEvent(new CustomerNameUpdatedDomainEvent(name, Id));
     }
 
-    public void Apply(CustomerNameUpdatedDomainEvent @event)
+    private void Apply(CustomerNameUpdatedDomainEvent @event)
     {
         Id = @event.CustomerId;
         Name = @event.Name;
@@ -37,7 +37,7 @@ public sealed class Customer : AggregateRoot, IValidation
         AddDomainEvent(new CustomerOrderLimitUpdatedDomainEvent(money, Id));
     }
 
-    public void Apply(CustomerOrderLimitUpdatedDomainEvent @event)
+    private void Apply(CustomerOrderLimitUpdatedDomainEvent @event)
     {
         Id = @event.CustomerId;
         OrderLimit = @event.OrderLimit;

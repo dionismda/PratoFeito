@@ -1,6 +1,4 @@
-﻿using _Shared.ValueObjects.Abstractions;
-
-namespace _Shared.ValueObjects._Commons;
+﻿namespace _Shared.ValueObjects._Commons;
 
 public class Money : ValueObject<Money>
 {

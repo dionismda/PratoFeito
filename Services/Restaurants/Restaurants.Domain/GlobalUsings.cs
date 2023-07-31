@@ -1,1 +1,13 @@
 ﻿global using Microsoft.Extensions.DependencyInjection;
+global using _Architecture.Domain.Abstractions;
+global using _Architecture.Domain.Interfaces;
+global using _Shared.ValueObjects.Restaurants;
+global using Restaurants.Domain._Commons.Enums;
+global using FluentValidation;
+global using _Architecture.Domain.ValueObjects.Validators;
+global using Restaurants.Domain.Restaurants.ValueObjects.Validators;
+global using _Shared.ValueObjects._Commons;
+global using _Architecture.Domain.Exceptions;
+global using _Architecture.Domain.Extensions;
+global using Restaurants.Domain.Restaurants.Entities.Validators;
+global using Restaurants.Domain.Restaurants.Events;
