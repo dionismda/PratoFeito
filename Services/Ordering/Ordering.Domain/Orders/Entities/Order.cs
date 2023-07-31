@@ -23,8 +23,34 @@ public sealed class Order : AggregateRoot, IValidation
         CustomerId = customerId;
     }
 
+    public void AddOrderItem(OrderItem orderItem)
+    {
+        _orderItems.Add(orderItem);
+    }
+
+    public void UpdateOrderItem(OrderItem orderItem)
+    {
+        _orderItems ??= new List<OrderItem>();
+
+        if (orderItem.Id == default) return;
+
+        var index = _orderItems.FindIndex(x => x.Id == orderItem.Id);
+
+        if (index != -1) _orderItems[index] = orderItem;
+    }
+
+    public void RemoveOrderItem(OrderItem orderItem)
+    {
+        _orderItems.Remove(orderItem);
+    }
+
     public void Validate()
     {
-        throw new NotImplementedException();
+        OrderValidator validator = new();
+
+        var result = validator.Validate(this);
+
+        if (!result.IsValid)
+            throw new ValidationDomainException(result.GetErrors());
     }
 }

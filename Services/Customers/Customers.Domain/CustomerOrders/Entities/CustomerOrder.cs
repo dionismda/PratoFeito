@@ -15,7 +15,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         Validate();
     }
 
-    public void Apply(CustomerOrderCreatedDomainEvent @event)
+    private void Apply(CustomerOrderCreatedDomainEvent @event)
     {
         Id = @event.CustomerOrderId;
         CustomerId = @event.CustomerId;
@@ -35,7 +35,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
     }
 
-    public void Apply(CustomerOrderDeliveredDomainEvent @event)
+    private void Apply(CustomerOrderDeliveredDomainEvent @event)
     {
         Id = @event.CustomerOrderId;
         State = CustomerOrderState.Delivered;
@@ -53,7 +53,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
     }
 
-    public void Apply(CustomerOrderCanceledDomainEvent @event)
+    private void Apply(CustomerOrderCanceledDomainEvent @event)
     {
         Id = @event.CustomerOrderId;
         State = CustomerOrderState.Cancelled;

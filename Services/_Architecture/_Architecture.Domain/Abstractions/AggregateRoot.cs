@@ -1,4 +1,6 @@
-﻿namespace _Architecture.Domain.Abstractions;
+﻿using System.Reflection;
+
+namespace _Architecture.Domain.Abstractions;
 
 public abstract class AggregateRoot : Entity
 {
@@ -18,7 +20,7 @@ public abstract class AggregateRoot : Entity
 
     private void ApplyDomainEventChange(DomainEvent @event)
     {
-        var method = GetType().GetMethod("Apply", new Type[] { @event.GetType() });
+        var method = GetType().GetMethod("Apply", bindingAttr: BindingFlags.NonPublic | BindingFlags.Instance, new Type[] { @event.GetType() });
 
         if (method == null)
             throw new ArgumentNullException($"The Apply method was not found in the aggregate for {@event.GetType().Name}!");

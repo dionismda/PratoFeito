@@ -2,7 +2,7 @@
 
 public enum CustomerOrderState
 {
-    Cancelled = 0,
-    Created = 1,
-    Delivered = 2
+    Cancelled,
+    Created,
+    Delivered
 }

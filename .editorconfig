@@ -186,3 +186,9 @@ dotnet_diagnostic.CS8601.severity = none
 # Dereference of a possibly null reference.
 dotnet_diagnostic.CS8602.severity = none
 dotnet_diagnostic.CS8604.severity = none
+
+# Unused method parameters should be removed
+dotnet_diagnostic.S1172.severity = none
+
+# Reflection should not be used to increase accessibility of classes, methods, or fields
+dotnet_diagnostic.S3011.severity = none

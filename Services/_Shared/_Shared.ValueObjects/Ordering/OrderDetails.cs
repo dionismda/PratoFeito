@@ -1,6 +1,4 @@
-﻿using _Shared.ValueObjects._Commons;
-
-namespace _Shared.ValueObjects.Ordering;
+﻿namespace _Shared.ValueObjects.Ordering;
 
 public sealed class OrderDetails : OrderInfo
 {
