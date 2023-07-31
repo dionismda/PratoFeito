@@ -53,7 +53,7 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
         }
     }
 
-    public void Apply(CustomerOrderCanceledDomainEvent @event)
+    private void Apply(CustomerOrderCanceledDomainEvent @event)
     {
         Id = @event.CustomerOrderId;
         State = CustomerOrderState.Cancelled;
