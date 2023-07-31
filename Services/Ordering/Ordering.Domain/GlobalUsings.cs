@@ -10,3 +10,4 @@ global using Ordering.Domain.Orders.Aggregates.Validators;
 global using Ordering.Domain.Orders.Enums;
 global using _Shared.ValueObjects._Commons;
 global using _Shared.ValueObjects.Ordering;
+global using Ordering.Domain.Orders.Entities.Validators;

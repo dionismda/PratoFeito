@@ -28,7 +28,7 @@ public class Money : ValueObject<Money>
         return Amount >= moneyValueObject.Amount;
     }
 
-    protected override IEnumerable<object> GetEqualityComponents()
+    protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return Amount;
     }
