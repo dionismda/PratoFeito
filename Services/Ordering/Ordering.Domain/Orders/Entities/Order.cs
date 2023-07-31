@@ -28,7 +28,7 @@ public sealed class Order : AggregateRoot, IValidation
         _orderItems.Add(orderItem);
     }
 
-    public void RemoveOrderItem(OrderItem orderItem)
+    public void UpdateOrderItem(OrderItem orderItem)
     {
         _orderItems ??= new List<OrderItem>();
 
@@ -39,7 +39,7 @@ public sealed class Order : AggregateRoot, IValidation
         if (index != -1) _orderItems[index] = orderItem;
     }
 
-    public void RemoveContact(OrderItem orderItem)
+    public void RemoveOrderItem(OrderItem orderItem)
     {
         _orderItems.Remove(orderItem);
     }

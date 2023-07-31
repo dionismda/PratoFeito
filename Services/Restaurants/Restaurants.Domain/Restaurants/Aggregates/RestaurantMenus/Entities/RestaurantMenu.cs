@@ -21,7 +21,7 @@ public sealed class RestaurantMenu : Entity, IValidation
         _menuItems.Add(menuItem);
     }
 
-    public void RemoveOrderItem(MenuItem menuItem)
+    public void UpdateOrderItem(MenuItem menuItem)
     {
         _menuItems ??= new List<MenuItem>();
 
@@ -32,7 +32,7 @@ public sealed class RestaurantMenu : Entity, IValidation
         if (index != -1) _menuItems[index] = menuItem;
     }
 
-    public void RemoveContact(MenuItem menuItem)
+    public void RemoveOrderItem(MenuItem menuItem)
     {
         _menuItems.Remove(menuItem);
     }

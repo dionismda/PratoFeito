@@ -52,6 +52,27 @@ public sealed class RestaurantOrder : AggregateRoot, IValidation
         State = RestaurantOrderState.CANCELLED;
     }
 
+    public void AddRestaurantOrderItem(RestaurantOrderItem restaurantOrderItem)
+    {
+        _restaurantOrderLineItem.Add(restaurantOrderItem);
+    }
+
+    public void UpdateRestaurantOrderItem(RestaurantOrderItem restaurantOrderItem)
+    {
+        _restaurantOrderLineItem ??= new List<RestaurantOrderItem>();
+
+        if (restaurantOrderItem.Id == default) return;
+
+        var index = _restaurantOrderLineItem.FindIndex(x => x.Id == restaurantOrderItem.Id);
+
+        if (index != -1) _restaurantOrderLineItem[index] = restaurantOrderItem;
+    }
+
+    public void RemoveRestaurantOrderItem(RestaurantOrderItem restaurantOrderItem)
+    {
+        _restaurantOrderLineItem.Remove(restaurantOrderItem);
+    }
+
     public void Validate()
     {
         RestaurantOrderValidator validator = new();
