@@ -12,6 +12,7 @@ public sealed class RestaurantMenuValidator : AbstractValidator<RestaurantMenu>
         RuleFor(x => x.MenuVersion)
             .NotEmpty()
             .NotNull()
-            .MinimumLength(1);
+            .MinimumLength(1)
+            .MaximumLength(255);
     }
 }
