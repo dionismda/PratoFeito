@@ -2,15 +2,16 @@
 
 public sealed class CustomerQueries : DapperQueries, ICustomerQueries
 {
-    private const string CustomerSchema = "Customers";
+    private readonly string _customerSchema;
 
     public CustomerQueries(IConnectionDapper connectionDapper) : base(connectionDapper)
     {
+        _customerSchema = nameof(ContextEnum.Customers).ToLower();
     }
 
     public async Task<IList<GetCustomersQueryModel>> GetCustomersAsync(CancellationToken cancellationToken)
     {
-        using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
+        using var connection = await ConnectionDapper.GetConnectionAsync(_customerSchema);
 
         var sql = @"SELECT
                         customer_id as id,
@@ -28,7 +29,7 @@ public sealed class CustomerQueries : DapperQueries, ICustomerQueries
 
     public async Task<GetCustomerByIdQueryModel?> GetCustomerByIdAsync(Identifier CustomerId, CancellationToken cancellationToken)
     {
-        using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
+        using var connection = await ConnectionDapper.GetConnectionAsync(_customerSchema);
 
         var sql = @"SELECT
                         customer_id as id,
@@ -46,7 +47,7 @@ public sealed class CustomerQueries : DapperQueries, ICustomerQueries
 
     public async Task<IList<GetCustomerOrdersByCustomerIdQueryModel>> GetCustomerOrdersByCustomerIdAsync(Identifier CustomerId, CancellationToken cancellationToken)
     {
-        using var connection = await ConnectionDapper.GetConnectionAsync(CustomerSchema);
+        using var connection = await ConnectionDapper.GetConnectionAsync(_customerSchema);
 
         var sql = @"SELECT
                         customer_order_id as id,

@@ -12,6 +12,11 @@ public sealed class CustomerOrderTypeMap : AggregateTypeMap<CustomerOrder>
             .HasColumnName("customer_id")
             .IdentifierConversion();
 
+        builder
+            .Property(x => x.State)
+            .IsRequired()
+            .HasColumnName("state");
+
         builder.HasOne<Customer>()
                .WithMany()
                .IsRequired()
