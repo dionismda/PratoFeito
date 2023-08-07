@@ -51,21 +51,4 @@ public static class MockCustomerRepositoryExtension
 
         mockCustomerRepository.SetupAllProperties();
     }
-
-    public static void SetupGetCustomerDuplicateAsync(this Mock<ICustomerRepository> mockCustomerRepository, List<Customer> customer)
-    {
-        mockCustomerRepository
-            .Setup(x => x.GetCustomerDuplicateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(customer);
-
-        mockCustomerRepository.SetupAllProperties();
-    }
-
-    public static void VerifyGetCustomerDuplicateAsync(this Mock<ICustomerRepository> mockCustomerRepository, Func<Times> times)
-    {
-        mockCustomerRepository
-            .Verify(x => x.GetCustomerDuplicateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()), times);
-
-        mockCustomerRepository.SetupAllProperties();
-    }
 }

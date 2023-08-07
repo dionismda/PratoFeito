@@ -1,4 +1,4 @@
-﻿namespace _Architecture.Domain.ValueObjects.Validators;
+﻿namespace _Architecture.Application.ValueObjects.Validators;
 
 public class MoneyValidator : AbstractValidator<Money>
 {

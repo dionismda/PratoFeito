@@ -3,30 +3,21 @@
 public class UpdateCustomerCommandHandlerTest
 {
     private UpdateCustomerCommandHandler UpdateCustomerCommandHandler { get; set; }
-    private Customer Customer { get; set; }
 
-    private readonly Mock<IMapper> mockMapper = new();
     private readonly Mock<ICustomerDomainService> mockCustomerDomainService = new();
 
     public UpdateCustomerCommandHandlerTest()
     {
-        UpdateCustomerCommandHandler = new UpdateCustomerCommandHandler(mockMapper.Object, mockCustomerDomainService.Object);
-        Customer = CustomerBuilder.New().Build();
+        UpdateCustomerCommandHandler = new UpdateCustomerCommandHandler(mockCustomerDomainService.Object);
     }
 
     [Theory]
     [MemberData(nameof(UpdateCustomerCommandData.ValidUpdateCustomerCommand), MemberType = typeof(UpdateCustomerCommandData))]
     public async Task UpdateCustomerCommandHandler_MustReturnCustomerObecjtUpdated_WhenUpdateCustomerCommandDataIsCalled(UpdateCustomerCommand updateCustomerCommand)
     {
-        mockMapper.SetupMap<UpdateCustomerCommand, Customer>(Customer);
-
-        var result = await UpdateCustomerCommandHandler.Handle(updateCustomerCommand, It.IsAny<CancellationToken>());
-
-        mockMapper.VerifyMap<UpdateCustomerCommand, Customer>(Times.Once);
+        await UpdateCustomerCommandHandler.Handle(updateCustomerCommand, It.IsAny<CancellationToken>());
 
         mockCustomerDomainService
-            .Verify(x => x.UpdateAsync(Customer, It.IsAny<CancellationToken>()), Times.Once);
-
-        Assert.Equal(Customer, result);
+            .Verify(x => x.UpdateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }

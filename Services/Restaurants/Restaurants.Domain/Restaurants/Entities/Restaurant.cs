@@ -1,6 +1,6 @@
 ﻿namespace Restaurants.Domain.Restaurants.Entities;
 
-public sealed class Restaurant : AggregateRoot, IValidation
+public sealed class Restaurant : AggregateRoot
 {
     public string Name { get; private set; } = string.Empty;
     public RestaurantState State { get; private set; }
@@ -10,8 +10,6 @@ public sealed class Restaurant : AggregateRoot, IValidation
     public Restaurant(string name) : this()
     {
         AddDomainEvent(new RestaurantCreatedDomainEvent(name));
-
-        Validate();
     }
 
     private void Apply(RestaurantCreatedDomainEvent @event)
@@ -62,15 +60,5 @@ public sealed class Restaurant : AggregateRoot, IValidation
     private void Apply(RestaurantChangeNameDomainEvent @event)
     {
         Name = @event.RestaurantName;
-    }
-
-    public void Validate()
-    {
-        RestaurantValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

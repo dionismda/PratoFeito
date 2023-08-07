@@ -21,8 +21,6 @@ public class CancelCustomerOrderCommandHandler : ICommandHandler<CancelCustomerO
 
         customerOrder.MarkOrderAsCanceled();
 
-        customerOrder.Validate();
-
         await _customerOrderDomainService.UpdateAsync(customerOrder, cancellationToken);
 
         return customerOrder;

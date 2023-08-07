@@ -2,18 +2,16 @@
 
 public sealed class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommand, Customer>
 {
-    private readonly IMapper _mapper;
     private readonly ICustomerDomainService _customerDomainService;
 
-    public UpdateCustomerCommandHandler(IMapper mapper, ICustomerDomainService customerDomainService)
+    public UpdateCustomerCommandHandler(ICustomerDomainService customerDomainService)
     {
-        _mapper = mapper;
         _customerDomainService = customerDomainService;
     }
 
     public async Task<Customer> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customer = _mapper.Map<Customer>(request);
+        var customer = new Customer(request.Name, request.OrderLimit);
 
         await _customerDomainService.UpdateAsync(customer, cancellationToken);
 

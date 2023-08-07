@@ -1,4 +1,10 @@
+using FluentValidation;
 using Logging.Serilog;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
 var builder = WebApplication.CreateBuilder(args);
 SerilogExtensions.AddSerilogApi();

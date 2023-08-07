@@ -1,6 +1,6 @@
 ﻿namespace Restaurants.Domain.RestaurantMenus.Entities;
 
-public sealed class RestaurantMenu : AggregateRoot, IValidation
+public sealed class RestaurantMenu : AggregateRoot
 {
     public string MenuVersion { get; private set; }
 
@@ -38,15 +38,5 @@ public sealed class RestaurantMenu : AggregateRoot, IValidation
     public void RemoveOrderItem(MenuItem menuItem)
     {
         _menuItems.Remove(menuItem);
-    }
-
-    public void Validate()
-    {
-        RestaurantMenuValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

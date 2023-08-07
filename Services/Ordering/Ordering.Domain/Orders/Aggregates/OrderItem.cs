@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Domain.Orders.Aggregates;
 
-public sealed class OrderItem : Entity, IValidation
+public sealed class OrderItem : Entity
 {
     public string MenuItemId { get; private set; } = string.Empty;
     public string Name { get; private set; } = string.Empty;
@@ -16,15 +16,5 @@ public sealed class OrderItem : Entity, IValidation
         Name = name;
         Quantity = quantity;
         Price = price;
-    }
-
-    public void Validate()
-    {
-        OrderItemValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

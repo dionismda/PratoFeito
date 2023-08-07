@@ -1,6 +1,6 @@
 ﻿namespace Customers.Domain.CustomerOrders.Entities;
 
-public sealed class CustomerOrder : AggregateRoot, IValidation
+public sealed class CustomerOrder : AggregateRoot
 {
     public Identifier CustomerId { get; private set; } = null!;
     public CustomerOrderState State { get; private set; } = CustomerOrderState.Created;
@@ -11,8 +11,6 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
     public CustomerOrder(Identifier customerId, Money orderTotal) : this()
     {
         AddDomainEvent(new CustomerOrderCreatedDomainEvent(Id, customerId, orderTotal));
-
-        Validate();
     }
 
     private void Apply(CustomerOrderCreatedDomainEvent @event)
@@ -57,15 +55,5 @@ public sealed class CustomerOrder : AggregateRoot, IValidation
     {
         Id = @event.CustomerOrderId;
         State = CustomerOrderState.Cancelled;
-    }
-
-    public void Validate()
-    {
-        CustomerOrdersValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

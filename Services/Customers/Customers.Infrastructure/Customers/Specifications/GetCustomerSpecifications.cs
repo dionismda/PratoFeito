@@ -12,9 +12,10 @@ public class GetCustomerByIdSpecification : Specification<Customer>
     }
 }
 
-public class GetCustomerDuplicate : Specification<Customer>
+public class GetCustomerByNameSpecification : Specification<Customer>
 {
-    public GetCustomerDuplicate(Customer customer) : base(CustomerCriteria.CheckCustomerDuplicate(customer))
+    public GetCustomerByNameSpecification(PersonName name)
+        : base(customer => customer.Name.FirstName == name.FirstName && customer.Name.LastName == name.LastName)
     {
     }
 }

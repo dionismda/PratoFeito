@@ -28,8 +28,6 @@ public sealed class RestaurantDomainService : DomainService<Restaurant>, IRestau
 
         restaurant.ChangeName(entity.Name);
 
-        restaurant.Validate();
-
         await base.UpdateAsync(restaurant, cancellationToken);
     }
 
@@ -51,8 +49,6 @@ public sealed class RestaurantDomainService : DomainService<Restaurant>, IRestau
                     break;
             }
         }
-
-        restaurant.Validate();
 
         await base.UpdateAsync(restaurant, cancellationToken);
     }

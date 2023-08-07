@@ -12,8 +12,6 @@ public class CustomerProfile : Profile
             .ForMember(dest => dest.Body, opt => opt.MapFrom(src => src))
             .ReverseMap();
 
-        CreateMap<CreateCustomerCommand, Customer>();
-
         CreateMap<CustomerInputModel, UpdateCustomerCommand>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => new PersonName(src.FirstName, src.LastName)))
             .ForMember(dest => dest.OrderLimit, opt => opt.MapFrom(src => new Money(src.Amount)));
@@ -22,8 +20,6 @@ public class CustomerProfile : Profile
             .ForMember(dest => dest.Body, opt => opt.MapFrom(src => src))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ReverseMap();
-
-        CreateMap<UpdateCustomerCommand, Customer>();
 
         CreateMap<DeleteCustomerInputModel, DeleteCustomerOrderCommand>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

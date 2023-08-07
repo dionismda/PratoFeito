@@ -1,6 +1,6 @@
 ﻿namespace Restaurants.Domain.RestaurantOrders.Entities;
 
-public sealed class RestaurantOrder : AggregateRoot, IValidation
+public sealed class RestaurantOrder : AggregateRoot
 {
     public Identifier RestaurantId { get; private set; } = null!;
 
@@ -71,15 +71,5 @@ public sealed class RestaurantOrder : AggregateRoot, IValidation
     public void RemoveRestaurantOrderItem(RestaurantOrderItem restaurantOrderItem)
     {
         _restaurantOrderLineItem.Remove(restaurantOrderItem);
-    }
-
-    public void Validate()
-    {
-        RestaurantOrderValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

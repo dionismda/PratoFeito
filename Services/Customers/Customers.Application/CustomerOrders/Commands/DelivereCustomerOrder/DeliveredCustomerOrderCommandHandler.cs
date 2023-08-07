@@ -22,8 +22,6 @@ public class DeliveredCustomerOrderCommandHandler : ICommandHandler<DeliveredCus
 
         customerOrder.MarkOrderAsDelivered();
 
-        customerOrder.Validate();
-
         await _customerOrderDomainService.UpdateAsync(customerOrder, cancellationToken);
 
         return customerOrder;
