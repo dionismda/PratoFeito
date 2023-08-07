@@ -2,4 +2,5 @@
 
 public interface IRestaurantDomainService : IDomainService<Restaurant>
 {
+    Task RestaurantOperationAsync(Restaurant entity, CancellationToken cancellationToken);
 }

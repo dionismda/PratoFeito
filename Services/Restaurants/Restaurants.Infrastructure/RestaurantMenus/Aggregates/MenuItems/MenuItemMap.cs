@@ -1,4 +1,6 @@
-﻿namespace Restaurants.Infrastructure.Restaurants.Aggregates.MenuItems;
+﻿using Restaurants.Domain.RestaurantMenus.Aggregates.MenuItems.Entities;
+
+namespace Restaurants.Infrastructure.RestaurantMenus.Aggregates.MenuItems;
 
 public sealed class MenuItemMap : EntityTypeMap<MenuItem>
 {

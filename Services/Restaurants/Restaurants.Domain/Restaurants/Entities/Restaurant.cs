@@ -3,26 +3,33 @@
 public sealed class Restaurant : AggregateRoot, IValidation
 {
     public string Name { get; private set; } = string.Empty;
-    public RestaurantMenu Menu { get; private set; } = null!;
     public RestaurantState State { get; private set; }
 
     private Restaurant() : base() { }
 
-    public Restaurant(string name, RestaurantMenu menu) : this()
+    public Restaurant(string name) : this()
     {
-        AddDomainEvent(new RestaurantCreatedDomainEvent(name, menu));
+        AddDomainEvent(new RestaurantCreatedDomainEvent(name));
+
+        Validate();
     }
 
     private void Apply(RestaurantCreatedDomainEvent @event)
     {
         Name = @event.Name;
-        Menu = @event.Menu;
         State = RestaurantState.CREATED;
     }
 
     public void OpenRestaurant()
     {
-        AddDomainEvent(new RestaurantOpenedDomainEvent());
+        if (State != RestaurantState.OPEN)
+        {
+            AddDomainEvent(new RestaurantOpenedDomainEvent(Id));
+        }
+        else
+        {
+            throw new RestaurantWasOpenedException(Id);
+        }
     }
 
     private void Apply(RestaurantOpenedDomainEvent @event)
@@ -32,12 +39,29 @@ public sealed class Restaurant : AggregateRoot, IValidation
 
     public void CloseRestaurant()
     {
-        AddDomainEvent(new RestaurantClosedDomainEvent());
+        if (State == RestaurantState.OPEN)
+        {
+            AddDomainEvent(new RestaurantClosedDomainEvent(Id));
+        }
+        else
+        {
+            throw new RestaurantStateNotOpenedException();
+        }
     }
 
     private void Apply(RestaurantClosedDomainEvent @event)
     {
         State = RestaurantState.CLOSED;
+    }
+
+    public void ChangeName(string name)
+    {
+        AddDomainEvent(new RestaurantChangeNameDomainEvent(name));
+    }
+
+    private void Apply(RestaurantChangeNameDomainEvent @event)
+    {
+        Name = @event.RestaurantName;
     }
 
     public void Validate()

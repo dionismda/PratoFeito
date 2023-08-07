@@ -7,10 +7,8 @@ public sealed class RestaurantValidator : AbstractValidator<Restaurant>
         RuleFor(x => x.Name)
             .NotEmpty()
             .NotNull()
-            .MinimumLength(1);
-
-        RuleFor(x => x.Menu)
-            .SetValidator(new RestaurantMenuValidator());
+            .MinimumLength(1)
+            .MaximumLength(255);
 
         RuleFor(x => x.State)
             .IsInEnum();

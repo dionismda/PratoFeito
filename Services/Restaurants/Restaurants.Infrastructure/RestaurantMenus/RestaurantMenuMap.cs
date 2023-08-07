@@ -1,4 +1,6 @@
-﻿namespace Restaurants.Infrastructure.Restaurants.Aggregates.RestaurantMenus;
+﻿using Restaurants.Domain.RestaurantMenus.Entities;
+
+namespace Restaurants.Infrastructure.RestaurantMenus;
 
 public sealed class RestaurantMenuMap : EntityTypeMap<RestaurantMenu>
 {
@@ -11,5 +13,10 @@ public sealed class RestaurantMenuMap : EntityTypeMap<RestaurantMenu>
             .HasColumnName("menu_version")
             .HasMaxLength(255)
             .IsRequired();
+
+        builder
+            .HasMany(x => x.MenuItems)
+            .WithOne()
+            .HasForeignKey("fk_restaurant_menu");
     }
 }

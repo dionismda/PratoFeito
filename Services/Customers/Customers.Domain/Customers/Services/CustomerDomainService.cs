@@ -2,13 +2,15 @@
 
 public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDomainService
 {
-    private readonly INotificationDomainService _notificationDomainService;
+    private readonly ICustomerNotificationDomainService _notificationDomainService;
     private readonly ICustomerRepository _customerRepository;
 
-    public CustomerDomainService(INotificationDomainService notificationDomainService, ICustomerRepository repository) : base(repository)
+    public CustomerDomainService(
+        ICustomerNotificationDomainService notificationDomainService,
+        ICustomerRepository customerRepository) : base(customerRepository)
     {
         _notificationDomainService = notificationDomainService;
-        _customerRepository = repository;
+        _customerRepository = customerRepository;
     }
 
     public override async Task InsertAsync(Customer entity, CancellationToken cancellationToken)
@@ -22,10 +24,8 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
     {
         await ValidateFields(async () => await _customerRepository.GetCustomerDuplicateAsync(entity, cancellationToken), entity);
 
-        var customer = await _customerRepository.GetCustomerByIdAsync(entity.Id, cancellationToken);
-
-        if (customer is null)
-            throw new NotFoundException($"Customer not found {entity.Id}");
+        var customer = await _customerRepository.GetCustomerByIdAsync(entity.Id, cancellationToken)
+            ?? throw new NotFoundException($"Customer not found {entity.Id}");
 
         if (!entity.Name.Equals(customer.Name))
             customer.ChangeName(entity.Name);
@@ -35,9 +35,7 @@ public sealed class CustomerDomainService : DomainService<Customer>, ICustomerDo
 
         customer.Validate();
 
-        _customerRepository.Update(customer);
-
-        await _customerRepository.CommitAsync(cancellationToken);
+        await base.UpdateAsync(customer, cancellationToken);
     }
 
     public async Task ValidateFields(Func<Task<IList<Customer>>> getResultQueryValidate, Customer entity)

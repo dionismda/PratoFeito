@@ -1,8 +1,10 @@
-﻿namespace Restaurants.Domain.Restaurants.Aggregates.RestaurantMenus.Entities;
+﻿namespace Restaurants.Domain.RestaurantMenus.Entities;
 
-public sealed class RestaurantMenu : Entity, IValidation
+public sealed class RestaurantMenu : AggregateRoot, IValidation
 {
     public string MenuVersion { get; private set; }
+
+    public Identifier RestaurantId { get; private set; }
 
     private List<MenuItem> _menuItems = new();
     public IReadOnlyCollection<MenuItem> MenuItems
@@ -11,9 +13,10 @@ public sealed class RestaurantMenu : Entity, IValidation
         private set => _menuItems = value.ToList();
     }
 
-    public RestaurantMenu(string menuVersion)
+    public RestaurantMenu(string menuVersion, Identifier restaurantId)
     {
         MenuVersion = menuVersion;
+        RestaurantId = restaurantId;
     }
 
     public void AddMenuItem(MenuItem menuItem)

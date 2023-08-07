@@ -1,4 +1,4 @@
-﻿namespace Restaurants.Domain.Restaurants.Aggregates.MenuItems.Entities.Validators;
+﻿namespace Restaurants.Domain.RestaurantMenus.Aggregates.MenuItems.Entities.Validators;
 
 public sealed class MenuItemValidator : AbstractValidator<MenuItem>
 {
@@ -10,7 +10,12 @@ public sealed class MenuItemValidator : AbstractValidator<MenuItem>
             .MinimumLength(3)
             .MaximumLength(255);
 
+        RuleFor(x => x.RestaurantMenuId)
+            .NotEmpty()
+            .NotNull();
+
         RuleFor(x => x.Price)
             .SetValidator(new MoneyValidator());
+
     }
 }

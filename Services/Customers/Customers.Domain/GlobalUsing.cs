@@ -2,9 +2,11 @@
 global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Extensions;
 global using _Architecture.Domain.Interfaces;
-global using _Architecture.Domain.Services;
 global using _Architecture.Domain.ValueObjects.Validators;
+global using _Shared.ValueObjects._Commons;
 global using Customers.Domain._Commons.Enums;
+global using Customers.Domain._Commons.Interfaces;
+global using Customers.Domain._Commons.Services;
 global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Entities.Validators;
 global using Customers.Domain.CustomerOrders.Events;
@@ -20,4 +22,3 @@ global using Customers.Domain.Customers.Services;
 global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Linq.Expressions;
-global using _Shared.ValueObjects._Commons;

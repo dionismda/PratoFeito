@@ -1,4 +1,6 @@
-﻿namespace _Architecture.UnitTests.Domain.Services;
+﻿using _Architecture.Domain.Abstractions;
+
+namespace _Architecture.UnitTests.Domain.Services;
 
 public sealed class NotificationDomainServiceTest
 {

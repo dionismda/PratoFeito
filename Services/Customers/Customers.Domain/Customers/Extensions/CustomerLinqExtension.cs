@@ -2,8 +2,8 @@
 
 public static class CustomerLinqExtension
 {
-    public static bool HasName(this IEnumerable<Customer> modulo, PersonName name)
+    public static bool HasName(this IEnumerable<Customer> customers, PersonName name)
     {
-        return modulo.Any(x => x.Name.Equals(name));
+        return customers.Any(x => x.Name.Equals(name));
     }
 }

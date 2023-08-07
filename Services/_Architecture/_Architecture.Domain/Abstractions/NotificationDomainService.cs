@@ -1,10 +1,10 @@
-﻿namespace _Architecture.Domain.Services;
+﻿namespace _Architecture.Domain.Abstractions;
 
-public sealed class NotificationDomainService : INotificationDomainService
+public abstract class NotificationDomainService : INotificationDomainService
 {
     private readonly Dictionary<string, List<string>> _errors;
 
-    public NotificationDomainService()
+    protected NotificationDomainService()
     {
         _errors = new Dictionary<string, List<string>>();
     }

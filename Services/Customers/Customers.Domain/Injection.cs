@@ -4,7 +4,7 @@ public static class Injection
 {
     public static IServiceCollection InjectionCustomersDomain(this IServiceCollection services)
     {
-        services.AddScoped<INotificationDomainService, NotificationDomainService>();
+        services.AddScoped<ICustomerNotificationDomainService, CustomerNotificationDomainService>();
 
         return services
                 .InjectionCustomers()
