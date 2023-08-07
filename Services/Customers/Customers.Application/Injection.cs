@@ -10,7 +10,7 @@ public static class Injection
             cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
-        services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());
 

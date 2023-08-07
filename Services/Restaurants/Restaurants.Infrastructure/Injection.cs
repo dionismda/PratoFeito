@@ -4,7 +4,8 @@ public static class Injection
 {
     public static IServiceCollection InjectionRestaurantsInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        //services.AddQuartzJobInSeconds<RestaurantIntegrationEventLogBackgroundService>(10);
+        services.AddQuartzJobInSeconds<RestaurantIntegrationEventLogBackgroundService>(10);
+
         services.AddSingleton<RestaurantEventsInterceptor>();
 
         services.AddDbContext<RestaurantContext>();

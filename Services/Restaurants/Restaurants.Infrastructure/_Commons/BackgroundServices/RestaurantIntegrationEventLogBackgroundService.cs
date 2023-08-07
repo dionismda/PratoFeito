@@ -3,9 +3,9 @@
 public sealed class RestaurantIntegrationEventLogBackgroundService : IntegrationEventLogBackgroundService
 {
     public RestaurantIntegrationEventLogBackgroundService(
-        IIntegrationEventLogService integrationEventLogService,
-        IEventBusAws eventBusAws,
-        IIntegrationEventMapper integrationEventMapper) : base(integrationEventLogService, eventBusAws, integrationEventMapper)
+        IRestaurantIntegrationEventLogService integrationEventLogService,
+        IRestaurantEventBusAws eventBusAws,
+        IRestaurantIntegrationEventMapper integrationEventMapper) : base(integrationEventLogService, eventBusAws, integrationEventMapper)
     {
     }
 }

@@ -3,7 +3,7 @@
 public sealed class RestaurantEventBusAws : EventBusAws.EventBusAws, IRestaurantEventBusAws, IDisposable
 {
     public RestaurantEventBusAws(
-        IEventBusSubscriptionsManager subsManager,
+        IRestaurantEventBusSubscriptionsManager subsManager,
         IPollyPolicy pollyPolicy,
         IAmazonSimpleNotificationService amazonSNS,
         IAmazonSQS amazonSQS) : base(subsManager, pollyPolicy, amazonSNS, amazonSQS)

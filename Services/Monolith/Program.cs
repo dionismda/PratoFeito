@@ -1,7 +1,6 @@
-using FluentValidation;
 using Logging.Serilog;
+using System.Diagnostics;
 using System.Globalization;
-using static System.Net.Mime.MediaTypeNames;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
@@ -22,9 +21,7 @@ builder.Services.AddQuartzHostedService();
 builder.Services.CustomAddSwaggerService(builder.Configuration);
 
 builder.Services.InjectionCustomerApi(builder.Configuration);
-builder.Services.InjectionOrderingApi(builder.Configuration);
 builder.Services.InjectionRestaurantApi(builder.Configuration);
-
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 
 builder.Services.AddMvc()
