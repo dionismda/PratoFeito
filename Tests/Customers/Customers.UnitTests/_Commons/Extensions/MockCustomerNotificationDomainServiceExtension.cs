@@ -1,8 +1,8 @@
 ﻿namespace _Architecture.UnitTests.Domain.Extensions;
 
-public static class MockNotificationDomainServiceExtension
+public static class MockCustomerNotificationDomainServiceExtension
 {
-    public static void SetupThrows(this Mock<INotificationDomainService> mockNotificationDomainService)
+    public static void SetupThrows(this Mock<ICustomerNotificationDomainService> mockNotificationDomainService)
     {
         mockNotificationDomainService
              .Setup(x => x.Validate(It.IsAny<string>()))
@@ -11,7 +11,7 @@ public static class MockNotificationDomainServiceExtension
         mockNotificationDomainService.SetupAllProperties();
     }
 
-    public static void VerifyAddError(this Mock<INotificationDomainService> mockNotificationDomainService, Func<Times> times)
+    public static void VerifyAddError(this Mock<ICustomerNotificationDomainService> mockNotificationDomainService, Func<Times> times)
     {
         mockNotificationDomainService
             .Verify(x => x.AddError(It.IsAny<string>(), It.IsAny<string>()), times);
@@ -19,7 +19,7 @@ public static class MockNotificationDomainServiceExtension
         mockNotificationDomainService.SetupAllProperties();
     }
 
-    public static void VerifyValidate(this Mock<INotificationDomainService> mockNotificationDomainService, Func<Times> times)
+    public static void VerifyValidate(this Mock<ICustomerNotificationDomainService> mockNotificationDomainService, Func<Times> times)
     {
         mockNotificationDomainService
             .Verify(x => x.Validate(It.IsAny<string>()), times);

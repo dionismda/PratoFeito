@@ -1,12 +1,10 @@
 global using _Architecture.Domain.Exceptions;
-global using _Architecture.Domain.ValueObjects;
+global using _Architecture.Domain.Interfaces;
 global using _Architecture.UnitTests._Commons.Abstracts;
 global using _Architecture.UnitTests._Commons.Builders;
 global using _Architecture.UnitTests._Commons.Helpers;
-global using Bogus;
-global using Xunit;
-global using _Architecture.Domain.Interfaces;
-global using Moq;
-global using _Architecture.Domain.Services;
-global using AutoMapper;
 global using _Shared.ValueObjects._Commons;
+global using AutoMapper;
+global using Bogus;
+global using Moq;
+global using Xunit;

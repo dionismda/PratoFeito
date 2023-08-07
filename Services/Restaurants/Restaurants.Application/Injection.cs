@@ -2,7 +2,7 @@
 
 public static class Injection
 {
-    public static IServiceCollection InjectionRestaurantApplication(this IServiceCollection services)
+    public static IServiceCollection InjectionRestaurantsApplication(this IServiceCollection services)
     {
         return services;
     }

@@ -5,11 +5,11 @@ public sealed class CustomerDomainServiceTest
     private Customer Customer { get; set; }
     private CustomerDomainService CustomerDomainService { get; set; }
     private readonly Mock<ICustomerRepository> mockCustomerRepository = new();
-    private readonly Mock<INotificationDomainService> mockNotificationDomainService = new();
+    private readonly Mock<ICustomerNotificationDomainService> mockCustomerNotificationDomainService = new();
 
     public CustomerDomainServiceTest()
     {
-        CustomerDomainService = new CustomerDomainService(mockNotificationDomainService.Object, mockCustomerRepository.Object);
+        CustomerDomainService = new CustomerDomainService(mockCustomerNotificationDomainService.Object, mockCustomerRepository.Object);
         Customer = CustomerBuilder.New().Build();
     }
 
@@ -112,9 +112,9 @@ public sealed class CustomerDomainServiceTest
 
         await CustomerDomainService.ValidateFields(getResultQueryValidate, Customer);
 
-        mockNotificationDomainService.VerifyAddError(Times.Never);
+        mockCustomerNotificationDomainService.VerifyAddError(Times.Never);
 
-        mockNotificationDomainService.VerifyValidate(Times.Once);
+        mockCustomerNotificationDomainService.VerifyValidate(Times.Once);
     }
 
     [Fact]
@@ -129,15 +129,15 @@ public sealed class CustomerDomainServiceTest
         Func<Task<IList<Customer>>> getResultQueryValidate = ()
             => mockCustomerRepository.Object.GetCustomerDuplicateAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>());
 
-        mockNotificationDomainService.SetupThrows();
+        mockCustomerNotificationDomainService.SetupThrows();
 
         await Assert.ThrowsAsync<NotificationDomainException>(async () =>
         {
             await CustomerDomainService.ValidateFields(getResultQueryValidate, Customer);
         });
 
-        mockNotificationDomainService.VerifyAddError(Times.Once);
+        mockCustomerNotificationDomainService.VerifyAddError(Times.Once);
 
-        mockNotificationDomainService.VerifyValidate(Times.Once);
+        mockCustomerNotificationDomainService.VerifyValidate(Times.Once);
     }
 }
