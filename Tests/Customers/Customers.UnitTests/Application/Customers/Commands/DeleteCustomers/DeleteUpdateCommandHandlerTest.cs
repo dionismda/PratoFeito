@@ -5,12 +5,11 @@ public sealed class DeleteUpdateCommandHandlerTest
     private DeleteUpdateCommandHandler DeleteUpdateCommandHandler { get; set; }
     private Customer Customer { get; set; }
 
-    private readonly Mock<ICustomerDomainService> mockCustomerDomainService = new();
     private readonly Mock<ICustomerRepository> mockCustomerRepository = new();
 
     public DeleteUpdateCommandHandlerTest()
     {
-        DeleteUpdateCommandHandler = new DeleteUpdateCommandHandler(mockCustomerDomainService.Object, mockCustomerRepository.Object);
+        DeleteUpdateCommandHandler = new DeleteUpdateCommandHandler(mockCustomerRepository.Object);
         Customer = CustomerBuilder.New().Build();
     }
 
@@ -24,8 +23,11 @@ public sealed class DeleteUpdateCommandHandlerTest
 
         mockCustomerRepository.VerifyGetCustomerByIdAsync(Times.Once);
 
-        mockCustomerDomainService
-            .Verify(x => x.DeleteAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerRepository
+            .Verify(x => x.Delete(It.IsAny<Customer>()), Times.Once);
+
+        mockCustomerRepository
+            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Theory]
@@ -40,8 +42,5 @@ public sealed class DeleteUpdateCommandHandlerTest
         });
 
         mockCustomerRepository.VerifyGetCustomerByIdAsync(Times.Once);
-
-        mockCustomerDomainService
-            .Verify(x => x.DeleteAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 }

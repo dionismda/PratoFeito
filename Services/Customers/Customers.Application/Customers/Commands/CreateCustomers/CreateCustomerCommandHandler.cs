@@ -2,18 +2,20 @@
 
 public sealed class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerCommand, Customer>
 {
-    private readonly ICustomerDomainService _customerDomainService;
+    private readonly ICustomerRepository _customerRepository;
 
-    public CreateCustomerCommandHandler(ICustomerDomainService customerDomainService)
+    public CreateCustomerCommandHandler(ICustomerRepository customerRepository)
     {
-        _customerDomainService = customerDomainService;
+        _customerRepository = customerRepository;
     }
 
     public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = new Customer(request.Name, request.OrderLimit);
 
-        await _customerDomainService.InsertAsync(customer, cancellationToken);
+        _customerRepository.Insert(customer);
+
+        await _customerRepository.CommitAsync(cancellationToken);
 
         return customer;
     }

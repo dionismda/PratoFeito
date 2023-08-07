@@ -3,13 +3,10 @@
 public sealed class CreateCustomerOrderCommandHandlerTest
 {
     private CreateCustomerOrderCommandHandler CreateCustomerOrderCommandHandler { get; set; }
-    private CustomerOrder CustomerOrder { get; set; }
-
-    private readonly Mock<ICustomerOrderDomainService> mockCustomerOrderDomainService = new();
+    private readonly Mock<ICustomerOrderRepository> mockCustomerOrderRepository = new();
     public CreateCustomerOrderCommandHandlerTest()
     {
-        CreateCustomerOrderCommandHandler = new CreateCustomerOrderCommandHandler(mockCustomerOrderDomainService.Object);
-        CustomerOrder = CustomerOrderBuilder.New().Build();
+        CreateCustomerOrderCommandHandler = new CreateCustomerOrderCommandHandler(mockCustomerOrderRepository.Object);
     }
 
     [Theory]
@@ -18,7 +15,10 @@ public sealed class CreateCustomerOrderCommandHandlerTest
     {
         await CreateCustomerOrderCommandHandler.Handle(createCustomerOrderCommand, It.IsAny<CancellationToken>());
 
-        mockCustomerOrderDomainService
-            .Verify(x => x.InsertAsync(It.IsAny<CustomerOrder>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository
+            .Verify(x => x.Insert(It.IsAny<CustomerOrder>()), Times.Once);
+
+        mockCustomerOrderRepository
+            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 }

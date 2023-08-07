@@ -1,5 +1,4 @@
 ﻿global using _Architecture.Domain.Abstractions;
-global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Interfaces;
 global using _Shared.ValueObjects._Commons;
 global using Microsoft.Extensions.DependencyInjection;
@@ -11,10 +10,6 @@ global using Restaurants.Domain.RestaurantMenus.Entities;
 global using Restaurants.Domain.RestaurantOrders.Aggregates.RestaurantOrderItems.Entities;
 global using Restaurants.Domain.RestaurantOrders.Entities;
 global using Restaurants.Domain.RestaurantOrders.Events;
-global using Restaurants.Domain.RestaurantOrders.Interfaces;
 global using Restaurants.Domain.Restaurants.Entities;
 global using Restaurants.Domain.Restaurants.Events;
 global using Restaurants.Domain.Restaurants.Exceptions;
-global using Restaurants.Domain.Restaurants.Extensions;
-global using Restaurants.Domain.Restaurants.Interfaces;
-global using Restaurants.Domain.Restaurants.Services;

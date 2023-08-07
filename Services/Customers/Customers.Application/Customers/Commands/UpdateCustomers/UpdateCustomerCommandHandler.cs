@@ -2,18 +2,27 @@
 
 public sealed class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommand, Customer>
 {
-    private readonly ICustomerDomainService _customerDomainService;
+    private readonly ICustomerRepository _customerRepository;
 
-    public UpdateCustomerCommandHandler(ICustomerDomainService customerDomainService)
+    public UpdateCustomerCommandHandler(ICustomerRepository customerRepository)
     {
-        _customerDomainService = customerDomainService;
+        _customerRepository = customerRepository;
     }
 
     public async Task<Customer> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customer = new Customer(request.Name, request.OrderLimit);
+        var customer = await _customerRepository.GetCustomerByIdAsync(request.Id, cancellationToken)
+            ?? throw new NotFoundException($"Customer not found {request.Id}");
 
-        await _customerDomainService.UpdateAsync(customer, cancellationToken);
+        if (!request.Name.Equals(customer.Name))
+            customer.ChangeName(request.Name);
+
+        if (!request.OrderLimit.Equals(customer.OrderLimit))
+            customer.ChangeOrderLimit(request.OrderLimit);
+
+        _customerRepository.Update(customer);
+
+        await _customerRepository.CommitAsync(cancellationToken);
 
         return customer;
     }

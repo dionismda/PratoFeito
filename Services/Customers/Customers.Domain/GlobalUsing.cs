@@ -1,5 +1,4 @@
 ﻿global using _Architecture.Domain.Abstractions;
-global using _Architecture.Domain.Exceptions;
 global using _Architecture.Domain.Interfaces;
 global using _Shared.ValueObjects._Commons;
 global using Customers.Domain._Commons.Enums;
@@ -8,12 +7,7 @@ global using Customers.Domain._Commons.Services;
 global using Customers.Domain.CustomerOrders.Entities;
 global using Customers.Domain.CustomerOrders.Events;
 global using Customers.Domain.CustomerOrders.Exceptions;
-global using Customers.Domain.CustomerOrders.Interfaces;
-global using Customers.Domain.CustomerOrders.Services;
 global using Customers.Domain.Customers.Entities;
 global using Customers.Domain.Customers.Events;
-global using Customers.Domain.Customers.Extensions;
-global using Customers.Domain.Customers.Interfaces;
-global using Customers.Domain.Customers.Services;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Linq.Expressions;

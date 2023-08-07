@@ -13,15 +13,11 @@ public static class Injection
 
     private static IServiceCollection InjectionCustomers(this IServiceCollection services)
     {
-        services.AddScoped<ICustomerDomainService, CustomerDomainService>();
-
         return services;
     }
 
     private static IServiceCollection InjectionCustomerOrders(this IServiceCollection services)
     {
-        services.AddScoped<ICustomerOrderDomainService, CustomerOrderDomainService>();
-
         return services;
     }
 }

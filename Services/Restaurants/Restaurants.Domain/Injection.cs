@@ -13,8 +13,6 @@ public static class Injection
 
     private static IServiceCollection InjectionRestaurant(this IServiceCollection services)
     {
-        services.AddScoped<IRestaurantDomainService, RestaurantDomainService>();
-
         return services;
     }
 
