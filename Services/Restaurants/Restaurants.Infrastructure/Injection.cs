@@ -6,7 +6,7 @@ public static class Injection
     {
         services.AddQuartzJobInSeconds<RestaurantIntegrationEventLogBackgroundService>(10);
 
-        services.AddSingleton<EventsInterceptor<IRestaurantIntegrationEventMapper>>();
+        services.AddSingleton<RestaurantEventsInterceptor>();
 
         services.AddDbContext<RestaurantContext>();
 

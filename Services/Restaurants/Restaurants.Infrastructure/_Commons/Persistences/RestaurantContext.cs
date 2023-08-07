@@ -17,10 +17,18 @@ public sealed class RestaurantContext : BaseDbContext
     //public DbSet<RestaurantOrderItem> RestaurantOrderItem { get; set; } = null!;
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
-        var interceptor = Services.GetRequiredService<EventsInterceptor<IRestaurantIntegrationEventMapper>>();
+        var connectionString = Configuration.GetConnectionString("PratoFeitoDb");
+        var interceptor = Services.GetRequiredService<RestaurantEventsInterceptor>();
 
         optionsBuilder
+            .UseNpgsql(connectionString, x =>
+            {
+                x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
+                x.MigrationsAssembly("Monolith");
+            })
+            .UseSnakeCaseNamingConvention()
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors()
             .AddInterceptors(interceptor);
     }
 

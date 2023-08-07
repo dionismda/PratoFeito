@@ -1,6 +1,4 @@
-﻿using Customers.Application.CustomerOrders.IntegrationEvents.CustomerOrderCreated;
-
-namespace Customers.Application;
+﻿namespace Customers.Application;
 
 public static class Injection
 {

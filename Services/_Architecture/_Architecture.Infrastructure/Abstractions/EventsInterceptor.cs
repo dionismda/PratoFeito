@@ -1,12 +1,11 @@
-﻿namespace _Architecture.Infrastructure.Interceptors;
+﻿namespace _Architecture.Infrastructure.Abstractions;
 
-public sealed class EventsInterceptor<TMapper> : SaveChangesInterceptor
-    where TMapper : IIntegrationEventMapper
+public abstract class EventsInterceptor : SaveChangesInterceptor
 {
     private readonly IMediator _mediator;
-    private readonly TMapper _mapper;
+    private readonly IIntegrationEventMapper _mapper;
 
-    public EventsInterceptor(IMediator mediator, TMapper mapper)
+    protected EventsInterceptor(IMediator mediator, IIntegrationEventMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
