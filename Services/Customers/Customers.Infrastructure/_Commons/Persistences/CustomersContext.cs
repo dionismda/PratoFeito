@@ -15,10 +15,18 @@ public sealed class CustomersContext : BaseDbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
-        var interceptor = Services.GetRequiredService<EventsInterceptor<ICustomerIntegrationEventMapper>>();
+        var connectionString = Configuration.GetConnectionString("PratoFeitoDb");
+        var interceptor = Services.GetRequiredService<CustomerEventsInterceptor>();
 
         optionsBuilder
+            .UseNpgsql(connectionString, x =>
+            {
+                x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
+                x.MigrationsAssembly("Monolith");
+            })
+            .UseSnakeCaseNamingConvention()
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors()
             .AddInterceptors(interceptor);
     }
 

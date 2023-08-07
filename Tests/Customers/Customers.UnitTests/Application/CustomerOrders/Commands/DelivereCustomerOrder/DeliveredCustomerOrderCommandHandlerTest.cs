@@ -5,13 +5,11 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
     private DeliveredCustomerOrderCommandHandler DeliveredCustomerOrderCommandHandler { get; set; }
     private CustomerOrder CustomerOrder { get; set; }
 
-    private readonly Mock<ICustomerOrderDomainService> mockCustomerOrderDomainService = new();
     private readonly Mock<ICustomerOrderRepository> mockCustomerOrderRepository = new();
 
     public DeliveredCustomerOrderCommandHandlerTest()
     {
-        DeliveredCustomerOrderCommandHandler = new DeliveredCustomerOrderCommandHandler(
-            mockCustomerOrderDomainService.Object, mockCustomerOrderRepository.Object);
+        DeliveredCustomerOrderCommandHandler = new DeliveredCustomerOrderCommandHandler(mockCustomerOrderRepository.Object);
         CustomerOrder = CustomerOrderBuilder.New().Build();
     }
 
@@ -23,16 +21,19 @@ public sealed class DeliveredCustomerOrderCommandHandlerTest
             .Setup(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(CustomerOrder);
 
-        mockCustomerOrderDomainService
-            .Setup(x => x.UpdateAsync(It.IsAny<CustomerOrder>(), It.IsAny<CancellationToken>()));
+        mockCustomerOrderRepository
+            .Setup(x => x.Update(It.IsAny<CustomerOrder>()));
 
         var result = await DeliveredCustomerOrderCommandHandler.Handle(deliveredCustomerOrderCommand, It.IsAny<CancellationToken>());
 
         mockCustomerOrderRepository
             .Verify(x => x.GetCustomerOrderByIdAsync(It.IsAny<Identifier>(), It.IsAny<CancellationToken>()), Times.Once);
 
-        mockCustomerOrderDomainService
-            .Verify(x => x.UpdateAsync(It.IsAny<CustomerOrder>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockCustomerOrderRepository
+            .Verify(x => x.Update(It.IsAny<CustomerOrder>()), Times.Once);
+
+        mockCustomerOrderRepository
+            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
 
         Assert.NotNull(result);
         Assert.True(result.State == CustomerOrderState.Delivered);

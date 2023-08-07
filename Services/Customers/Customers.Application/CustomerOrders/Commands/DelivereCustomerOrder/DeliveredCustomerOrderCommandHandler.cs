@@ -2,29 +2,23 @@
 
 public class DeliveredCustomerOrderCommandHandler : ICommandHandler<DeliveredCustomerOrderCommand, CustomerOrder>
 {
-    private readonly ICustomerOrderDomainService _customerOrderDomainService;
     private readonly ICustomerOrderRepository _customerOrderRepository;
 
-    public DeliveredCustomerOrderCommandHandler(ICustomerOrderDomainService customerOrderDomainService, ICustomerOrderRepository customerOrderRepository)
+    public DeliveredCustomerOrderCommandHandler(ICustomerOrderRepository customerOrderRepository)
     {
-        _customerOrderDomainService = customerOrderDomainService;
         _customerOrderRepository = customerOrderRepository;
     }
 
     public async Task<CustomerOrder> Handle(DeliveredCustomerOrderCommand request, CancellationToken cancellationToken)
     {
-        var customerOrder = await _customerOrderRepository.GetCustomerOrderByIdAsync(request.Id, cancellationToken);
-
-        if (customerOrder is null)
-        {
-            throw new NotFoundException($"Not found customer order id {request.Id}");
-        }
+        var customerOrder = await _customerOrderRepository.GetCustomerOrderByIdAsync(request.Id, cancellationToken)
+            ?? throw new NotFoundException($"Not found customer order id {request.Id}");
 
         customerOrder.MarkOrderAsDelivered();
 
-        customerOrder.Validate();
+        _customerOrderRepository.Update(customerOrder);
 
-        await _customerOrderDomainService.UpdateAsync(customerOrder, cancellationToken);
+        await _customerOrderRepository.CommitAsync(cancellationToken);
 
         return customerOrder;
     }

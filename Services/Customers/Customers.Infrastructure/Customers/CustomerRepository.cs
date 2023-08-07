@@ -16,8 +16,10 @@ public sealed class CustomerRepository : Repository<Customer>, ICustomerReposito
         return await FindByAsync(new GetCustomerByIdSpecification(id), cancellationToken);
     }
 
-    public async Task<IList<Customer>> GetCustomerDuplicateAsync(Customer customer, CancellationToken cancellationToken)
+    public async Task<bool> IsNameUniqueAsync(PersonName name, CancellationToken cancellationToken)
     {
-        return await FindAllAsync(new GetCustomerDuplicate(customer), cancellationToken);
+        var result = await FindAllAsync(new GetCustomerByNameSpecification(name), cancellationToken);
+
+        return result.Any();
     }
 }

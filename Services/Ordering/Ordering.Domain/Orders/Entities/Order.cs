@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Domain.Orders.Entities;
 
-public sealed class Order : AggregateRoot, IValidation
+public sealed class Order : AggregateRoot
 {
     public Identifier RestaurantId { get; private set; } = null!;
     public Identifier CustomerId { get; private set; } = null!;
@@ -42,15 +42,5 @@ public sealed class Order : AggregateRoot, IValidation
     public void RemoveOrderItem(OrderItem orderItem)
     {
         _orderItems.Remove(orderItem);
-    }
-
-    public void Validate()
-    {
-        OrderValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

@@ -17,16 +17,6 @@ public sealed class CustomerOrderTest
         Assert.Equal(CustomerOrderState.Created, CustomerOrder.State);
     }
 
-    [Theory]
-    [MemberData(nameof(MoneyData.InvalidMoney), MemberType = typeof(MoneyData))]
-    public void CustomerOrder_MustReturnException_WhenOrderTotalIsInvalid(Money invalidMoney)
-    {
-        Assert.Throws<ValidationDomainException>(() =>
-        {
-            CustomerBuilder.New().ChangeOrderLimit(invalidMoney).Build();
-        });
-    }
-
     [Fact]
     public void CustomerOrder_MustMarkStateAsDelireved_WhenFunctionMarkOrderAsDeliveredIsCalled()
     {

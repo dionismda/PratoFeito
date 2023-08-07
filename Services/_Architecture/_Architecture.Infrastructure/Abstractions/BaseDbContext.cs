@@ -2,7 +2,7 @@
 
 public abstract class BaseDbContext : DbContext, IUnitOfWork
 {
-    private readonly IConfiguration _configuration;
+    protected IConfiguration Configuration { get; private set; }
     public IServiceProvider Services { get; private set; }
 
     public string Schema { get; protected set; } = string.Empty;
@@ -12,7 +12,7 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
         IConfiguration configuration,
         IServiceProvider services) : base(options)
     {
-        _configuration = configuration;
+        Configuration = configuration;
         Services = services;
     }
 
@@ -28,21 +28,6 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
             modelBuilder.HasDefaultSchema(Schema);
 
         modelBuilder.ApplyConfiguration(new IntegrationEventLogTypeMap());
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var connectionString = _configuration.GetConnectionString("PratoFeitoDb");
-
-        optionsBuilder
-            .UseNpgsql(connectionString, x =>
-            {
-                x.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
-                x.MigrationsAssembly("Monolith");
-            })
-            .UseSnakeCaseNamingConvention()
-            .EnableSensitiveDataLogging()
-            .EnableDetailedErrors();
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

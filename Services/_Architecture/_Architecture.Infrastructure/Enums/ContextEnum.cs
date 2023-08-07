@@ -3,5 +3,6 @@
 public enum ContextEnum
 {
     Customers,
-    Ordering
+    Ordering,
+    Restaurants
 }

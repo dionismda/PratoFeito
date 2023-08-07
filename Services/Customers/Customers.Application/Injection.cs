@@ -1,13 +1,19 @@
-﻿using Customers.Application.CustomerOrders.IntegrationEvents.CustomerOrderCreated;
-
-namespace Customers.Application;
+﻿namespace Customers.Application;
 
 public static class Injection
 {
     public static IServiceCollection InjectionCustomersApplication(this IServiceCollection services)
     {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+        });
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
         services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());
+
         services.AddSingleton<ICustomerIntegrationEventMapper, CustomerIntegrationEventMapper>();
 
         services

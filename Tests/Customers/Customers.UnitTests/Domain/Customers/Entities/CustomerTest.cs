@@ -22,21 +22,9 @@ public sealed class CustomerTest
     {
         Customer.ChangeName(validName);
 
-        Customer.Validate();
-
         Assert.NotNull(Customer);
         Assert.Equal(Customer.Name, validName);
         Assert.NotEmpty(Customer.DomainEvents.OfType<CustomerNameUpdatedDomainEvent>());
-    }
-
-    [Theory]
-    [MemberData(nameof(PersonNameData.InvalidPersonName), MemberType = typeof(PersonNameData))]
-    public void Customer_MustReturnException_WhenNameIsInvalid(PersonName invalidPersonName)
-    {
-        Assert.Throws<ValidationDomainException>(() =>
-        {
-            CustomerBuilder.New().ChangeName(invalidPersonName).Build();
-        });
     }
 
     [Theory]
@@ -45,20 +33,8 @@ public sealed class CustomerTest
     {
         Customer.ChangeOrderLimit(validMoney);
 
-        Customer.Validate();
-
         Assert.NotNull(Customer);
         Assert.Equal(Customer.OrderLimit, validMoney);
         Assert.NotEmpty(Customer.DomainEvents.OfType<CustomerOrderLimitUpdatedDomainEvent>());
-    }
-
-    [Theory]
-    [MemberData(nameof(MoneyData.InvalidMoney), MemberType = typeof(MoneyData))]
-    public void Customer_MustReturnException_WhenOrderLimitIsInvalid(Money invalidMoney)
-    {
-        Assert.Throws<ValidationDomainException>(() =>
-        {
-            CustomerBuilder.New().ChangeOrderLimit(invalidMoney).Build();
-        });
     }
 }

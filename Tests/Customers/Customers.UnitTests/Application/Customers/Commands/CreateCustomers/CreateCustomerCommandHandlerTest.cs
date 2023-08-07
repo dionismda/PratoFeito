@@ -3,30 +3,24 @@
 public sealed class CreateCustomerCommandHandlerTest
 {
     private CreateCustomerCommandHandler CreateCustomerCommandHandler { get; set; }
-    private Customer Customer { get; set; }
 
-    private readonly Mock<IMapper> mockMapper = new();
-    private readonly Mock<ICustomerDomainService> mockCustomerDomainService = new();
+    private readonly Mock<ICustomerRepository> mockCustomerRepository = new();
 
     public CreateCustomerCommandHandlerTest()
     {
-        CreateCustomerCommandHandler = new CreateCustomerCommandHandler(mockMapper.Object, mockCustomerDomainService.Object);
-        Customer = CustomerBuilder.New().Build();
+        CreateCustomerCommandHandler = new CreateCustomerCommandHandler(mockCustomerRepository.Object);
     }
 
     [Theory]
     [MemberData(nameof(CreateCustomerCommandData.ValidCreateCustomerCommand), MemberType = typeof(CreateCustomerCommandData))]
     public async Task CreateCustomerCommandHandler_MustReturnCustomerObecjt_WhenCreateCustomerCommandIsCalled(CreateCustomerCommand createCustomerCommand)
     {
-        mockMapper.SetupMap<CreateCustomerCommand, Customer>(Customer);
+        await CreateCustomerCommandHandler.Handle(createCustomerCommand, It.IsAny<CancellationToken>());
 
-        var result = await CreateCustomerCommandHandler.Handle(createCustomerCommand, It.IsAny<CancellationToken>());
+        mockCustomerRepository
+            .Verify(x => x.Insert(It.IsAny<Customer>()), Times.Once);
 
-        mockMapper.VerifyMap<CreateCustomerCommand, Customer>(Times.Once);
-
-        mockCustomerDomainService
-            .Verify(x => x.InsertAsync(Customer, It.IsAny<CancellationToken>()), Times.Once);
-
-        Assert.Equal(Customer, result);
+        mockCustomerRepository
+            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 }

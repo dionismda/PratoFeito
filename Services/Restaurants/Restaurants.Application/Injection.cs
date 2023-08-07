@@ -2,8 +2,10 @@
 
 public static class Injection
 {
-    public static IServiceCollection InjectionRestaurantApplication(this IServiceCollection services)
+    public static IServiceCollection InjectionRestaurantsApplication(this IServiceCollection services)
     {
+        services.AddSingleton<IRestaurantIntegrationEventMapper, RestaurantIntegrationEventMapper>();
+
         return services;
     }
 }

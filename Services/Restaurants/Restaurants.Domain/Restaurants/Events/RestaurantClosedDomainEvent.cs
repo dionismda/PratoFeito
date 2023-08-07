@@ -1,3 +1,3 @@
 ﻿namespace Restaurants.Domain.Restaurants.Events;
 
-public record RestaurantClosedDomainEvent() : DomainEvent;
+public record RestaurantClosedDomainEvent(Identifier RestaurantId) : DomainEvent;

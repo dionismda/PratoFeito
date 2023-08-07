@@ -8,8 +8,7 @@
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <ItemGroup>    
-    <PackageReference Include="FluentValidation" Version="11.5.2" />    
+  <ItemGroup>            
     <PackageReference Include="MediatR" Version="12.0.1" />
   </ItemGroup>
 

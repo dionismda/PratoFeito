@@ -1,5 +1,5 @@
 ﻿namespace Customers.Infrastructure._Commons.EventBus;
 
-public class CustomerEventBusSubscriptionsManager : EventBusSubscriptionsManager, ICustomerEventBusSubscriptionsManager
+public sealed class CustomerEventBusSubscriptionsManager : EventBusSubscriptionsManager, ICustomerEventBusSubscriptionsManager
 {
 }

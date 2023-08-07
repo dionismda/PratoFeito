@@ -1,6 +1,6 @@
 ﻿namespace Customers.Domain.Customers.Entities;
 
-public sealed class Customer : AggregateRoot, IValidation
+public sealed class Customer : AggregateRoot
 {
     public PersonName Name { get; private set; } = null!;
     public Money OrderLimit { get; private set; } = null!;
@@ -10,8 +10,6 @@ public sealed class Customer : AggregateRoot, IValidation
     public Customer(PersonName name, Money orderLimit) : this()
     {
         AddDomainEvent(new CustomerCreatedDomainEvent(name, orderLimit, Id));
-
-        Validate();
     }
 
     private void Apply(CustomerCreatedDomainEvent @event)
@@ -41,15 +39,5 @@ public sealed class Customer : AggregateRoot, IValidation
     {
         Id = @event.CustomerId;
         OrderLimit = @event.OrderLimit;
-    }
-
-    public void Validate()
-    {
-        CustomerValidator validator = new();
-
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-            throw new ValidationDomainException(result.GetErrors());
     }
 }

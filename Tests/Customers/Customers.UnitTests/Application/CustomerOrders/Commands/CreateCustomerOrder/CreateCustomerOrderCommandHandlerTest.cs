@@ -3,29 +3,22 @@
 public sealed class CreateCustomerOrderCommandHandlerTest
 {
     private CreateCustomerOrderCommandHandler CreateCustomerOrderCommandHandler { get; set; }
-    private CustomerOrder CustomerOrder { get; set; }
-
-    private readonly Mock<IMapper> mockMapper = new();
-    private readonly Mock<ICustomerOrderDomainService> mockCustomerOrderDomainService = new();
+    private readonly Mock<ICustomerOrderRepository> mockCustomerOrderRepository = new();
     public CreateCustomerOrderCommandHandlerTest()
     {
-        CreateCustomerOrderCommandHandler = new CreateCustomerOrderCommandHandler(mockMapper.Object, mockCustomerOrderDomainService.Object);
-        CustomerOrder = CustomerOrderBuilder.New().Build();
+        CreateCustomerOrderCommandHandler = new CreateCustomerOrderCommandHandler(mockCustomerOrderRepository.Object);
     }
 
     [Theory]
     [MemberData(nameof(CreateCustomerOrderCommandData.ValidCreateCustomerOrderCommand), MemberType = typeof(CreateCustomerOrderCommandData))]
     public async Task CreateCustomerCommandHandler_MustReturnCustomerObecjt_WhenCreateCustomerCommandIsCalled(CreateCustomerOrderCommand createCustomerOrderCommand)
     {
-        mockMapper.SetupMap<CreateCustomerOrderCommand, CustomerOrder>(CustomerOrder);
+        await CreateCustomerOrderCommandHandler.Handle(createCustomerOrderCommand, It.IsAny<CancellationToken>());
 
-        var result = await CreateCustomerOrderCommandHandler.Handle(createCustomerOrderCommand, It.IsAny<CancellationToken>());
+        mockCustomerOrderRepository
+            .Verify(x => x.Insert(It.IsAny<CustomerOrder>()), Times.Once);
 
-        mockMapper.VerifyMap<CreateCustomerOrderCommand, CustomerOrder>(Times.Once);
-
-        mockCustomerOrderDomainService
-            .Verify(x => x.InsertAsync(CustomerOrder, It.IsAny<CancellationToken>()), Times.Once);
-
-        Assert.Equal(CustomerOrder, result);
+        mockCustomerOrderRepository
+            .Verify(x => x.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 }
