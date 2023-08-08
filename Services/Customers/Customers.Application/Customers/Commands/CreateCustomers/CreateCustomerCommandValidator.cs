@@ -1,20 +1,8 @@
 ﻿namespace Customers.Application.Customers.Commands.CreateCustomers;
 
-public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
+public sealed class CreateCustomerCommandValidator : CustomerCommandValidator<CreateCustomerCommand>
 {
-    public CreateCustomerCommandValidator(ICustomerRepository customerRepository)
+    public CreateCustomerCommandValidator(ICustomerRepository customerRepository) : base(customerRepository)
     {
-        RuleFor(x => x.Name)
-            .SetValidator(new PersonNameValidator());
-
-        RuleFor(x => x.OrderLimit)
-            .SetValidator(new MoneyValidator());
-
-        RuleFor(x => x.Name)
-            .MustAsync(async (personName, cancellationToken) =>
-             {
-                 return !await customerRepository.IsNameUniqueAsync(personName, cancellationToken);
-
-             }).WithMessage("Name already exists");
     }
 }

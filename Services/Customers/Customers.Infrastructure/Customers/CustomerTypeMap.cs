@@ -6,20 +6,6 @@ public sealed class CustomerTypeMap : AggregateTypeMap<Customer>
     {
         base.Configure(builder);
 
-        builder
-            .OwnsOne(x => x.Name)
-            .Property(x => x.FirstName)
-            .HasColumnName("firstname")
-            .HasMaxLength(50)
-            .IsRequired();
-
-        builder
-            .OwnsOne(x => x.Name)
-            .Property(x => x.LastName)
-            .HasColumnName("lastname")
-            .HasMaxLength(200)
-            .IsRequired();
-
         builder.OwnsOne(x => x.Name, n =>
         {
             n.Property(x => x.FirstName)

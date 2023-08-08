@@ -1,17 +1,13 @@
 ﻿namespace Customers.Application.Customers.Commands.UpdateCustomers;
 
-public sealed class UpdateCustomerCommand : ICommand<Customer>
+public sealed class UpdateCustomerCommand : CustomerCommand
 {
     public Identifier Id { get; private set; } = null!;
-    public PersonName Name { get; private set; } = null!;
-    public Money OrderLimit { get; private set; } = null!;
 
-    private UpdateCustomerCommand() { }
+    private UpdateCustomerCommand() : base() { }
 
-    public UpdateCustomerCommand(Identifier id, PersonName name, Money orderLimit) : this()
+    public UpdateCustomerCommand(Identifier id, PersonName name, Money orderLimit) : base(name, orderLimit)
     {
         Id = id;
-        Name = name;
-        OrderLimit = orderLimit;
     }
 }
