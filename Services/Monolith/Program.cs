@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
-builder.Services.AddQuartzHostedService();
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 builder.Services.CustomAddSwaggerService(builder.Configuration);
 
@@ -64,4 +64,5 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.MapControllers();
 
 await app.InjectionApplicationAsync();
+
 app.Run();

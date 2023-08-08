@@ -1,4 +1,6 @@
-﻿namespace _Architecture.Infrastructure.Extensions;
+﻿using Quartz;
+
+namespace _Architecture.Infrastructure.Extensions;
 
 public static class QuartzExtension
 {
@@ -9,10 +11,11 @@ public static class QuartzExtension
         {
             var jobKey = new JobKey(nameof(TIntegrationEventLogBackgroundService));
 
-            conf.AddJob<TIntegrationEventLogBackgroundService>(jobKey)
+            conf.AddJob<TIntegrationEventLogBackgroundService>(opts => opts.WithIdentity(jobKey))
                 .AddTrigger(trigger =>
                 {
                     trigger.ForJob(jobKey)
+                           .WithIdentity(typeof(TIntegrationEventLogBackgroundService).Name + "-trigger")
                            .WithSimpleSchedule(schedule =>
                            {
                                schedule.WithIntervalInSeconds(seconds)

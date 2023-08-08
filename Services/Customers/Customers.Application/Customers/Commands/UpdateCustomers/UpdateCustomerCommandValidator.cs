@@ -7,5 +7,12 @@ public sealed class UpdateCustomerCommandValidator : CustomerCommandValidator<Up
         RuleFor(x => x.Id)
             .NotEmpty()
             .NotNull();
+
+        RuleFor(x => x)
+            .MustAsync(async (customer, cancellationToken) =>
+            {
+                return !await customerRepository.IsNameUniqueAsync(customer.Name, customer.Id, cancellationToken);
+
+            }).WithMessage("Name already exists");
     }
 }

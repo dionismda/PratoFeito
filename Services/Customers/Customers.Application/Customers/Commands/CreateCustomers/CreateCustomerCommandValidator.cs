@@ -4,5 +4,11 @@ public sealed class CreateCustomerCommandValidator : CustomerCommandValidator<Cr
 {
     public CreateCustomerCommandValidator(ICustomerRepository customerRepository) : base(customerRepository)
     {
+        RuleFor(x => x.Name)
+            .MustAsync(async (personName, cancellationToken) =>
+            {
+                return !await customerRepository.IsNameUniqueAsync(personName, cancellationToken);
+
+            }).WithMessage("Name already exists");
     }
 }

@@ -18,4 +18,10 @@ public class GetCustomerByNameSpecification : Specification<Customer>
         : base(customer => customer.Name.FirstName == name.FirstName && customer.Name.LastName == name.LastName)
     {
     }
+
+    public GetCustomerByNameSpecification(PersonName name, Identifier Id)
+        : base(customer => customer.Name.FirstName == name.FirstName
+            && customer.Name.LastName == name.LastName && customer.Id != Id)
+    {
+    }
 }
