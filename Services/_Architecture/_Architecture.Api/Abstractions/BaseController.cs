@@ -5,7 +5,7 @@
 [Consumes("application/json")]
 public abstract class BaseController : ControllerBase
 {
-    protected IMapper Mapper { get; set; }
+    protected IMapper Mapper { get; private set; }
 
     protected BaseController(IMapper mapper)
     {

@@ -9,7 +9,6 @@ public class CustomerController : BaseController
     public CustomerController(IMediator mediator, IMapper mapper) : base(mapper)
     {
         _mediator = mediator;
-
     }
 
     [HttpGet]

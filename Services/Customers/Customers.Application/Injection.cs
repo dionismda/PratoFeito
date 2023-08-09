@@ -12,7 +12,7 @@ public static class Injection
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(opt => { opt.AllowNullCollections = true; }, AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddSingleton<ICustomerIntegrationEventMapper, CustomerIntegrationEventMapper>();
 
