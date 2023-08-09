@@ -12,6 +12,13 @@ public sealed class RestaurantController : BaseController
         _mediator = mediator;
     }
 
+    [HttpGet]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseError), (int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<ResponseSuccess<IList<RestaurantViewModel>>>> GetAll(CancellationToken cancellation)
+        => await ExecuteAsync<RestaurantViewModel, GetRestaurantsQueryModel>(async ()
+            => await _mediator.Send(Mapper.Map<GetRestaurantsQuery>(new GetRestaurantsInputModel()), cancellation));
+
     [HttpGet("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ResponseError), (int)HttpStatusCode.InternalServerError)]

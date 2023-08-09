@@ -20,5 +20,9 @@ public sealed class RestaurantProfile : Profile
             .ReverseMap();
 
         CreateMap<GetRestaurantByIdQueryModel, RestaurantViewModel>();
+
+        CreateMap<GetRestaurantsInputModel, GetRestaurantsQuery>();
+
+        CreateMap<GetRestaurantsQueryModel, RestaurantViewModel>();
     }
 }
