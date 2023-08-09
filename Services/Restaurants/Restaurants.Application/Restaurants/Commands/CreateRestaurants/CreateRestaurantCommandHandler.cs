@@ -1,6 +1,6 @@
 ﻿namespace Restaurants.Application.Restaurants.Commands.CreateRestaurants;
 
-public sealed class CreateRestaurantCommandHandler : ICommandHandler<CreateRestaurantCommand, Restaurant>
+internal sealed class CreateRestaurantCommandHandler : ICommandHandler<CreateRestaurantCommand, Restaurant>
 {
     private readonly IRestaurantRepository _restaurantRepository;
 

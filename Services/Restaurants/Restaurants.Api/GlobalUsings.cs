@@ -12,3 +12,5 @@ global using Restaurants.Domain;
 global using Restaurants.Domain.Restaurants.Entities;
 global using Restaurants.Infrastructure;
 global using System.Net;
+global using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
+global using Restaurants.Infrastructure.Restaurants.Queries;

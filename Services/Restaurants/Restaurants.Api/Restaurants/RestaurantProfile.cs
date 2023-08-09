@@ -14,5 +14,11 @@ public sealed class RestaurantProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State));
+
+        CreateMap<GetRestaurantByIdInputModel, GetRestaurantByIdQuery>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ReverseMap();
+
+        CreateMap<GetRestaurantByIdQueryModel, RestaurantViewModel>();
     }
 }

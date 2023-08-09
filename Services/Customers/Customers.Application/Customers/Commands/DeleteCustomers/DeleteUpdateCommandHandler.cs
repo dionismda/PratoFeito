@@ -1,6 +1,6 @@
 ﻿namespace Customers.Application.Customers.Commands.DeleteCustomers;
 
-public sealed class DeleteUpdateCommandHandler : ICommandHandler<DeleteCustomerOrderCommand>
+internal sealed class DeleteUpdateCommandHandler : ICommandHandler<DeleteCustomerOrderCommand>
 {
     private readonly ICustomerRepository _customerRepository;
 

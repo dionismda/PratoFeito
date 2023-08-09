@@ -1,6 +1,6 @@
 ﻿namespace Customers.Application.Customers.Commands.UpdateCustomers;
 
-public sealed class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommand, Customer>
+internal sealed class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommand, Customer>
 {
     private readonly ICustomerRepository _customerRepository;
 

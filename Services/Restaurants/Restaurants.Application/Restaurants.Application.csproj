@@ -11,8 +11,4 @@
     <ProjectReference Include="..\Restaurants.Infrastructure\Restaurants.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Restaurants\Queries\" />
-  </ItemGroup>
-
 </Project>
