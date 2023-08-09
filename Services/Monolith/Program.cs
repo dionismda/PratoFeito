@@ -1,5 +1,4 @@
 using Logging.Serilog;
-using System.Diagnostics;
 using System.Globalization;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
