@@ -22,4 +22,11 @@ public sealed class CustomerRepository : Repository<Customer>, ICustomerReposito
 
         return result.Any();
     }
+
+    public async Task<bool> IsNameUniqueAsync(PersonName name, Identifier id, CancellationToken cancellationToken)
+    {
+        var result = await FindAllAsync(new GetCustomerByNameSpecification(name, id), cancellationToken);
+
+        return result.Any();
+    }
 }

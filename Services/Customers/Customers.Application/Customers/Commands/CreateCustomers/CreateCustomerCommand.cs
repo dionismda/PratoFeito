@@ -1,15 +1,10 @@
 ﻿namespace Customers.Application.Customers.Commands.CreateCustomers;
 
-public sealed class CreateCustomerCommand : ICommand<Customer>
+public sealed class CreateCustomerCommand : CustomerCommand
 {
-    public PersonName Name { get; private set; } = null!;
-    public Money OrderLimit { get; private set; } = null!;
+    private CreateCustomerCommand() : base() { }
 
-    private CreateCustomerCommand() { }
-
-    public CreateCustomerCommand(PersonName name, Money orderLimit) : this()
+    public CreateCustomerCommand(PersonName name, Money orderLimit) : base(name, orderLimit)
     {
-        Name = name;
-        OrderLimit = orderLimit;
     }
 }
