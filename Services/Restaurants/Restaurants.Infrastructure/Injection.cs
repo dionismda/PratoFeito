@@ -28,8 +28,7 @@ public static class Injection
         });
 
         services
-            .InjectionRestaurant()
-            .InjectionRestaurantOrders();
+            .InjectionRestaurant();
 
         return services;
     }
@@ -38,13 +37,6 @@ public static class Injection
     {
         services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         services.AddScoped<IRestaurantQueries, RestaurantQueries>();
-
-        return services;
-    }
-
-    private static IServiceCollection InjectionRestaurantOrders(this IServiceCollection services)
-    {
-        services.AddScoped<IRestaurantOrderRepository, RestaurantOrderRepository>();
 
         return services;
     }

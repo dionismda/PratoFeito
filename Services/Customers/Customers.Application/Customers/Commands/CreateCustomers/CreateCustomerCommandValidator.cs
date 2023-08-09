@@ -2,7 +2,7 @@
 
 public sealed class CreateCustomerCommandValidator : CustomerCommandValidator<CreateCustomerCommand>
 {
-    public CreateCustomerCommandValidator(ICustomerRepository customerRepository) : base(customerRepository)
+    public CreateCustomerCommandValidator(ICustomerRepository customerRepository) : base()
     {
         RuleFor(x => x.Name)
             .MustAsync(async (personName, cancellationToken) =>

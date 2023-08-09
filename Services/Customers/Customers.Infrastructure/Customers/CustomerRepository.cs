@@ -6,11 +6,6 @@ public sealed class CustomerRepository : Repository<Customer>, ICustomerReposito
     {
     }
 
-    public async Task<IList<Customer>> GetCustomerAllAsync(CancellationToken cancellationToken)
-    {
-        return await FindAllAsync(new GetCustomerAllSpecification(), cancellationToken);
-    }
-
     public async Task<Customer?> GetCustomerByIdAsync(Identifier id, CancellationToken cancellationToken)
     {
         return await FindByAsync(new GetCustomerByIdSpecification(id), cancellationToken);

@@ -2,7 +2,7 @@
 
 public enum RestaurantState
 {
-    OPEN,
-    CLOSED,
-    CREATED
+    Opened,
+    Closed,
+    Created
 }

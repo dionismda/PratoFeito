@@ -2,7 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiExplorerSettings(GroupName = nameof(ContextEnum.Customers))]
-public class CustomerController : BaseController
+public sealed class CustomerController : BaseController
 {
     private readonly IMediator _mediator;
 

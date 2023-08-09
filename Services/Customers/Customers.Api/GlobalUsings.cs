@@ -19,3 +19,4 @@ global using Customers.Infrastructure.Customers.Queries;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Net;
+global using Customers.Application.Customers.Commands.Abstractions;

@@ -2,9 +2,9 @@
 
 public sealed class RestaurantMenu : AggregateRoot
 {
-    public string MenuVersion { get; private set; }
-
     public Identifier RestaurantId { get; private set; }
+
+    public string MenuVersion { get; private set; }
 
     private List<MenuItem> _menuItems = new();
     public IReadOnlyCollection<MenuItem> MenuItems

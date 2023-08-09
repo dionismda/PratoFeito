@@ -1,6 +1,4 @@
-﻿using _Shared.ValueObjects._Commons;
-
-namespace Restaurants.Infrastructure.Restaurants;
+﻿namespace Restaurants.Infrastructure.Restaurants;
 
 public sealed class RestaurantRepository : Repository<Restaurant>, IRestaurantRepository
 {
@@ -8,18 +6,15 @@ public sealed class RestaurantRepository : Repository<Restaurant>, IRestaurantRe
     {
     }
 
-    public Task<IList<Restaurant>> GetRestaurantAllAsync(CancellationToken cancellationToken)
+    public async Task<Restaurant?> GetRestaurantByIdAsync(Identifier id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await FindByAsync(new GetRestaurantByIdSpecification(id), cancellationToken);
     }
 
-    public Task<Restaurant?> GetRestaurantByIdAsync(Identifier id, CancellationToken cancellationToken)
+    public async Task<bool> IsRestaurantUnique(string name, CancellationToken cancellationToken, Identifier? id = null)
     {
-        throw new NotImplementedException();
-    }
+        var result = await FindAllAsync(new GetRestaurantDuplicate(name, id), cancellationToken);
 
-    public Task<IList<Restaurant>> GetRestaurantDuplicateAsync(Restaurant restaurant, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        return result.Any();
     }
 }

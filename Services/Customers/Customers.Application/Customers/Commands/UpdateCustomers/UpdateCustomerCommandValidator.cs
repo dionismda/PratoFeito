@@ -2,7 +2,7 @@
 
 public sealed class UpdateCustomerCommandValidator : CustomerCommandValidator<UpdateCustomerCommand>
 {
-    public UpdateCustomerCommandValidator(ICustomerRepository customerRepository) : base(customerRepository)
+    public UpdateCustomerCommandValidator(ICustomerRepository customerRepository) : base()
     {
         RuleFor(x => x.Id)
             .NotEmpty()
