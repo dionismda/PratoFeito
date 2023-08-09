@@ -24,7 +24,6 @@ global using Customers.Infrastructure._Commons.Services;
 global using Customers.Infrastructure.CustomerOrders;
 global using Customers.Infrastructure.Customers;
 global using Customers.Infrastructure.Customers.Queries;
-global using Customers.Infrastructure.Customers.Specifications;
 global using Dapper;
 global using EventBus.Abstractions;
 global using EventBus.Interfaces;

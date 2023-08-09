@@ -1,9 +1,4 @@
-﻿namespace Customers.Infrastructure.Customers.Specifications;
-
-public class GetCustomerAllSpecification : Specification<Customer>
-{
-    public GetCustomerAllSpecification() : base(null) { }
-}
+﻿namespace Customers.Infrastructure.Customers;
 
 public class GetCustomerByIdSpecification : Specification<Customer>
 {

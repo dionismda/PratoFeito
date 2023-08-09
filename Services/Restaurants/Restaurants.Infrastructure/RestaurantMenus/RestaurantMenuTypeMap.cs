@@ -1,8 +1,6 @@
-﻿using Restaurants.Domain.RestaurantMenus.Entities;
+﻿namespace Restaurants.Infrastructure.RestaurantMenus;
 
-namespace Restaurants.Infrastructure.RestaurantMenus;
-
-public sealed class RestaurantMenuMap : EntityTypeMap<RestaurantMenu>
+public sealed class RestaurantMenuTypeMap : EntityTypeMap<RestaurantMenu>
 {
     public override void Configure(EntityTypeBuilder<RestaurantMenu> builder)
     {

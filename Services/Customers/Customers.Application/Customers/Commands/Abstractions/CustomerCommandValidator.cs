@@ -3,7 +3,7 @@
 public abstract class CustomerCommandValidator<TCommand> : AbstractValidator<TCommand>
     where TCommand : CustomerCommand
 {
-    protected CustomerCommandValidator(ICustomerRepository customerRepository)
+    protected CustomerCommandValidator()
     {
         RuleFor(x => x.Name)
             .SetValidator(new PersonNameValidator());

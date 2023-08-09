@@ -15,12 +15,12 @@ public sealed class Restaurant : AggregateRoot
     private void Apply(RestaurantCreatedDomainEvent @event)
     {
         Name = @event.Name;
-        State = RestaurantState.CREATED;
+        State = RestaurantState.Created;
     }
 
     public void OpenRestaurant()
     {
-        if (State != RestaurantState.OPEN)
+        if (State != RestaurantState.Opened)
         {
             AddDomainEvent(new RestaurantOpenedDomainEvent(Id));
         }
@@ -32,12 +32,12 @@ public sealed class Restaurant : AggregateRoot
 
     private void Apply(RestaurantOpenedDomainEvent @event)
     {
-        State = RestaurantState.OPEN;
+        State = RestaurantState.Opened;
     }
 
     public void CloseRestaurant()
     {
-        if (State == RestaurantState.OPEN)
+        if (State == RestaurantState.Opened)
         {
             AddDomainEvent(new RestaurantClosedDomainEvent(Id));
         }
@@ -49,7 +49,7 @@ public sealed class Restaurant : AggregateRoot
 
     private void Apply(RestaurantClosedDomainEvent @event)
     {
-        State = RestaurantState.CLOSED;
+        State = RestaurantState.Closed;
     }
 
     public void ChangeName(string name)

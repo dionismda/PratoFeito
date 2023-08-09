@@ -4,12 +4,21 @@ public abstract class Specification<TAggregateRoot> : ISpecification<TAggregateR
     where TAggregateRoot : AggregateRoot
 {
     public bool IsSplitQuery { get; protected set; }
-    public Expression<Func<TAggregateRoot, bool>>? Criteria { get; }
+    public Expression<Func<TAggregateRoot, bool>>? Criteria { get; private set; }
     public List<Expression<Func<TAggregateRoot, object>>> IncludeExpressions { get; } = new();
     public Expression<Func<TAggregateRoot, object>>? OrderByExpression { get; private set; }
     public Expression<Func<TAggregateRoot, object>>? OrderByDescendingExpression { get; private set; }
 
+    protected Specification()
+    {
+    }
+
     protected Specification(Expression<Func<TAggregateRoot, bool>>? criteria)
+    {
+        Criteria = criteria;
+    }
+
+    public void AddCriteria(Expression<Func<TAggregateRoot, bool>>? criteria)
     {
         Criteria = criteria;
     }

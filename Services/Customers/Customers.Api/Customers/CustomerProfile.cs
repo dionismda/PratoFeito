@@ -31,7 +31,8 @@ public class CustomerProfile : Profile
             .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Name.LastName))
             .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.OrderLimit.Amount));
 
-        CreateMap<GetCustomersInputModel, GetCustomersQuery>();
+        CreateMap<GetCustomersInputModel, GetCustomersQuery>()
+            .ReverseMap();
 
         CreateMap<GetCustomerByIdInputModel, GetCustomerByIdQuery>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

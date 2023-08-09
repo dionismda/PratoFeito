@@ -1,3 +1,14 @@
-﻿global using Restaurants.Application;
+﻿global using _Architecture.Api.Abstractions;
+global using _Architecture.Api.Swaggers.Exemples;
+global using _Architecture.Application.Responses;
+global using _Architecture.Infrastructure.Enums;
+global using AutoMapper;
+global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
+global using Restaurants.Application;
+global using Restaurants.Application.Restaurants._Commons;
+global using Restaurants.Application.Restaurants.Commands.CreateRestaurants;
 global using Restaurants.Domain;
+global using Restaurants.Domain.Restaurants.Entities;
 global using Restaurants.Infrastructure;
+global using System.Net;

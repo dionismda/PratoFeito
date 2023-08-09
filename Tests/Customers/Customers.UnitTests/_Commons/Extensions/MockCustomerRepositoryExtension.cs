@@ -2,23 +2,6 @@
 
 public static class MockCustomerRepositoryExtension
 {
-    public static void SetupGetCustomerAllAsync(this Mock<ICustomerRepository> mockCustomerRepository, List<Customer> customers)
-    {
-        mockCustomerRepository
-            .Setup(x => x.GetCustomerAllAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(customers);
-
-        mockCustomerRepository.SetupAllProperties();
-    }
-
-    public static void VerifyGetCustomerAllAsync(this Mock<ICustomerRepository> mockCustomerRepository, Func<Times> times)
-    {
-        mockCustomerRepository
-            .Verify(x => x.GetCustomerAllAsync(It.IsAny<CancellationToken>()), times);
-
-        mockCustomerRepository.SetupAllProperties();
-    }
-
     public static void SetupGetCustomerByIdAsync(this Mock<ICustomerRepository> mockCustomerRepository, Customer customer)
     {
         mockCustomerRepository

@@ -4,6 +4,10 @@ public class RestaurantIntegrationEventMapper : IntegrationEventMapper, IRestaur
 {
     protected override IntegrationEvent? MapDomainEvent<TDomainEvent>(TDomainEvent domainEvent)
     {
-        throw new NotImplementedException();
+        return domainEvent switch
+        {
+            { } => null,
+            _ => throw new ArgumentOutOfRangeException(nameof(domainEvent), domainEvent, null)
+        };
     }
 }
