@@ -32,6 +32,7 @@ public static class Injection
             .InjectionCustomerOrders();
 
         return services;
+
     }
 
     private static IServiceCollection InjectionCustomers(this IServiceCollection services)

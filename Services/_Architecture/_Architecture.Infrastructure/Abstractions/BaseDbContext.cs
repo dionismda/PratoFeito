@@ -16,7 +16,7 @@ public abstract class BaseDbContext : DbContext, IUnitOfWork
         Services = services;
     }
 
-    public DbSet<IntegrationEventLog> IntegrationEventLogs { get; set; }
+    public DbSet<IntegrationEventLog> IntegrationEventLogs { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
