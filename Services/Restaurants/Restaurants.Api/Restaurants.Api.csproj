@@ -4,12 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <OutputType>Library</OutputType>
+    <RootNamespace>Restaurants.Api</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>     
+    <OutputType>Library</OutputType> 
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\_Architecture\_Architecture.Api\_Architecture.Api.csproj" />
