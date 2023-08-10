@@ -8,7 +8,7 @@ env:
   DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
 
 jobs:
-  build-and-test:
+  deploy:
 
     name: build-and-test-${{matrix.os}}
     runs-on: ${{ matrix.os }}
@@ -53,6 +53,6 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -f src/app/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG src/app
+        docker build -f src/api/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG src/api
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
