@@ -1,7 +1,6 @@
 [![Sonar Cloud](https://github.com/dionismda/PratoFeito/actions/workflows/sonar-cloud.yml/badge.svg?branch=main)](https://github.com/dionismda/PratoFeito/actions/workflows/sonar-cloud.yml)
 [![deploy aws](https://github.com/dionismda/PratoFeito/actions/workflows/deploy-aws.yml/badge.svg?branch=main)](https://github.com/dionismda/PratoFeito/actions/workflows/deploy-aws.yml)
-# PratoFeito
-
+# PratoF
 O PratoFeito é um clone simplificado do iFood, criado com o objetivo de fornecer uma plataforma intuitiva e conveniente para fazer pedidos de comida online. Este projeto representa uma excelente oportunidade para aprender e aprimorar habilidades de programação, ao mesmo tempo em que serve como um ponto de partida para projetos mais complexos. Inspirado nas [lives](https://www.youtube.com/watch?v=6BfJb7RPW-o&list=PLs-l5bSgIMhBDOtatiLQXeNarcdeaekZI&index=10) do [Lucas Gertel](https://github.com/lgertel), onde ele desenvolveu uma aplicação similar em Kotlin e explorou abordagens diferentes, você pode conferir a estrutura proposta para o projeto no seguinte [link](https://miro.com/app/board/uXjVMR2I6DI=/).
 
 # Tecnologias usadas
