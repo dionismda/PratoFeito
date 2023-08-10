@@ -1,6 +1,6 @@
 ﻿namespace Restaurants.Application.Restaurants.Queries.GetRestaurants;
 
-internal sealed class GetRestaurantsQueryHandler : IQueryHandler<GetRestaurantsQuery, IList<GetRestaurantsQueryModel>>
+public sealed class GetRestaurantsQueryHandler : IQueryHandler<GetRestaurantsQuery, IList<GetRestaurantsQueryModel>>
 {
     private readonly IRestaurantQueries _restaurantQueries;
 

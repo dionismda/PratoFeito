@@ -1,6 +1,6 @@
 ﻿namespace Customers.Application.Customers.Queries.GetCustomerById;
 
-internal sealed class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQuery, GetCustomerByIdQueryModel?>
+public sealed class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQuery, GetCustomerByIdQueryModel?>
 {
     private readonly ICustomerQueries _customerQueries;
 

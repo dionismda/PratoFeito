@@ -1,6 +1,6 @@
 ﻿namespace Customers.Application.Customers.Commands.CreateCustomers;
 
-internal sealed class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerCommand, Customer>
+public sealed class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerCommand, Customer>
 {
     private readonly ICustomerRepository _customerRepository;
 

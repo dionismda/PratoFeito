@@ -1,6 +1,6 @@
 ﻿namespace Customers.Application.Customers.Queries.GetCustomerOrdersByCustomerId;
 
-internal sealed class GetCustomerOrdersByCustomerIdQueryHandler : IQueryHandler<GetCustomerOrdersByCustomerIdQuery, IList<GetCustomerOrdersByCustomerIdQueryModel>>
+public sealed class GetCustomerOrdersByCustomerIdQueryHandler : IQueryHandler<GetCustomerOrdersByCustomerIdQuery, IList<GetCustomerOrdersByCustomerIdQueryModel>>
 {
     private readonly ICustomerQueries _customerQueries;
 
