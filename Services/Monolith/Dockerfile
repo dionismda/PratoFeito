@@ -27,10 +27,6 @@ COPY ["Services/Ordering/Ordering.Api/Ordering.Api.csproj", "Services/Ordering/O
 COPY ["Services/Ordering/Ordering.Application/Ordering.Application.csproj", "Services/Ordering/Ordering.Application/"]
 COPY ["Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Services/Ordering/Ordering.Infrastructure/"]
 COPY ["Services/Ordering/Ordering.Domain/Ordering.Domain.csproj", "Services/Ordering/Ordering.Domain/"]
-COPY ["Services/Restaurants/Restaurants.Api/Restaurants.Api.csproj", "Services/Restaurants/Restaurants.Api/"]
-COPY ["Services/Restaurants/Restaurants.Application/Restaurants.Application.csproj", "Services/Restaurants/Restaurants.Application/"]
-COPY ["Services/Restaurants/Restaurants.Infrastructure/Restaurants.Infrastructure.csproj", "Services/Restaurants/Restaurants.Infrastructure/"]
-COPY ["Services/Restaurants/Restaurants.Domain/Restaurants.Domain.csproj", "Services/Restaurants/Restaurants.Domain/"]
 RUN dotnet restore "Services/Monolith/Monolith.csproj"
 COPY . .
 WORKDIR "/src/Services/Monolith"
