@@ -53,7 +53,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -f ./Services/Monolith -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG src/app
+        docker build -f ./Services/Monolith -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./app
         docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
         
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
