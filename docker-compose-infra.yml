@@ -60,7 +60,9 @@ networks:
   postgres-network:
     driver: bridge
   localstack-network:
-    driver: bridge     
+    driver: bridge
+  pratofeito_localstack-network:
+    external: true    
     
 volumes:
   pgadmin_data:

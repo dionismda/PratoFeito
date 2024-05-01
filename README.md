@@ -33,6 +33,11 @@ O contexto "cliente" do PratoFeito é responsável por gerenciar as funcionalida
 # Como executar o projeto
 Para executar o PratoFeito, siga as instruções abaixo:
 
+1. Abra o cmd e execute o comando "docker compose -f docker-compose-infra.yml up -d" para criar a infraestrutura
+2. Na raiz do projeto execute o bat CreateMigrations passando o nome da migrations que sera gerada. (Ex: CreateMigrations initial)
+3. Na raiz do projeto execute o bat ExecuteMigrations para criar as migrations
+4. Basta abrir o projeto e executar ele com o modo docker-compose
+
 ## Foto do projeto no miro 
 [![image info](./.readmeFiles/ProjetoMiro.png)](https://miro.com/app/board/uXjVMR2I6DI=/)
 
